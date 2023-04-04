@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['pelanggan', 'admin']);
+            $table->dateTime('last_login')->nullable();
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico">
 
     <!-- TITLE -->
-    <title>Login - GoTravel</title>
+    <title>Register - GoTravel</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,25 +60,22 @@
 
                 <div class="container">
                     <div class="wrap-login100 p-6 col-6 mx-auto">
-                        <form class="login100-form validate-form" method="POST" action="/proces-login">
+                        <form class="login100-form validate-form" method="POST" action="/register">
                             @csrf
                             <span class="login100-form-title pb-5">
-                                Login
+                                Register
                             </span>
-                            {{-- notif alert --}}
-                            @if (session('success'))     
-                            <div class="alert alert-success" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i> {{session('success')}}
-                            </div>
-                            @endif
-                            @if (session('error'))     
-                            <div class="alert alert-danger" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-frown-o me-2" aria-hidden="true"></i> {{session('error')}}
-                            </div>
-                            @endif
-                            {{-- notif --}}
+                                <div class="wrap-input100 validate-input input-group" >
+                                    <input class="input100 form-control ms-0 @error('name') is-invalid  @enderror" name="name" type="text" placeholder="Nama" value="{{old('name')}}">
+                                    <span class="input-group-text bg-white text-muted">
+                                        <i class="zmdi zmdi-account"></i>
+                                    </span>
+                                    @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                                 <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
                                     <input class="input100 form-control ms-0 @error('email') is-invalid  @enderror" name="email" type="email" placeholder="Email" value="{{old('email')}}">
                                     <span class="input-group-text bg-white text-muted">
@@ -110,7 +107,7 @@
                                     </button>
                                 </div>
                                 <div class="text-center pt-3">
-                                    <p class="text-dark mb-0">Not a member?<a href="/register" class="text-primary ms-1">Sign UP</a></p>
+                                    <p class="text-dark mb-0">Not a member?<a href="register.html" class="text-primary ms-1">Sign UP</a></p>
                                 </div>
                                 <label class="login-social-icon"><span>Login with Social</span></label>
                                 <div class="d-flex justify-content-center">
