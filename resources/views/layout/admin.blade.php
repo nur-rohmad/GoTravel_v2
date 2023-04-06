@@ -264,17 +264,7 @@
     <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- TypeHead js -->
-    <script src="/assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
-    <script src="/assets/js/typehead.js"></script>
 
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
-    <script src="/assets/plugins/p-scroll/pscroll.js"></script>
-    <script src="/assets/plugins/p-scroll/pscroll-1.js"></script>
-
-    <!-- SIDE-MENU JS -->
-    <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
 
     <!-- SIDEBAR JS -->
     <script src="/assets/plugins/sidebar/sidebar.js"></script>

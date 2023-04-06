@@ -12,6 +12,7 @@ class WisataController extends Controller
     public function index()
     {
         $wisata = Wisata::orderBy('id', 'desc')->get();
+        // dd($wisata->location);
         return view('admin.wisata.index', compact('wisata'));
     }
 

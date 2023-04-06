@@ -1,4 +1,7 @@
 @extends('layout.admin');
+@section('addcss')
+<link rel="stylesheet" href="/assets/plugins/richtexteditor/rte_theme_default.css" />
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -112,9 +115,9 @@
 <!-- /Row -->
 @endsection
 @section('addscript')
-<!-- INTERNAL WYSIWYG Editor JS -->
-<script src="/assets/plugins/wysiwyag/jquery.richtext.js "></script>
-<script src="/assets/plugins/wysiwyag/wysiwyag.js "></script>
+<!-- INTERNAL Richtext Editor JS -->
+<script type="text/javascript" src="/assets/plugins/richtexteditor/rte.js"></script>
+<script type="text/javascript" src='/assets/plugins/richtexteditor/plugins/all_plugins.js'></script>
 
 <!-- INTERNAL File-Uploads Js-->
 <script src="/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
@@ -125,4 +128,7 @@
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
+<script>
+    var editor1 = new RichTextEditor('.content')
+</script>
 @endsection

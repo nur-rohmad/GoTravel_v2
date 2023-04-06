@@ -26,4 +26,15 @@ class Wisata extends Model
             $model->id = Str::uuid();
         });
     }
+
+    public function getLocationAttribute()
+    {
+        $location = json_decode($this->attributes['location']);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $location = new \stdClass;
+        }
+
+        return $location;
+    }
 }
