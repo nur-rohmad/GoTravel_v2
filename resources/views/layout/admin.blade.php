@@ -9,21 +9,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="keywords"
+        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico">
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Go Travel </title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- STYLE CSS -->
-     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
 
-	<!-- Plugins CSS -->
+    <!-- Plugins CSS -->
     <link href="/assets/css/plugins.css" rel="stylesheet">
 
     <!--- FONT-ICONS CSS -->
@@ -51,10 +52,12 @@
             <div class="app-header header sticky">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
-                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
+                            href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo"
+                                alt="logo">
                             <img src="/assets/images/brand/logo-dark.png" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
@@ -83,7 +86,8 @@
                                                 </div>
                                                 <div class="notifications-menu">
                                                     <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
+                                                        <div
+                                                            class="me-3 notifyimg  bg-primary brround box-shadow-primary">
                                                             <i class="fe fe-mail"></i>
                                                         </div>
                                                         <div class="mt-1 wd-80p">
@@ -93,7 +97,8 @@
                                                         </div>
                                                     </a>
                                                     <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
+                                                        <div
+                                                            class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
                                                             <i class="fe fe-check-circle"></i>
                                                         </div>
                                                         <div class="mt-1 wd-80p">
@@ -103,7 +108,8 @@
                                                         </div>
                                                     </a>
                                                     <a class="dropdown-item d-flex" href="notify-list.html">
-                                                        <div class="me-3 notifyimg  bg-success brround box-shadow-success">
+                                                        <div
+                                                            class="me-3 notifyimg  bg-success brround box-shadow-success">
                                                             <i class="fe fe-shopping-cart"></i>
                                                         </div>
                                                         <div class="mt-1 wd-80p">
@@ -130,7 +136,8 @@
                                         </div>
                                         <!-- NOTIFICATIONS -->
                                         <div class="dropdown d-flex profile-1">
-                                            <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
+                                            <a href="javascript:void(0)" data-bs-toggle="dropdown"
+                                                class="nav-link leading-none d-flex">
                                                 <img src="/assets/images/users/21.jpg" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image">
                                             </a>
@@ -152,7 +159,7 @@
                                                 <a class="dropdown-item" href="lockscreen.html">
                                                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                                 </a>
-                                                <a class="dropdown-item" href="login.html">
+                                                <a class="dropdown-item" href="/logouth">
                                                     <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                                 </a>
                                             </div>
@@ -172,10 +179,12 @@
                 <div class="app-sidebar">
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
-                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo"
+                                alt="logo">
                             <img src="/assets/images/brand/icon-white.png" class="header-brand-img toggle-logo"
                                 alt="logo">
-                            <img src="/assets/images/brand/icon-dark.png" class="header-brand-img light-logo" alt="logo">
+                            <img src="/assets/images/brand/icon-dark.png" class="header-brand-img light-logo"
+                                alt="logo">
                             <img src="/assets/images/brand/logo-dark.png" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
@@ -191,19 +200,19 @@
                                 <h3>Main</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="admin/dashboard"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Dashboard</span></a>
                             </li>
                             <li class="sub-category">
-                                <h3>UI Kit</h3>
+                                <h3>Master Data</h3>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link" href="landing-page.html" target="_blank"><i
-                                        class="side-menu__icon fe fe-zap"></i><span
-                                        class="side-menu__label">Landing Page</span><span class="badge bg-green br-5 side-badge blink-text pb-1">New</span></a>
+                                <a class="side-menu__item has-link" href="/admin/wisata"><i
+                                        class="side-menu__icon fe fe-briefcase"></i><span
+                                        class="side-menu__label">Wisata</span></a>
                             </li>
-                            
+
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                                 width="24" height="24" viewBox="0 0 24 24">
@@ -235,7 +244,9 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
+                            class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All
+                        rights reserved.
                     </div>
                 </div>
             </div>
@@ -253,8 +264,8 @@
     <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- TypeHead js -->
-	<script src="/assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
+    <!-- TypeHead js -->
+    <script src="/assets/plugins/bootstrap5-typehead/autocomplete.js"></script>
     <script src="/assets/js/typehead.js"></script>
 
     <!-- Perfect SCROLLBAR JS-->

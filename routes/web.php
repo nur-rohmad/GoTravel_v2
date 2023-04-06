@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Auth'], function(){
+Route::group(['namespace' => 'Auth'], function () {
     Route::get('/login', 'LoginController@login');
     Route::post('/proces-login', 'LoginController@procces_login');
-    Route::get('/register', function() {
+    Route::get('/register', function () {
         return view('auth.form_register');
     });
     Route::post('/register', 'LoginController@register');
+    Route::get('/logouth', 'LoginController@logouth');
 });
+
+// Auth::routes(['verify' => true]);

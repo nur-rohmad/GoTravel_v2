@@ -9,7 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="keywords"
+        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico">
@@ -21,9 +22,9 @@
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- STYLE CSS -->
-     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
 
-	<!-- Plugins CSS -->
+    <!-- Plugins CSS -->
     <link href="/assets/css/plugins.css" rel="stylesheet">
 
     <!--- FONT-ICONS CSS -->
@@ -54,7 +55,8 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7 mb-2">
                     <div class="text-center">
-                        <a href="index.html"><img src="/assets/images/brand/logo-white.png" class="header-brand-img" alt=""></a>
+                        <a href="index.html"><img src="/assets/images/brand/logo-white.png" class="header-brand-img"
+                                alt=""></a>
                     </div>
                 </div>
 
@@ -65,58 +67,64 @@
                             <span class="login100-form-title pb-5">
                                 Register
                             </span>
-                                <div class="wrap-input100 validate-input input-group" >
-                                    <input class="input100 form-control ms-0 @error('name') is-invalid  @enderror" name="name" type="text" placeholder="Nama" value="{{old('name')}}">
-                                    <span class="input-group-text bg-white text-muted">
-                                        <i class="zmdi zmdi-account"></i>
-                                    </span>
-                                    @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                            <div class="wrap-input100 validate-input input-group">
+                                <input class="input100 form-control ms-0 @error('name') is-invalid  @enderror"
+                                    name="name" type="text" placeholder="Nama" value="{{old('name')}}">
+                                <span class="input-group-text bg-white text-muted">
+                                    <i class="zmdi zmdi-account"></i>
+                                </span>
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="wrap-input100 validate-input input-group"
+                                data-bs-validate="Valid email is required: ex@abc.xyz">
+                                <input class="input100 form-control ms-0 @error('email') is-invalid  @enderror"
+                                    name="email" type="email" placeholder="Email" value="{{old('email')}}">
+                                <span class="input-group-text bg-white text-muted">
+                                    <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
+                                </span>
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                                <input class="input100 form-control ms-0 @error('password') is-invalid  @enderror"
+                                    name="password" type="password" placeholder="Password">
+                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                </a>
+                                @error('password')
+                                <div class="invalid-feedback login100">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="text-end pt-4">
+                                <p class="mb-0"><a href="forgot-password.html" class="text-primary ms-1">Forgot
+                                        Password?</a></p>
+                            </div>
+                            <div class="container-login100-form-btn">
+                                <button type="submit" class="login100-form-btn btn-primary">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="text-center pt-3">
+                                <p class="text-dark mb-0">Not a member?<a href="/login" class="text-primary ms-1">Sign
+                                        UP</a></p>
+                            </div>
+                            <label class="login-social-icon"><span>Login with Social</span></label>
+                            <div class="d-flex justify-content-center">
+                                <a href="javascript:void(0)">
+                                    <div class="social-login me-4 text-center">
+                                        <i class="fa fa-google"></i>
                                     </div>
-                                    @enderror
-                                </div>
-                                <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
-                                    <input class="input100 form-control ms-0 @error('email') is-invalid  @enderror" name="email" type="email" placeholder="Email" value="{{old('email')}}">
-                                    <span class="input-group-text bg-white text-muted">
-                                        <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>
-                                    </span>
-                                    @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="wrap-input100 validate-input input-group" id="Password-toggle">
-                                    <input class="input100 form-control ms-0 @error('password') is-invalid  @enderror" name="password" type="password" placeholder="Password">
-                                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                        <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
-                                    </a>
-                                    @error('password')
-                                    <div class="invalid-feedback login100">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="text-end pt-4">
-                                    <p class="mb-0"><a href="forgot-password.html" class="text-primary ms-1">Forgot Password?</a></p>
-                                </div>
-                                <div class="container-login100-form-btn">
-                                    <button type="submit" class="login100-form-btn btn-primary">
-                                            Login
-                                    </button>
-                                </div>
-                                <div class="text-center pt-3">
-                                    <p class="text-dark mb-0">Not a member?<a href="register.html" class="text-primary ms-1">Sign UP</a></p>
-                                </div>
-                                <label class="login-social-icon"><span>Login with Social</span></label>
-                                <div class="d-flex justify-content-center">
-                                    <a href="javascript:void(0)">
-                                        <div class="social-login me-4 text-center">
-                                            <i class="fa fa-google"></i>
-                                        </div>
-                                    </a>
-                                </div>
+                                </a>
+                            </div>
                         </form>
                     </div>
                 </div>
