@@ -1,7 +1,4 @@
 @extends('layout.admin');
-@section('addcss')
-<link rel="stylesheet" href="/assets/plugins/richtexteditor/rte_theme_default.css" />
-@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -62,15 +59,6 @@
                         </div> --}}
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Deskripsi<span class="text-red">*</span></label>
-                                <textarea class="content" name="deskripsi"></textarea>
-                                @error('deskripsi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
                                 <label class="form-label">Status<span class="text-red">*</span></label>
                                 <select name="status" class="form-control form-select select2"
                                     data-bs-placeholder="Select Status">
@@ -85,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Longitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('longitude') @enderror" name="longitude"
+                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude"
                                     value="{{ old('longitude') }}">
                                 @error('longitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -95,9 +83,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('latitude') @enderror" name="latitude"
+                                <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude"
                                     value="{{ old('latitude') }}">
                                 @error('latitude')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-label">Deskripsi<span class="text-red">*</span></label>
+                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                                @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -115,20 +113,13 @@
 <!-- /Row -->
 @endsection
 @section('addscript')
-<!-- INTERNAL Richtext Editor JS -->
-<script type="text/javascript" src="/assets/plugins/richtexteditor/rte.js"></script>
-<script type="text/javascript" src='/assets/plugins/richtexteditor/plugins/all_plugins.js'></script>
+<!-- INTERNAL summernote -->
+ <!-- INTERNAL SUMMERNOTE Editor JS -->
+ <script src="/assets/plugins/summernote1/summernote1.js"></script>
+ <script src="/assets/js/summernote.js"></script>
 
-<!-- INTERNAL File-Uploads Js-->
-<script src="/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-<script src="/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-<script src="/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-<script src="/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-<script src="/assets/plugins/fancyuploder/fancy-uploader.js"></script>
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
-<script>
-    var editor1 = new RichTextEditor('.content')
-</script>
+
 @endsection

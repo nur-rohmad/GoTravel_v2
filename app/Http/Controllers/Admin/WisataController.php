@@ -30,11 +30,11 @@ class WisataController extends Controller
             'nama_wisata' => 'required',
             'kota' => 'required',
             'deskripsi' => 'required',
-            // 'demo' => 'required|image',
             'status' => 'required',
             'longitude' => 'required',
             'latitude' => 'required'
         ]);
+        // dd($wisata);
         $wisata['location'] = json_encode([
             'latitude' => $request->latitude,
             'longitude' => $request->longitude

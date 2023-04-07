@@ -15,6 +15,9 @@ class LoginController extends Controller
     {
         if (!Auth::user()) {
             return view('auth.form_login');
+        }else {
+            $user = auth()->user();
+            return redirect('/'.$user->role.'/dashboard');
         }
     }
 
@@ -29,6 +32,9 @@ class LoginController extends Controller
         // dd($data_login);
         if (Auth::Attempt($data_login)) {
             $request->session()->regenerate();
+            $user = User::where('id', auth()->user()->id)->first();
+            $user->last_login = now();
+            $user->save();
             switch (auth()->user()->role) {
                 case 'admin':
                     return redirect('admin/dashboard');
