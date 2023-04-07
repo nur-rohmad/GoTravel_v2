@@ -39,24 +39,25 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
-                                <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('kota') }}">
+                                    <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
+                                        placeholder="Bromo.." value="{{ old('kota') }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        {{-- <div class="col-md-12">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Foto <span class="text-red">*</span></label>
-                                <input type="file" id="demo" name="image"
-                                    class="form-control @error('image') is-invalid @enderror"
-                                    accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                <div class="input-group">
+                                    <input type="file"  name="image[]" class="form-control @error('image') is-invalid @enderror"  />
+                                    <button class="btn btn-sm btn-success">tambah</button>
+                                </div>
                                 @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Status<span class="text-red">*</span></label>

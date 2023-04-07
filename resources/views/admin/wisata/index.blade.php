@@ -25,25 +25,25 @@
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
                         <thead>
-                            <th>No</th>
+                            <th width="5%">No</th>
                             <th>Nama Wisata</th>
                             <th>Kota</th>
                             <th>Deskripsi</th>
                             <th>Foto</th>
                             <th>Lokasi</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th width="5%">Action</th>
                         </thead>
                         <tbody>
                             @foreach ($wisata as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $item->nama_wisata }}</td>
                                 <td>{{ $item->kota }}</td>
                                 <td><button class="btn btn-sm btn-dark"
                                         onclick="showDeskripsi('{{ $item->deskripsi }}')">lihat deskripsi</button></td>
                                 <td></td>
-                                <td><button class="btn btn-sm btn-info">Lihat Peta</button></td>
+                                <td><button class="btn btn-sm btn-info" onclick="showLocation()">Lihat Peta</button></td>
                                 <td class="text-center"><span
                                         class="badge  bg-{{ $item->status == 'draf' ? 'danger' : 'success'  }} badge-sm ">{{
                                         ucWords($item->status)
@@ -78,9 +78,29 @@
     </div>
 </div>
 {{-- modal deskripsi --}}
+{{-- modal map --}}
+<div class="modal fade effect-rotate-bottom" id="modal-location">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Lokasi Wisata</h6><button aria-label="Close" class="btn-close"
+                    data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="ht-300" id="leaflet2" style="height: 400px"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- modal map --}}
 <!-- /Row -->
 @endsection
 @section('addscript')
+<!-- INTERNAL SELECT2 JS -->
+<script src="/assets/plugins/select2/select2.full.min.js"></script>
 {{-- datatable --}}
 <script src="/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
 <script src="/assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
@@ -98,17 +118,46 @@
 
 <!-- INTERNAL summernote -->
 <script src="/assets/plugins/summernote1/summernote1.js"></script>
+
+ <!-- INTERNAL leaflet js -->
+ <script src="/assets/plugins/leaflet/leaflet.js"></script>
+ {{-- <script src="/assets/js/map-leafleft.js"></script> --}}
 <script>
+    
      $(document).ready(function() {
+        'use strict';
+        
         $('#summernote').summernote('disable');
+         // Adding a Popu
+         $('#modal-location').on('show.bs.modal', function(){
+                var map = L.map('leaflet2').setView([51.505, -0.09], 13);
+                map.whenReady(() => {
+                    $('#modal-location').css('width', '100%');
+                });
+                setTimeout(function() {
+                    map.invalidateSize();
+                }, 10);
+            });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup();
     });
-    function showDeskripsi(deskripsi) {
+    // load deskripsi
+    function showDeskripsi(deskripsi) 
+    {
         $('#summernote').summernote('code', deskripsi);
         $('#modal-deskripsi').modal('show');
     }
-    $('#btn-deskripsi').click((deskripsi)=>{
-        
-        
-    })
+    // load location
+    function showLocation()
+    {
+       
+        $('#modal-location').modal('show');
+    }
+   
+
 </script>
 @endsection
