@@ -9,5 +9,7 @@ Route::group(['namespace' => 'admin'], function () {
         Route::get('/', 'WisataController@index');
         Route::get('/tambah-wisata', 'WisataController@create');
         Route::post('/proccess-add-wisata', 'WisataController@procces_create');
+        Route::post('/proccess-edit-wisata', 'WisataController@procces_edit');
+        Route::get('/edit-wisata/{id}', 'WisataController@edit');
     });
 });

@@ -2,11 +2,11 @@
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Tambah Wisata</h1>
+    <h1 class="page-title">Edit Wisata</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item " aria-current="page"><a href="/admin/wisata">Wisata</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tambah Wisata</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Wisata</li>
         </ol>
     </div>
 </div>
@@ -18,19 +18,20 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="card-title">Tambah wisata</h3>
+                <h3 class="card-title">Edit wisata</h3>
                 <a href="/admin/wisata" class="btn btn-sm btn-dark"><i class="fa fa-arrow-left me-2"></i>Kembali</a>
             </div>
             <div class="card-body">
-                <form action="/admin/wisata/proccess-add-wisata" method="POST" enctype="multipart/form-data">
+                <form action="/admin/wisata/proccess-edit-wisata" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" value="{{$wisata->id}}" name="id">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Nama Wisata <span class="text-red">*</span></label>
                                 <input type="text" name="nama_wisata"
                                     class="form-control @error('nama_wisata') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('nama_wisata') }}">
+                                    placeholder="Bromo.." value="{{ old('nama_wisata', $wisata->nama_wisata) }}">
                                 @error('nama_wisata')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -40,7 +41,7 @@
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
                                     <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                        placeholder="Bromo.." value="{{ old('kota') }}">
+                                        placeholder="Bromo.." value="{{ old('kota', $wisata->kota) }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -63,8 +64,8 @@
                                 <label class="form-label">Status<span class="text-red">*</span></label>
                                 <select name="status" class="form-control form-select select2"
                                     data-bs-placeholder="Select Status">
-                                    <option value="draf">Draf</option>
-                                    <option value="publish">Publish</option>
+                                    <option value="draf" {{ $wisata->status  == 'draf' ? 'selected' : ''}}>Draf</option>
+                                    <option value="publish" {{ $wisata->status  == 'publish' ? 'selected' : ''}} >Publish</option>
                                 </select>
                                 @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -75,7 +76,7 @@
                             <div class="form-group">
                                 <label class="form-label"> Longitude <span class="text-red">*</span></label>
                                 <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
-                                    value="{{ old('longitude') }}" readonly>
+                                    value="{{ old('longitude' ,  $wisata->location->longitude) }}" readonly>
                                 @error('longitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -86,7 +87,7 @@
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
                                 <div class="input-group">
                                     <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
-                                        value="{{ old('latitude') }}" readonly>
+                                        value="{{ old('latitude' , $wisata->location->latitude) }}" readonly>
                                     <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i class="fa fa-map-o ms-2"></i></a>
                                 </div>
                                 @error('latitude')
@@ -98,7 +99,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Deskripsi<span class="text-red">*</span></label>
-                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote" name="deskripsi">{{ old('deskripsi', $wisata->deskripsi) }}</textarea>
                                 @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -143,6 +144,7 @@
 
   <!-- INTERNAL Notifications js -->
   <script src="/assets/plugins/notify/js/rainbow.js"></script>
+  {{-- <script src="/assets/plugins/notify/js/sample.js"></script> --}}
   <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
   <script src="/assets/plugins/notify/js/notifIt.js"></script>
 
@@ -161,35 +163,54 @@
    {
        // add canva map
        $('#modal-body').append( `<div class="ht-300" id="leaflet2" style="height: 400px;"></div>`)
+       
+        //creatre icon
+        const iconLama = L.icon({
+            iconUrl: '/assets/images/icon-map/icon-lama-merah.png',
+            iconSize: [50, 50],
+        })
+        const iconBaru = L.icon({
+            iconUrl: '/assets/images/icon-map/icon-baru-biru.png',
+            iconSize: [50, 50],
+        })
+
        // inisialisasi map
-       var peta = L.map('leaflet2').setView([-2.504, 117.905], 5);
+       var peta = L.map('leaflet2').setView([{{$wisata->location->latitude}} , {{$wisata->location->longitude}}], 12);
        setTimeout(function(){ peta.invalidateSize()}, 400);
        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
        }).addTo(peta);
-        // create event  saat peta diclick
-        var theMarker = {}
-        peta.on('click', function(ev){
-        var latlng = peta.mouseEventToLatLng(ev.originalEvent);
-        // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
-        if (theMarker != undefined) {
-              peta.removeLayer(theMarker);
-        };
-        // add marker to map
-         theMarker = L.marker([latlng.lat , latlng.lng]).addTo(peta)
-        // add latlng to form
-        $('#latitude').val(latlng.lat)
-        $('#longitude').val(latlng.lng)
-
-        // notif
-        $.growl.notice({
-                title: '<i class="fa fa-check"></i> Sukses',
-                message: `berhasil menambahkan <br/> latitude : ${latlng.lat} <br/> longitude : ${latlng.lng}`,
-                duration: 2000
-        });
-
        
-});
+       //add maker 
+       L.marker([{{$wisata->location->latitude}} , {{$wisata->location->longitude}}], {icon: iconLama}).addTo(peta)
+            .bindPopup('titik lama')
+       
+        var theMarker = {}
+       
+         // create event  saat peta diclick
+        peta.on('click', function(ev){
+            var latlng = peta.mouseEventToLatLng(ev.originalEvent);
+            
+            // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
+            if (theMarker != undefined) {
+                peta.removeLayer(theMarker);
+            };
+            
+            // add marker to map
+            theMarker = L.marker([latlng.lat , latlng.lng], {icon: iconBaru}).addTo(peta)
+            theMarker.bindPopup('titik baru')
+            // add latlng to form
+            $('#latitude').val(latlng.lat)
+            $('#longitude').val(latlng.lng)
+
+            // notif penambahan latitude and longitude
+            $.growl.notice({
+                    title: '<i class="fa fa-check"></i> Sukses',
+                    message: `berhasil menambahkan <br/> latitude : ${latlng.lat} <br/> longitude : ${latlng.lng}`,
+                    duration: 2000
+            });
+        });
+        // tampilkan modal
        $('#modal-location').modal('show');
    }
 

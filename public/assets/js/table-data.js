@@ -13,7 +13,7 @@ $(function(e) {
     //______Basic Data Table
     $('#responsive-datatable').DataTable({
         language: {
-            searchPlaceholder: 'Search...',
+            searchPlaceholder: 'Cari Kota/Nama Wisata',
             scrollX: "100%",
             sSearch: '',
         }

@@ -37,4 +37,9 @@ class Wisata extends Model
 
         return $location;
     }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
 }

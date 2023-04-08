@@ -31,13 +31,13 @@
                             <th>Deskripsi</th>
                             <th>Foto</th>
                             <th>Lokasi</th>
-                            <th>Status</th>
-                            <th width="5%">Action</th>
+                            <th width="5%">Status</th>
+                            <th width="10%">Action</th>
                         </thead>
                         <tbody>
                             @foreach ($wisata as $item)
                             <tr>
-                                <td>{{ $loop->index+1 }}</td>
+                                <td class="text-center">{{ $loop->index+1 }}</td>
                                 <td>{{ $item->nama_wisata }}</td>
                                 <td>{{ $item->kota }}</td>
                                 <td><button class="btn btn-sm btn-dark"
@@ -49,7 +49,10 @@
                                         ucWords($item->status)
                                         }}</span>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <a href="/admin/wisata/edit-wisata/{{$item->id}}" class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i> edit </a>
+                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" ></i> hapus </button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -121,7 +124,11 @@
 
  <!-- INTERNAL leaflet js -->
  <script src="/assets/plugins/leaflet/leaflet.js"></script>
- {{-- <script src="/assets/js/map-leafleft.js"></script> --}}
+ 
+ <!-- INTERNAL Notifications js -->
+ <script src="/assets/plugins/notify/js/rainbow.js"></script>
+ <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+ <script src="/assets/plugins/notify/js/notifIt.js"></script>
 <script>
     
      $(document).ready(function() {
@@ -141,18 +148,20 @@
     {
         // add judul modal
         $('#nama-wisata').text(nama_wisata)
+       
         // add canva map
         $('#modal-body').append( `<div class="ht-300" id="leaflet2" style="height: 400px;"></div>`)
+        
         // inisialisasi map
-        var peta = L.map('leaflet2').setView([-7.4040, 111.4452], 13);
+        var peta = L.map('leaflet2').setView([latitude, longitude], 13);
         setTimeout(function(){ peta.invalidateSize()}, 400);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(peta);
         L.marker([latitude , longitude]).addTo(peta)
             .bindPopup(nama_wisata)
-            .openPopup();
-            // tampilkan modal
+            
+        // tampilkan modal
         $('#modal-location').modal('show');
     }
 
@@ -160,7 +169,25 @@
     $('#modal-location').on('hide.bs.modal', function(){
         $('#leaflet2').remove()
     })
-   
-
 </script>
+    @if (session('gagal'))
+    <script>
+         // notif<i class="fas fa-exclamation-triangle"></i>
+         $.growl.error({
+                title: '<i class="fa fa-exclamation-triangle"></i> GAGAL',
+                message: "{{ session('gagal') }}",
+                duration: 5000
+        });
+    </script>
+    @endif
+    @if (session('success'))
+    <script>
+         // notif<i class="fas fa-exclamation-triangle"></i>
+         $.growl.notice({
+                title: '<i class="fa fa-check"></i> SUKSES',
+                message: "{{ session('success') }}",
+                duration: 5000
+        });
+    </script>
+    @endif
 @endsection

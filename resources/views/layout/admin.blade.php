@@ -212,6 +212,11 @@
                                         class="side-menu__icon fe fe-briefcase"></i><span
                                         class="side-menu__label">Wisata</span></a>
                             </li>
+                            <li>
+                                <a class="side-menu__item has-link" href="/admin/open-trip"><i
+                                        class="side-menu__icon fe fe-calendar"></i><span
+                                        class="side-menu__label">Open Trip</span></a>
+                            </li>
 
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
@@ -264,10 +269,14 @@
     <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
+     <!-- Perfect SCROLLBAR JS-->
+    <script src="/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+    <script src="/assets/plugins/p-scroll/pscroll.js"></script>
+    <script src="/assets/plugins/p-scroll/pscroll-1.js"></script>
+    <!-- SIDE-MENU JS -->
+    <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
 
-
-    <!-- SIDEBAR JS -->
-    <script src="/assets/plugins/sidebar/sidebar.js"></script>
+   
 
     <!-- Color Theme js -->
     <script src="/assets/js/themeColors.js"></script>
