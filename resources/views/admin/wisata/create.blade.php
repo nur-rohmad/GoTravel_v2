@@ -74,8 +74,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Longitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude"
-                                    value="{{ old('longitude') }}">
+                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
+                                    value="{{ old('longitude') }}" readonly>
                                 @error('longitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -84,8 +84,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude"
-                                    value="{{ old('latitude') }}">
+                                <div class="input-group">
+                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
+                                        value="{{ old('latitude') }}" readonly>
+                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i class="fa fa-map-o ms-2"></i></a>
+                                </div>
                                 @error('latitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -111,16 +114,92 @@
         </div>
     </div>
 </div>
+
+{{-- peta lokasi --}}
+<div class="modal fade" id="modal-location">
+    <div class="modal-dialog  modal-xl" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close" class="btn-close"
+                    data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- peta lokasi --}}
 <!-- /Row -->
 @endsection
 @section('addscript')
-<!-- INTERNAL summernote -->
+
  <!-- INTERNAL SUMMERNOTE Editor JS -->
  <script src="/assets/plugins/summernote1/summernote1.js"></script>
  <script src="/assets/js/summernote.js"></script>
 
+  <!-- INTERNAL Notifications js -->
+  <script src="/assets/plugins/notify/js/rainbow.js"></script>
+  {{-- <script src="/assets/plugins/notify/js/sample.js"></script> --}}
+  <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+  <script src="/assets/plugins/notify/js/notifIt.js"></script>
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
+
+<!-- INTERNAL leaflet js -->
+<script src="/assets/plugins/leaflet/leaflet.js"></script>
+{{-- <script src="/assets/js/map-leafleft.js"></script> --}}
+
+
+<script>
+   
+   // load location
+   function showMap()
+   {
+       // add canva map
+       $('#modal-body').append( `<div class="ht-300" id="leaflet2" style="height: 400px;"></div>`)
+       // inisialisasi map
+       var peta = L.map('leaflet2').setView([-2.504, 117.905], 5);
+       setTimeout(function(){ peta.invalidateSize()}, 400);
+       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+       }).addTo(peta);
+        // create event  saat peta diclick
+        var theMarker = {}
+        peta.on('click', function(ev){
+        var latlng = peta.mouseEventToLatLng(ev.originalEvent);
+        // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
+        if (theMarker != undefined) {
+              peta.removeLayer(theMarker);
+        };
+        // add marker to map
+         theMarker = L.marker([latlng.lat , latlng.lng]).addTo(peta)
+        // add latlng to form
+        $('#latitude').val(latlng.lat)
+        $('#longitude').val(latlng.lng)
+
+        // notif
+        $.growl.notice({
+                title: '<i class="fa fa-check"></i> Sukses',
+                message: `berhasil menambahkan <br/> latitude : ${latlng.lat} <br/> longitude : ${latlng.lng}`,
+                duration: 2000
+        });
+
+       
+});
+       $('#modal-location').modal('show');
+   }
+
+   // remove canva map saat modal tertutup
+   $('#modal-location').on('hide.bs.modal', function(){
+       $('#leaflet2').remove()
+   })
+  
+
+</script>
 
 @endsection

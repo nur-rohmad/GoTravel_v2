@@ -43,7 +43,7 @@
                                 <td><button class="btn btn-sm btn-dark"
                                         onclick="showDeskripsi('{{ $item->deskripsi }}')">lihat deskripsi</button></td>
                                 <td></td>
-                                <td><button class="btn btn-sm btn-info" onclick="showLocation()">Lihat Peta</button></td>
+                                <td><button class="btn btn-sm btn-info" onclick="showLocation('{{$item->nama_wisata}}', '{{$item->location->latitude}}', '{{$item->location->longitude}}')">Lihat Peta</button></td>
                                 <td class="text-center"><span
                                         class="badge  bg-{{ $item->status == 'draf' ? 'danger' : 'success'  }} badge-sm ">{{
                                         ucWords($item->status)
@@ -72,7 +72,7 @@
                 <textarea id="summernote" name="deskripsi"></textarea>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -80,17 +80,17 @@
 {{-- modal deskripsi --}}
 {{-- modal map --}}
 <div class="modal fade effect-rotate-bottom" id="modal-location">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Wisata</h6><button aria-label="Close" class="btn-close"
+                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close" class="btn-close"
                     data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
             </div>
-            <div class="modal-body">
-                <div class="ht-300" id="leaflet2" style="height: 400px"></div>
+            <div class="modal-body" id="modal-body">
+                
             </div>
             <div class="modal-footer">
-                <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -129,21 +129,6 @@
         
         $('#summernote').summernote('disable');
          // Adding a Popu
-         $('#modal-location').on('show.bs.modal', function(){
-                var map = L.map('leaflet2').setView([51.505, -0.09], 13);
-                map.whenReady(() => {
-                    $('#modal-location').css('width', '100%');
-                });
-                setTimeout(function() {
-                    map.invalidateSize();
-                }, 10);
-            });
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-            .openPopup();
     });
     // load deskripsi
     function showDeskripsi(deskripsi) 
@@ -152,11 +137,29 @@
         $('#modal-deskripsi').modal('show');
     }
     // load location
-    function showLocation()
+    function showLocation(nama_wisata, latitude, longitude)
     {
-       
+        // add judul modal
+        $('#nama-wisata').text(nama_wisata)
+        // add canva map
+        $('#modal-body').append( `<div class="ht-300" id="leaflet2" style="height: 400px;"></div>`)
+        // inisialisasi map
+        var peta = L.map('leaflet2').setView([-7.4040, 111.4452], 13);
+        setTimeout(function(){ peta.invalidateSize()}, 400);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(peta);
+        L.marker([latitude , longitude]).addTo(peta)
+            .bindPopup(nama_wisata)
+            .openPopup();
+            // tampilkan modal
         $('#modal-location').modal('show');
     }
+
+    // remove canva map saat modal tertutup
+    $('#modal-location').on('hide.bs.modal', function(){
+        $('#leaflet2').remove()
+    })
    
 
 </script>

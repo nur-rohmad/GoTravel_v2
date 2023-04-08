@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wisata;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class WisataController extends Controller
@@ -33,9 +32,9 @@ class WisataController extends Controller
             'status' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
-            'image' => 'required'
+            // 'image' => 'required'
         ]);
-        dd($wisata);
+        // dd($wisata);
         $wisata['location'] = json_encode([
             'latitude' => $request->latitude,
             'longitude' => $request->longitude
