@@ -40,8 +40,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
-                                    <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                        placeholder="Bromo.." value="{{ old('kota', $wisata->kota) }}">
+                                <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
+                                    placeholder="Bromo.." value="{{ old('kota', $wisata->kota) }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -51,12 +51,18 @@
                             <div class="form-group">
                                 <label class="form-label">Foto <span class="text-red">*</span></label>
                                 <div class="input-group">
-                                    <input type="file"  name="image[]" class="form-control @error('image') is-invalid @enderror"  />
-                                    <button class="btn btn-sm btn-success">tambah</button>
+                                    <input type="file" name="image" id="foto_wisata"
+                                        class="form-control @error('image') is-invalid @enderror" />
                                 </div>
                                 @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <div class="privew-image">
+                                    <img id="preview-image_edit" src="{{ asset('storage/'. $wisata->image) }}"
+                                        alt="preview image" style="max-height: 200px; max-width: 250px;">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -64,8 +70,9 @@
                                 <label class="form-label">Status<span class="text-red">*</span></label>
                                 <select name="status" class="form-control form-select select2"
                                     data-bs-placeholder="Select Status">
-                                    <option value="draf" {{ $wisata->status  == 'draf' ? 'selected' : ''}}>Draf</option>
-                                    <option value="publish" {{ $wisata->status  == 'publish' ? 'selected' : ''}} >Publish</option>
+                                    <option value="draf" {{ $wisata->status == 'draf' ? 'selected' : ''}}>Draf</option>
+                                    <option value="publish" {{ $wisata->status == 'publish' ? 'selected' : ''}} >Publish
+                                    </option>
                                 </select>
                                 @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -75,7 +82,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Longitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
+                                <input type="text" class="form-control @error('longitude') is-invalid @enderror"
+                                    name="longitude" id="longitude"
                                     value="{{ old('longitude' ,  $wisata->location->longitude) }}" readonly>
                                 @error('longitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -86,9 +94,11 @@
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
+                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror"
+                                        name="latitude" id="latitude"
                                         value="{{ old('latitude' , $wisata->location->latitude) }}" readonly>
-                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i class="fa fa-map-o ms-2"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i
+                                            class="fa fa-map-o ms-2"></i></a>
                                 </div>
                                 @error('latitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -99,7 +109,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Deskripsi<span class="text-red">*</span></label>
-                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote" name="deskripsi">{{ old('deskripsi', $wisata->deskripsi) }}</textarea>
+                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote"
+                                    name="deskripsi">{{ old('deskripsi', $wisata->deskripsi) }}</textarea>
                                 @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -121,11 +132,11 @@
     <div class="modal-dialog  modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close" class="btn-close"
-                    data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close"
+                    class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body" id="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -138,15 +149,15 @@
 @endsection
 @section('addscript')
 
- <!-- INTERNAL SUMMERNOTE Editor JS -->
- <script src="/assets/plugins/summernote1/summernote1.js"></script>
- <script src="/assets/js/summernote.js"></script>
+<!-- INTERNAL SUMMERNOTE Editor JS -->
+<script src="/assets/plugins/summernote1/summernote1.js"></script>
+<script src="/assets/js/summernote.js"></script>
 
-  <!-- INTERNAL Notifications js -->
-  <script src="/assets/plugins/notify/js/rainbow.js"></script>
-  {{-- <script src="/assets/plugins/notify/js/sample.js"></script> --}}
-  <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
-  <script src="/assets/plugins/notify/js/notifIt.js"></script>
+<!-- INTERNAL Notifications js -->
+<script src="/assets/plugins/notify/js/rainbow.js"></script>
+{{-- <script src="/assets/plugins/notify/js/sample.js"></script> --}}
+<script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+<script src="/assets/plugins/notify/js/notifIt.js"></script>
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
@@ -157,8 +168,18 @@
 
 
 <script>
-   
-   // load location
+    $(document).ready(function (e) {
+        $('#foto_wisata').change(function(){
+        let reader = new FileReader();
+        reader.onload = (e) => {
+        $('#preview-image_edit').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+    
+    });
+
+    // load location
    function showMap()
    {
        // add canva map

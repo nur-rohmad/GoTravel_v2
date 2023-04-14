@@ -39,8 +39,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
-                                    <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                        placeholder="Bromo.." value="{{ old('kota') }}">
+                                <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
+                                    placeholder="Bromo.." value="{{ old('kota') }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -50,12 +50,19 @@
                             <div class="form-group">
                                 <label class="form-label">Foto <span class="text-red">*</span></label>
                                 <div class="input-group">
-                                    <input type="file"  name="image[]" class="form-control @error('image') is-invalid @enderror"  />
-                                    <button class="btn btn-sm btn-success">tambah</button>
+                                    <input type="file" name="image" id="foto-wisata"
+                                        class="form-control @error('image') is-invalid @enderror" />
                                 </div>
                                 @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <div class="privew-image">
+                                    <img id="preview-image_add"
+                                        src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
+                                        alt="preview image" style="max-height: 200px; max-width: 250px;">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -74,8 +81,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Longitude <span class="text-red">*</span></label>
-                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" id="longitude"
-                                    value="{{ old('longitude') }}" readonly>
+                                <input type="text" class="form-control @error('longitude') is-invalid @enderror"
+                                    name="longitude" id="longitude" value="{{ old('longitude') }}" readonly>
                                 @error('longitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -85,9 +92,10 @@
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" id="latitude"
-                                        value="{{ old('latitude') }}" readonly>
-                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i class="fa fa-map-o ms-2"></i></a>
+                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror"
+                                        name="latitude" id="latitude" value="{{ old('latitude') }}" readonly>
+                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i
+                                            class="fa fa-map-o ms-2"></i></a>
                                 </div>
                                 @error('latitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -98,7 +106,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Deskripsi<span class="text-red">*</span></label>
-                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                                <textarea class="content @error('deskripsi') is-invalid @enderror" id="summernote"
+                                    name="deskripsi">{{ old('deskripsi') }}</textarea>
                                 @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -120,11 +129,11 @@
     <div class="modal-dialog  modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close" class="btn-close"
-                    data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close"
+                    class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body" id="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -137,14 +146,14 @@
 @endsection
 @section('addscript')
 
- <!-- INTERNAL SUMMERNOTE Editor JS -->
- <script src="/assets/plugins/summernote1/summernote1.js"></script>
- <script src="/assets/js/summernote.js"></script>
+<!-- INTERNAL SUMMERNOTE Editor JS -->
+<script src="/assets/plugins/summernote1/summernote1.js"></script>
+<script src="/assets/js/summernote.js"></script>
 
-  <!-- INTERNAL Notifications js -->
-  <script src="/assets/plugins/notify/js/rainbow.js"></script>
-  <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
-  <script src="/assets/plugins/notify/js/notifIt.js"></script>
+<!-- INTERNAL Notifications js -->
+<script src="/assets/plugins/notify/js/rainbow.js"></script>
+<script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+<script src="/assets/plugins/notify/js/notifIt.js"></script>
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
@@ -155,8 +164,17 @@
 
 
 <script>
-   
-   // load location
+    // preview image
+    $(document).ready(function (e) {
+        $('#foto-wisata').change(function(){
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#preview-image_add').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+        });
+    });
+    // load location
    function showMap()
    {
        // add canva map
@@ -173,7 +191,7 @@
         var latlng = peta.mouseEventToLatLng(ev.originalEvent);
         // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
         if (theMarker != undefined) {
-              peta.removeLayer(theMarker);
+              peta.removeLayer(theMarker); 
         };
         // add marker to map
          theMarker = L.marker([latlng.lat , latlng.lng]).addTo(peta)

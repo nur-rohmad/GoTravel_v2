@@ -42,16 +42,22 @@
                                 <td>{{ $item->kota }}</td>
                                 <td><button class="btn btn-sm btn-dark"
                                         onclick="showDeskripsi('{{ $item->deskripsi }}')">lihat deskripsi</button></td>
-                                <td></td>
-                                <td><button class="btn btn-sm btn-info" onclick="showLocation('{{$item->nama_wisata}}', '{{$item->location->latitude}}', '{{$item->location->longitude}}')">Lihat Peta</button></td>
+                                <td>
+                                    <img src="{{ asset('storage/'.$item->image) }}" alt="" width="80px">
+                                </td>
+                                <td><button class="btn btn-sm btn-info"
+                                        onclick="showLocation('{{$item->nama_wisata}}', '{{$item->location->latitude}}', '{{$item->location->longitude}}')">Lihat
+                                        Peta</button></td>
                                 <td class="text-center"><span
                                         class="badge  bg-{{ $item->status == 'draf' ? 'danger' : 'success'  }} badge-sm ">{{
                                         ucWords($item->status)
                                         }}</span>
                                 </td>
                                 <td>
-                                    <a href="/admin/wisata/edit-wisata/{{$item->id}}" class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i> edit </a>
-                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" ></i> hapus </button>
+                                    <a href="/admin/wisata/edit-wisata/{{$item->id}}" class="btn btn-sm btn-warning"> <i
+                                            class="fa fa-edit"></i> edit </a>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteWisata('{{ $item}}')"> <i
+                                            class="fa fa-trash"></i> hapus </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -86,11 +92,11 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close" class="btn-close"
-                    data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close"
+                    class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body" id="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
@@ -122,16 +128,15 @@
 <!-- INTERNAL summernote -->
 <script src="/assets/plugins/summernote1/summernote1.js"></script>
 
- <!-- INTERNAL leaflet js -->
- <script src="/assets/plugins/leaflet/leaflet.js"></script>
- 
- <!-- INTERNAL Notifications js -->
- <script src="/assets/plugins/notify/js/rainbow.js"></script>
- <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
- <script src="/assets/plugins/notify/js/notifIt.js"></script>
+<!-- INTERNAL leaflet js -->
+<script src="/assets/plugins/leaflet/leaflet.js"></script>
+
+<!-- INTERNAL Notifications js -->
+<script src="/assets/plugins/notify/js/rainbow.js"></script>
+<script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+<script src="/assets/plugins/notify/js/notifIt.js"></script>
 <script>
-    
-     $(document).ready(function() {
+    $(document).ready(function() {
         'use strict';
         
         $('#summernote').summernote('disable');
@@ -169,25 +174,81 @@
     $('#modal-location').on('hide.bs.modal', function(){
         $('#leaflet2').remove()
     })
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    // delete wisata
+    function deleteWisata(item){
+        const data = JSON.parse(item)
+        console.log(JSON.parse(item))
+        Swal.fire({
+            title: 'apakah anda yakin ?',
+            icon: 'warning',
+            html: `Menghapus postingan wisata dengan id #<span class="text-danger fw-bold">${data.id}</span>`,
+            confirmButtonColor: "#dc3545",
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+            return $.ajax({
+                    type: 'POST',
+                    url: '/admin/wisata/delete',
+                    data: {
+                        id_wisata: data.id
+                    },
+                    success:((res) => {
+                        console.log('result', res)
+                    }),
+                    error: ((err) => {
+                        console.log('err', err.responseJSON)
+                    })
+                })
+            // return fetch(`/admin/wisata/delete`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({id_wisata: data.id})
+            // }).then((result) => {
+            //     console.log('result',result)
+            //     if (!result.ok) {
+            //         swal.fire('Gagal', result.)
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log('err',error)
+            //     // if (error.) {
+                    
+            //     // }
+            // })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+            })
+    }
 </script>
-    @if (session('gagal'))
-    <script>
-         // notif<i class="fas fa-exclamation-triangle"></i>
+@if (session('gagal'))
+<script>
+    // notif<i class="fas fa-exclamation-triangle"></i>
          $.growl.error({
                 title: '<i class="fa fa-exclamation-triangle"></i> GAGAL',
                 message: "{{ session('gagal') }}",
                 duration: 5000
         });
-    </script>
-    @endif
-    @if (session('success'))
-    <script>
-         // notif<i class="fas fa-exclamation-triangle"></i>
+</script>
+@endif
+@if (session('success'))
+<script>
+    // notif<i class="fas fa-exclamation-triangle"></i>
          $.growl.notice({
                 title: '<i class="fa fa-check"></i> SUKSES',
                 message: "{{ session('success') }}",
                 duration: 5000
         });
-    </script>
-    @endif
+</script>
+@endif
 @endsection

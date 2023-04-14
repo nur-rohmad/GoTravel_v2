@@ -17,7 +17,7 @@ class CreateWisataTable extends Migration
             $table->uuid('id')->primary();
             $table->string('nama_wisata', 200);
             $table->string('kota', 200);
-            $table->json('image');
+            $table->string('image', 225);
             $table->text('deskripsi');
             $table->enum('status', ['publish', 'draf']);
             $table->json('location');

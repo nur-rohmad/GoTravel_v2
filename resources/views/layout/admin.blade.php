@@ -15,6 +15,9 @@
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico">
 
+    {{-- csrf token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- TITLE -->
     <title>Go Travel </title>
 
@@ -33,6 +36,8 @@
     <!-- INTERNAL Switcher css -->
     <link href="/assets/switcher/css/switcher.css" rel="stylesheet">
     <link href="/assets/switcher/demo.css" rel="stylesheet">
+    {{-- swertalert2 --}}
+    <link rel="stylesheet" href="/assets/plugins/sweetalert2/sweetalert2.min.css">
     @yield('addcss')
 </head>
 
@@ -214,8 +219,8 @@
                             </li>
                             <li>
                                 <a class="side-menu__item has-link" href="/admin/open-trip"><i
-                                        class="side-menu__icon fe fe-calendar"></i><span
-                                        class="side-menu__label">Open Trip</span></a>
+                                        class="side-menu__icon fe fe-calendar"></i><span class="side-menu__label">Open
+                                        Trip</span></a>
                             </li>
 
                         </ul>
@@ -269,14 +274,14 @@
     <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-     <!-- Perfect SCROLLBAR JS-->
+    <!-- Perfect SCROLLBAR JS-->
     <script src="/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
     <script src="/assets/plugins/p-scroll/pscroll.js"></script>
     <script src="/assets/plugins/p-scroll/pscroll-1.js"></script>
     <!-- SIDE-MENU JS -->
     <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
 
-   
+
 
     <!-- Color Theme js -->
     <script src="/assets/js/themeColors.js"></script>
@@ -292,6 +297,8 @@
 
     <!-- Switcher js -->
     <script src="/assets/switcher/js/switcher.js"></script>
+    {{-- swertalert2 --}}
+    <script src="/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 
     @yield('addscript')
 

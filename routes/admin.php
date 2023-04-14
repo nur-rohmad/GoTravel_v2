@@ -11,5 +11,6 @@ Route::group(['namespace' => 'admin'], function () {
         Route::post('/proccess-add-wisata', 'WisataController@procces_create');
         Route::post('/proccess-edit-wisata', 'WisataController@procces_edit');
         Route::get('/edit-wisata/{id}', 'WisataController@edit');
+        Route::post('/delete', 'WisataController@delete');
     });
 });
