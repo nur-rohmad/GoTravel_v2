@@ -213,12 +213,12 @@
                                 <h3>Master Data</h3>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link" href="/admin/wisata"><i
+                                <a class="side-menu__item has-link {{ (request()->is('admin/wisata*') )? 'active' : '' }}" href="/admin/wisata"><i
                                         class="side-menu__icon fe fe-briefcase"></i><span
                                         class="side-menu__label">Wisata</span></a>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link" href="/admin/open-trip"><i
+                                <a class="side-menu__item has-link {{ (request()->is('admin/open-trip*') )? 'active' : '' }}" href="/admin/open-trip"><i
                                         class="side-menu__icon fe fe-calendar"></i><span class="side-menu__label">Open
                                         Trip</span></a>
                             </li>

@@ -18,5 +18,6 @@ Route::group(['namespace' => 'admin'], function () {
     Route::group(['prefix' => 'open-trip'], function(){
         Route::get('/', 'OpenTripController@index');
         Route::get('/tambah-open-trip', 'OpenTripController@create');
+        Route::post('/proccess-add', 'OpenTripController@prosesCreate');
     });
 });

@@ -10,7 +10,7 @@ class OpenTrip extends Model
 {
     use HasFactory;
     protected $table = 'open_trip';
-    protected $filable = [
+    protected $fillable = [
         'title',
         'slug',
         'deskripsi',
@@ -27,6 +27,14 @@ class OpenTrip extends Model
         static::creating(function ($model) {
             $model->id = Str::uuid();
         });
+    }
+
+    public function getLokasiTujuanAttribute()
+    {
+        $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
+
+        $this->attributes['lokasi_tujuan'] = Wisata::whereIn('id', $lokasiTujuan)->get();
+        return $this->attributes['lokasi_tujuan'];
     }
 
     public function getKeyType()
