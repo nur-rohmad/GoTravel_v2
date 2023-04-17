@@ -9,10 +9,28 @@ use Illuminate\Support\Facades\Storage;
 
 class WisataController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $wisata = Wisata::orderBy('id', 'desc')->get();
-        // dd($wisata);
+        $wisata = Wisata::orderBy('id', 'desc');
+
+        // jika terdapat request filter
+        if ($request->has('nama_wisata') && $request->nama_wisata != null) {
+            info('nama_wisata', [$request->nama_wisata]);
+            $wisata->where('nama_wisata', $request->nama_wisata);
+        }
+
+        if ($request->has('kota') && $request->kota != null) {
+            info('kota', [$request->kota]);
+            $wisata->where('kota', 'LIKE', '%'. $request->kota. '%');
+        }
+
+        if ($request->has('status') && $request->status != 'all') {
+            info('status', [$request->status]);
+            $wisata->where('status', $request->status);
+        }
+
+        $wisata = $wisata->get();
+        info('wisata', [$wisata]);
         return view('admin.wisata.index', compact('wisata'));
     }
 
@@ -116,7 +134,7 @@ class WisataController extends Controller
         ]);
 
         // cari data wisata
-        $wisata = Wisata::where('id', $request->wisata_id)->first();
+        $wisata = Wisata::where('id', $request->id_wisata)->first();
 
         // jika data wisata tidak ditemukan kembalikan error
         if (!$wisata) {
@@ -128,7 +146,9 @@ class WisataController extends Controller
 
         // hapus data dari database 
         $wisata->delete();
-        Storage::delete($wisata->image);
+        if ($wisata->image != null) {
+            Storage::delete($wisata->image);
+        }
 
         return response()->json([
             'success' => false,

@@ -5,6 +5,7 @@
     <h1 class="page-title">Tambah Wisata</h1>
     <div>
         <ol class="breadcrumb">
+            <li class="breadcrumb-item " aria-current="page"><a href="/admin">Admin</a></li>
             <li class="breadcrumb-item " aria-current="page"><a href="/admin/wisata">Wisata</a></li>
             <li class="breadcrumb-item active" aria-current="page">Tambah Wisata</li>
         </ol>

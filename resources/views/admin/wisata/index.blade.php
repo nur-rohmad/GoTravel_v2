@@ -5,6 +5,7 @@
     <h1 class="page-title">Wisata</h1>
     <div>
         <ol class="breadcrumb">
+            <li class="breadcrumb-item " aria-current="page"><a href="/admin">Admin</a></li>
             <li class="breadcrumb-item active" aria-current="page">Wisata</li>
         </ol>
     </div>
@@ -13,7 +14,29 @@
 
 <!-- ROW-1 OPEN -->
 <!-- Row -->
-<div class="row ">
+<div class="card shadow">
+    <form action="/admin/wisata" method="GET">
+        <div class="row p-4">
+            <div class="col-md-3">
+                <input type="text" value="{{ Request::get('nama_wisata') }}" class="form-control" name="nama_wisata" placeholder="nama wisata">
+            </div>
+            <div class="col-md-3">
+                <input type="text" value="{{ Request::get('kota') }}" class="form-control" name="kota" placeholder="Kota wisata">
+            </div>
+            <div class="col-md-3">
+                <select name="status" id="" class="form-control">
+                    <option  value="all">Semua</option>
+                    <option {{ Request::get('status') == 'publish' ? 'selected' : '' }} value="publish">Publish</option>
+                    <option {{ Request::get('status') == 'draf' ? 'selected' : '' }} value="draf">Draf</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">Cari</button>
+                <a href="/admin/wisata" class="btn btn-dark">Reset</a>
+            </div>
+        </div>
+    </form>
+    </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
@@ -56,7 +79,7 @@
                                 <td>
                                     <a href="/admin/wisata/edit-wisata/{{$item->id}}" class="btn btn-sm btn-warning"> <i
                                             class="fa fa-edit"></i> edit </a>
-                                    <button class="btn btn-sm btn-danger" onclick="deleteWisata('{{ $item}}')"> <i
+                                    <button class="btn btn-sm btn-danger" onclick="deleteWisata('{{ $item->id}}', '{{ $item->nama_wisata}}')"> <i
                                             class="fa fa-trash"></i> hapus </button>
                                 </td>
                             </tr>
@@ -175,59 +198,41 @@
         $('#leaflet2').remove()
     })
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+  
     // delete wisata
-    function deleteWisata(item){
-        const data = JSON.parse(item)
-        console.log(JSON.parse(item))
+    function deleteWisata(id, name_wisata){
         Swal.fire({
             title: 'apakah anda yakin ?',
             icon: 'warning',
-            html: `Menghapus postingan wisata dengan id #<span class="text-danger fw-bold">${data.id}</span>`,
+            html: `Menghapus postingan wisata dengan nama wisata <span class="text-danger fw-bold">${name_wisata}</span>`,
             confirmButtonColor: "#dc3545",
             showCancelButton: true,
             confirmButtonText: 'Delete',
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
-            return $.ajax({
-                    type: 'POST',
-                    url: '/admin/wisata/delete',
-                    data: {
-                        id_wisata: data.id
-                    },
-                    success:((res) => {
-                        console.log('result', res)
-                    }),
-                    error: ((err) => {
-                        console.log('err', err.responseJSON)
-                    })
+            return fetch(`/admin/wisata/delete`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify({id_wisata: id})
+            }).then((result) => {
+                console.log('result',result)
+                if (!result.ok) {
+                    swal.fire('Gagal','Gagal Menghapus data', 'error')
+                }else{
+                    swal.fire('Gagal','Data wisata berhasil dihapus', 'success').then(() => {
+                    location.reload()
                 })
-            // return fetch(`/admin/wisata/delete`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({id_wisata: data.id})
-            // }).then((result) => {
-            //     console.log('result',result)
-            //     if (!result.ok) {
-            //         swal.fire('Gagal', result.)
-            //     }
-            // })
-            // .catch(error => {
-            //     console.log('err',error)
-            //     // if (error.) {
-                    
-            //     // }
-            // })
+                }
+            })
+            .catch(error => {
+                swal.fire('Gagal','Terjadi kesalahan pada sistem', 'error')
+            })
             },
-            allowOutsideClick: () => !Swal.isLoading()
+                allowOutsideClick: () => !Swal.isLoading()
             })
     }
 </script>

@@ -37,10 +37,10 @@ class LoginController extends Controller
             $user->save();
             switch (auth()->user()->role) {
                 case 'admin':
-                    return redirect('admin/dashboard');
+                    return redirect('admin/');
                     break;
                 case 'pelanggan':
-                    return redirect('pelanggan/dashboard');
+                    return redirect('pelanggan/');
                     break;
                 default:
                     return abort(403);

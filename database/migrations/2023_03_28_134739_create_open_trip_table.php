@@ -16,6 +16,7 @@ class CreateOpenTripTable extends Migration
         Schema::create('open_trip', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title', 225);
+            $table->string('slug', 225)->unique();
             $table->text('deskripsi');
             $table->string('poster', 200);
             $table->integer('jumlah_peserta');
