@@ -29,16 +29,16 @@ class OpenTrip extends Model
         });
     }
 
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
     public function getLokasiTujuanAttribute()
     {
         $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
 
-        $this->attributes['lokasi_tujuan'] = Wisata::whereIn('id', $lokasiTujuan)->get();
-        return $this->attributes['lokasi_tujuan'];
-    }
-
-    public function getKeyType()
-    {
-        return 'string';
+        $lokasi = Wisata::select('id', 'nama_wisata')->whereIn('id', $lokasiTujuan)->get();
+        return $lokasi;
     }
 }

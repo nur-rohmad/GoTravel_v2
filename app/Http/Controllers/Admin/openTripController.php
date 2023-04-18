@@ -12,7 +12,6 @@ class openTripController extends Controller
     public function index(Request $request)
     {
         $openTrip = OpenTrip::get();
-        dd($openTrip);
         return view('admin.open-trip.index', compact('openTrip'));
 
     }
@@ -20,7 +19,7 @@ class openTripController extends Controller
     // render halaman create open trip
     public function create()
     {
-        $wisata = Wisata::where('status', 'publish')->get();
+        $wisata = Wisata::select('id', 'nama_wisata')->where('status', 'publish')->get();
         return view('admin.open-trip.create', compact('wisata'));
     }
 
