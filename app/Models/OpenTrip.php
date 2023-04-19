@@ -19,6 +19,8 @@ class OpenTrip extends Model
         'lokasi_tujuan',
         'harga',
         'lama_open_trip',
+        'poster',
+        'lokasi_penjemputan'
     ];
 
     protected static function boot()

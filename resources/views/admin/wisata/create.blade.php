@@ -150,19 +150,12 @@
 <!-- INTERNAL SUMMERNOTE Editor JS -->
 <script src="/assets/plugins/summernote1/summernote1.js"></script>
 <script src="/assets/js/summernote.js"></script>
-
-<!-- INTERNAL Notifications js -->
-<script src="/assets/plugins/notify/js/rainbow.js"></script>
-<script src="/assets/plugins/notify/js/jquery.growl.js"></script>
-<script src="/assets/plugins/notify/js/notifIt.js"></script>
-
+{{-- select2 --}}
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
 
 <!-- INTERNAL leaflet js -->
 <script src="/assets/plugins/leaflet/leaflet.js"></script>
-{{-- <script src="/assets/js/map-leafleft.js"></script> --}}
-
 
 <script>
     // preview image

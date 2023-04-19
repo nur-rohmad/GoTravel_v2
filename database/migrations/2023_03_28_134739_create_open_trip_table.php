@@ -24,6 +24,7 @@ class CreateOpenTripTable extends Migration
             $table->string('lokasi_tujuan');
             $table->float('harga');
             $table->integer('lama_open_trip');
+            $table->json('lokasi_penjemputan');
             $table->timestamps();
         });
     }

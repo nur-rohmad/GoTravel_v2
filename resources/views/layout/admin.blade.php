@@ -213,13 +213,14 @@
                                 <h3>Master Data</h3>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link {{ (request()->is('admin/wisata*') )? 'active' : '' }}" href="/admin/wisata"><i
-                                        class="side-menu__icon fe fe-briefcase"></i><span
+                                <a class="side-menu__item has-link {{ (request()->is('admin/wisata*') )? 'active' : '' }}"
+                                    href="/admin/wisata"><i class="side-menu__icon fe fe-briefcase"></i><span
                                         class="side-menu__label">Wisata</span></a>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link {{ (request()->is('admin/open-trip*') )? 'active' : '' }}" href="/admin/open-trip"><i
-                                        class="side-menu__icon fe fe-calendar"></i><span class="side-menu__label">Open
+                                <a class="side-menu__item has-link {{ (request()->is('admin/open-trip*') )? 'active' : '' }}"
+                                    href="/admin/open-trip"><i class="side-menu__icon fe fe-calendar"></i><span
+                                        class="side-menu__label">Open
                                         Trip</span></a>
                             </li>
 
@@ -299,6 +300,10 @@
     <script src="/assets/switcher/js/switcher.js"></script>
     {{-- swertalert2 --}}
     <script src="/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- INTERNAL Notifications js -->
+    <script src="/assets/plugins/notify/js/rainbow.js"></script>
+    <script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+    <script src="/assets/plugins/notify/js/notifIt.js"></script>
 
     @yield('addscript')
 
