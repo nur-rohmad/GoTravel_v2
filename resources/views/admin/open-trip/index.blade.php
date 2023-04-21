@@ -55,7 +55,8 @@
                                 <td>{{ $item->jumlah_peserta }}</td>
                                 <td>{{ number_format($item->harga) }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
+                                    <a href="/admin/open-trip/show/{{ $item->slug }}" class="btn btn-sm btn-info"><i
+                                            class="fa fa-eye"></i></a>
                                     <button class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                 </td>

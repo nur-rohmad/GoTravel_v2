@@ -15,9 +15,10 @@ Route::group(['namespace' => 'admin'], function () {
     });
 
     // open-trip
-    Route::group(['prefix' => 'open-trip'], function(){
+    Route::group(['prefix' => 'open-trip'], function () {
         Route::get('/', 'OpenTripController@index');
         Route::get('/tambah-open-trip', 'OpenTripController@create');
         Route::post('/proccess-add', 'OpenTripController@prosesCreate');
+        Route::get('/show/{slug}', 'OpenTripController@show');
     });
 });

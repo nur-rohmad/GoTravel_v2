@@ -51,4 +51,17 @@ class openTripController extends Controller
 
         return redirect('admin/open-trip')->with('success', 'data berhasil ditambahkan');
     }
+
+    // show
+    public function show($slug)
+    {
+        // get data open trip
+        $openTrip = OpenTrip::where('slug', $slug)->first();
+
+        if (!$openTrip) {
+            return back()->with('gagal', 'Data open trip tidak ditemukan');
+        }
+
+        return view('admin.open-trip.show', compact('openTrip'));
+    }
 }
