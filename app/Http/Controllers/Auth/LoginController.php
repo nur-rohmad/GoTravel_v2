@@ -15,9 +15,9 @@ class LoginController extends Controller
     {
         if (!Auth::user()) {
             return view('auth.form_login');
-        }else {
+        } else {
             $user = auth()->user();
-            return redirect('/'.$user->role.'/dashboard');
+            return redirect('/' . $user->role . '/dashboard');
         }
     }
 
@@ -29,12 +29,11 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        // dd($data_login);
         if (Auth::Attempt($data_login)) {
-            $request->session()->regenerate();
             $user = User::where('id', auth()->user()->id)->first();
             $user->last_login = now();
             $user->save();
+            $request->session()->regenerate();
             switch (auth()->user()->role) {
                 case 'admin':
                     return redirect('admin/');
