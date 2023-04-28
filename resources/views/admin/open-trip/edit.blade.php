@@ -83,7 +83,7 @@
                                     name="lokasi_tujuan[]" id="select2-multiple" multiple="multiple">
                                     <option value=""></option>
                                     @foreach ($wisata as $item)
-                                    <option value="{{$item->id}}" {{ in_array($item->id, $openTrip->lokasi_tujuan) ? 'selected' : '' }} >{{ $item->nama_wisata }}</option>
+                                    <option value="{{$item->id}}" {{ in_array($item->id, json_decode($openTrip->getRawOriginal('lokasi_tujuan'))) ? 'selected' : '' }} >{{ $item->nama_wisata }}</option>
                                     @endforeach
                                 </select>
                             </div>

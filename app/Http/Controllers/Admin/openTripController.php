@@ -78,7 +78,7 @@ class openTripController extends Controller
          if (!$openTrip) {
              return back()->with('gagal', 'Data open trip tidak ditemukan');
          }
- 
+         
          return view('admin.open-trip.edit', compact('openTrip', 'wisata'));
     }
 }
