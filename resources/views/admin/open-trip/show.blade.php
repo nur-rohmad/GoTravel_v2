@@ -20,25 +20,28 @@
     <div class="card show">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
-                    <img src="{{ asset('storage/'.$openTrip->poster) }}" alt="poster">
-                </div>
-                <div class="col-md-6">
-                    <h3 class="fw-semibold">{{ $openTrip->title }}</h3>
-                    <div class="d-flex flex-row" style="margin-top: -8px">
-                        <span class="badge rounded-pill bg-success badge-sm me-2"> <i class="fa fa-user me-1"></i> {{
-                            $openTrip->jumlah_peserta }} orang </span>
-                        <span class="badge rounded-pill bg-primary badge-sm"> <i
-                                class="fa fa-calendar-check-o me-1"></i>
-                            {{
-                            date("d M Y", strtotime($openTrip->tgl_berangkat)) }} </span>
+                <div class="col-md-12">
+                    <div class="d-flex">
+                        <div class="image"><img src="{{ asset('storage/'.$openTrip->poster) }}" alt="poster"></div>
+                        <div class="ms-4" style="width: 100%">
+                            <h3 class="fw-semibold">{{ $openTrip->title }}</h3>
+                            <div class="d-flex flex-row" style="margin-top: -8px">
+                                <span class="badge rounded-pill bg-success badge-sm me-2"> <i class="fa fa-user me-1"></i> {{
+                                    $openTrip->jumlah_peserta }} orang </span>
+                                <span class="badge rounded-pill bg-primary badge-sm"> <i
+                                        class="fa fa-calendar-check-o me-1"></i>
+                                    {{
+                                    date("d M Y", strtotime($openTrip->tgl_berangkat)) }} </span>
+                            </div>
+                            <h4 class="mt-4"><b> Deshripsi</b></h4>
+                            <div class="">
+                                {!! $openTrip->deskripsi !!}
+                            </div>
+                            <h4 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{ number_format($openTrip->harga)
+                                    }} </h3>
+                        </div>
                     </div>
-                    <h4 class="mt-4"><b> Deshripsi</b></h4>
-                    <div class="">
-                        {!! $openTrip->deskripsi !!}
-                    </div>
-                    <h4 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{ number_format($openTrip->harga)
-                            }} </h3>
+                   
 
                 </div>
             </div>
@@ -103,7 +106,6 @@
 
 <script>
     function showMap(latitude, longitude) {
-        console.log(latitude, longitude)
                 if ($('#leaflet2').length <= 0) {
                     $('#titikKumpul').append('<button class="btn btn-success mb-2" id="getRoute">Lihat rute </button>')
                     $('#titikKumpul').append('<div class="ht-300" id="leaflet2" style="height: 400px;"></div>')
@@ -123,16 +125,22 @@
                         navigator.geolocation.getCurrentPosition((location) => {
                             user_latitude = location.coords.latitude
                             user_longitude = location.coords.longitude
+                            console.log(user_latitude, user_longitude)
                            L.Routing.control({
                             waypoints: [
-                            L.latLng(user_latitude ,user_longitude),
-                            // L.latLng(-7.4214517 ,111.5110576),
-                            L.latLng(latitude, longitude)
+                                L.latLng(user_latitude ,user_longitude),
+                                // L.latLng(-7.4214517 ,111.5110576),
+                                L.latLng(latitude, longitude)
                             ],
-                            // lineOptions: {
-                            // styles: [{color: 'red', opacity: 1, weight: 2}]
-                            // }
-                            showAlternatives: true
+                           
+                            showAlternatives: true,
+                            altLineOptions: {
+                                styles: [
+                                    {color: 'black', opacity: 0.15, weight: 9},
+                                    {color: 'white', opacity: 0.8, weight: 6},
+                                    {color: 'blue', opacity: 0.5, weight: 2}
+                                ]
+                            }
                             }).addTo(peta);
                         });
                     } else {

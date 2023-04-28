@@ -38,7 +38,7 @@ class OpenTrip extends Model
 
     public function getLokasiTujuanAttribute()
     {
-        $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
+         $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
 
         $lokasi = Wisata::select('id', 'nama_wisata', 'image', 'deskripsi', 'updated_at', 'kota')->whereIn('id', $lokasiTujuan)->get();
         return $lokasi;
@@ -54,4 +54,13 @@ class OpenTrip extends Model
 
         return $location;
     }
+
+    // public function Complate_lokasi_tujuan()
+    // {
+    //     $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
+
+    //     $lokasi = Wisata::select('id', 'nama_wisata', 'image', 'deskripsi', 'updated_at', 'kota')->whereIn('id', $lokasiTujuan)->get();
+    //     return $lokasi;
+    // }
+
 }

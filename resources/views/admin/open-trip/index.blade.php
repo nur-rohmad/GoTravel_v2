@@ -57,7 +57,7 @@
                                 <td>
                                     <a href="/admin/open-trip/show/{{ $item->slug }}" class="btn btn-sm btn-info"><i
                                             class="fa fa-eye"></i></a>
-                                    <button class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button>
+                                    <a href="/admin/open-trip/edit/{{ $item->slug }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

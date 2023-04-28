@@ -12,6 +12,7 @@ class openTripController extends Controller
     public function index(Request $request)
     {
         $openTrip = OpenTrip::get();
+        
         return view('admin.open-trip.index', compact('openTrip'));
     }
 
@@ -63,5 +64,21 @@ class openTripController extends Controller
         }
 
         return view('admin.open-trip.show', compact('openTrip'));
+    }
+
+    // edit
+    public function edit($slug)
+    {
+         // data wisata
+         $wisata = Wisata::select('id', 'nama_wisata')->where('status', 'publish')->get();
+
+         // get data open trip
+         $openTrip = OpenTrip::where('slug', $slug)->first();
+
+         if (!$openTrip) {
+             return back()->with('gagal', 'Data open trip tidak ditemukan');
+         }
+ 
+         return view('admin.open-trip.edit', compact('openTrip', 'wisata'));
     }
 }
