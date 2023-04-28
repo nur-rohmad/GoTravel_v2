@@ -2,12 +2,12 @@
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Tambah Open Trip</h1>
+    <h1 class="page-title">Edit Open Trip</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item " aria-current="page"><a href="/admin">Admin</a></li>
             <li class="breadcrumb-item " aria-current="page"><a href="/admin/open-trip">Open Trip</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tambah</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </div>
 </div>
@@ -19,12 +19,13 @@
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="card-title">Tambah Open Trip</h3>
+                <h3 class="card-title">Edit Open Trip</h3>
                 <a href="/admin/open-trip" class="btn btn-sm btn-dark"><i class="fa fa-arrow-left me-2"></i>Kembali</a>
             </div>
             <div class="card-body">
-                <form action="/admin/open-trip/proccess-add" method="POST" enctype="multipart/form-data">
+                <form action="/admin/open-trip/proccess-edit" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $openTrip->id }}">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -39,7 +40,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Tanggal Berangkat</label>
-                                <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror"
+                                <input type="datetime-local"
+                                    class="form-control @error('tgl_berangkat') is-invalid @enderror"
                                     value="{{ old('tgl_berangkat', $openTrip->tgl_berangkat) }}" name="tgl_berangkat">
                                 @error('tgl_berangkat')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -50,7 +52,8 @@
                             <div class="form-group">
                                 <label class="form-label">Lama Open Trip</label>
                                 <input type="number" class="form-control @error('lama_open_trip') is-invalid @enderror"
-                                    value="{{ old('lama_open_trip', $openTrip->lama_open_trip) }}" name="lama_open_trip">
+                                    value="{{ old('lama_open_trip', $openTrip->lama_open_trip) }}"
+                                    name="lama_open_trip">
                                 @error('lama_open_trip')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -60,7 +63,8 @@
                             <div class="form-group">
                                 <label class="form-label">Kuota</label>
                                 <input type="number" class="form-control @error('jumlah_peserta') is-invalid @enderror"
-                                    value="{{ old('jumlah_peserta', $openTrip->jumlah_peserta) }}" name="jumlah_peserta">
+                                    value="{{ old('jumlah_peserta', $openTrip->jumlah_peserta) }}"
+                                    name="jumlah_peserta">
                                 @error('jumlah_peserta')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -83,7 +87,9 @@
                                     name="lokasi_tujuan[]" id="select2-multiple" multiple="multiple">
                                     <option value=""></option>
                                     @foreach ($wisata as $item)
-                                    <option value="{{$item->id}}" {{ in_array($item->id, json_decode($openTrip->getRawOriginal('lokasi_tujuan'))) ? 'selected' : '' }} >{{ $item->nama_wisata }}</option>
+                                    <option value="{{$item->id}}" {{ in_array($item->id,
+                                        json_decode($openTrip->getRawOriginal('lokasi_tujuan'))) ? 'selected' : '' }}
+                                        >{{ $item->nama_wisata }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,8 +113,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="privew-image">
-                                    <img id="preview-image_add"
-                                        src="{{ asset('storage/'. $openTrip->poster) }}"
+                                    <img id="preview-image_add" src="{{ asset('storage/'. $openTrip->poster) }}"
                                         alt="preview image" style="max-height: 200px; max-width: 250px;">
                                 </div>
                             </div>
@@ -119,14 +124,16 @@
                                 <label class="form-label"> Lokasi Penjemputan</label>
                                 <div class="d-flex">
                                     <input type="text" class="form-control @error('longitude') is-invalid @enderror"
-                                        name="longitude" id="longitude" value="{{ old('longitude', $openTrip->lokasi_penjemputan->latitude) }}"
+                                        name="longitude" id="longitude"
+                                        value="{{ old('longitude', $openTrip->lokasi_penjemputan->latitude) }}"
                                         placeholder="Longitude" readonly>
                                     @error('longitude')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <div class="input-group ms-2">
                                         <input type="text" class="form-control @error('latitude') is-invalid @enderror"
-                                            name="latitude" id="latitude" value="{{ old('latitude', $openTrip->lokasi_penjemputan->longitude) }}"
+                                            name="latitude" id="latitude"
+                                            value="{{ old('latitude', $openTrip->lokasi_penjemputan->longitude) }}"
                                             placeholder="Latitude" readonly>
                                         <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka
                                             Peta <i class="fa fa-map-o ms-2"></i></a>

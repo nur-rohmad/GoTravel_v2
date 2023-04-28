@@ -43,7 +43,7 @@
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{ date('d M Y', strtotime($item->tgl_berangkat)) }}</td>
+                                <td>{{ date('d M Y H:i', strtotime($item->tgl_berangkat)) }}</td>
                                 <td>{{ $item->lama_open_trip }}</td>
                                 <td>
                                     <ol>
@@ -57,7 +57,8 @@
                                 <td>
                                     <a href="/admin/open-trip/show/{{ $item->slug }}" class="btn btn-sm btn-info"><i
                                             class="fa fa-eye"></i></a>
-                                    <a href="/admin/open-trip/edit/{{ $item->slug }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="/admin/open-trip/edit/{{ $item->slug }}" class="btn btn-sm btn-warning"><i
+                                            class="fa fa-edit"></i></a>
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

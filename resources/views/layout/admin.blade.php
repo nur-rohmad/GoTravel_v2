@@ -149,12 +149,13 @@
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
                                                     <div class="text-center">
-                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">{{ auth()->user()->name }}</h5>
+                                                        <h5 class="text-dark mb-0 fs-14 fw-semibold">{{
+                                                            auth()->user()->name }}</h5>
                                                         <small class="text-muted">{{ auth()->user()->role }}</small>
                                                     </div>
                                                 </div>
                                                 <div class="dropdown-divider m-0"></div>
-                                                <a class="dropdown-item" href="profile.html">
+                                                <a class="dropdown-item" href="/profile">
                                                     <i class="dropdown-icon fe fe-user"></i> Profile
                                                 </a>
                                                 <a href="/logouth" class="dropdown-item">

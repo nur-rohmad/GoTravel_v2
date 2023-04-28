@@ -22,7 +22,12 @@ Route::group(['namespace' => 'Auth'], function () {
         return view('auth.form_register');
     });
     Route::post('/register', 'LoginController@register');
-    Route::get('/logouth', 'LoginController@logouth');
+    Route::get('/logouth', 'LoginController@logouth')->middleware('auth');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', 'ProfileController@index');
+    Route::post('/update-password', 'ProfileController@updatePassword');
 });
 
 // Auth::routes(['verify' => true]);

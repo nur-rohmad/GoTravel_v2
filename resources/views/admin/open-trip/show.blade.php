@@ -20,29 +20,26 @@
     <div class="card show">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="d-flex">
-                        <div class="image"><img src="{{ asset('storage/'.$openTrip->poster) }}" alt="poster"></div>
-                        <div class="ms-4" style="width: 100%">
-                            <h3 class="fw-semibold">{{ $openTrip->title }}</h3>
-                            <div class="d-flex flex-row" style="margin-top: -8px">
-                                <span class="badge rounded-pill bg-success badge-sm me-2"> <i class="fa fa-user me-1"></i> {{
-                                    $openTrip->jumlah_peserta }} orang </span>
-                                <span class="badge rounded-pill bg-primary badge-sm"> <i
-                                        class="fa fa-calendar-check-o me-1"></i>
-                                    {{
-                                    date("d M Y", strtotime($openTrip->tgl_berangkat)) }} </span>
-                            </div>
-                            <h4 class="mt-4"><b> Deshripsi</b></h4>
-                            <div class="">
-                                {!! $openTrip->deskripsi !!}
-                            </div>
-                            <h4 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{ number_format($openTrip->harga)
-                                    }} </h3>
-                        </div>
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/'.$openTrip->poster) }}" alt="poster">
+                </div>
+                <div class="col-md-8">
+                    <h3 class="fw-semibold">{{ $openTrip->title }}</h3>
+                    <div class="d-flex flex-row" style="margin-top: -8px">
+                        <span class="badge rounded-pill bg-success badge-sm me-2"> <i class="fa fa-user me-1"></i> {{
+                            $openTrip->jumlah_peserta }} orang </span>
+                        <span class="badge rounded-pill bg-primary badge-sm"> <i
+                                class="fa fa-calendar-check-o me-1"></i>
+                            {{
+                            date("d M Y H:i", strtotime($openTrip->tgl_berangkat)) }} </span>
                     </div>
-                   
-
+                    <h4 class="mt-4"><b> Deshripsi</b></h4>
+                    <div class="">
+                        {!! $openTrip->deskripsi !!}
+                    </div>
+                    <h4 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{
+                            number_format($openTrip->harga)
+                            }} </h4>
                 </div>
             </div>
         </div>
@@ -152,9 +149,5 @@
 
     }
 
-    function getRoute(latitude, longitude)
-    {
-       
-    }
 </script>
 @endsection

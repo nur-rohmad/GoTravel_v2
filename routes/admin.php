@@ -21,5 +21,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['admin_role']], function 
         Route::post('/proccess-add', 'OpenTripController@prosesCreate');
         Route::get('/show/{slug}', 'OpenTripController@show');
         Route::get('/edit/{slug}', 'OpenTripController@edit');
+        Route::post('/proccess-edit', 'OpenTripController@proccess_edit');
     });
 });
