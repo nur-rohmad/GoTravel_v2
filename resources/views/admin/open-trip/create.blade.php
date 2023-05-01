@@ -39,7 +39,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Tanggal Berangkat</label>
-                                <input type="date" class="form-control @error('tgl_berangkat') is-invalid @enderror"
+                                <input type="datetime-local"
+                                    class="form-control @error('tgl_berangkat') is-invalid @enderror"
                                     value="{{ old('tgl_berangkat') }}" name="tgl_berangkat">
                                 @error('tgl_berangkat')
                                 <div class="invalid-feedback">{{ $message }}</div>

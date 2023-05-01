@@ -9,7 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        dd('adsada');
-        return view('pelanggan.dahboard');
+        return view('pelanggan.dashboard');
     }
 }

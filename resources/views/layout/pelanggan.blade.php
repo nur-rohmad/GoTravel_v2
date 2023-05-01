@@ -81,8 +81,8 @@
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
-                                                <img src="{{ asset('storage/'.auth()->user()->foto_profile) }}" alt="profile-user"
-                                                    class="avatar  profile-user brround cover-image">
+                                                <img src="{{ asset('storage/'.auth()->user()->foto_profile) }}"
+                                                    alt="profile-user" class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
@@ -137,7 +137,7 @@
                                 <h3>Main</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="admin/dashboard"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="pelanggan/dashboard"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Dashboard</span></a>
                             </li>
@@ -145,13 +145,13 @@
                                 <h3>Master Data</h3>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link {{ (request()->is('admin/wisata*') )? 'active' : '' }}"
-                                    href="/admin/wisata"><i class="side-menu__icon fe fe-briefcase"></i><span
+                                <a class="side-menu__item has-link {{ (request()->is('pelanggan/wisata*') )? 'active' : '' }}"
+                                    href="/pelanggan/wisata"><i class="side-menu__icon fe fe-briefcase"></i><span
                                         class="side-menu__label">Wisata</span></a>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link {{ (request()->is('admin/open-trip*') )? 'active' : '' }}"
-                                    href="/admin/open-trip"><i class="side-menu__icon fe fe-calendar"></i><span
+                                <a class="side-menu__item has-link {{ (request()->is('pelanggan/open-trip*') )? 'active' : '' }}"
+                                    href="/pelanggan/open-trip"><i class="side-menu__icon fe fe-calendar"></i><span
                                         class="side-menu__label">Open
                                         Trip</span></a>
                             </li>

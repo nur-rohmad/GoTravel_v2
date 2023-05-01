@@ -52,7 +52,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin.php'));
             Route::prefix('pelanggan')
                 ->middleware('web')
-                ->middleware('admin_role')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/pelanggan.php'));
         });
