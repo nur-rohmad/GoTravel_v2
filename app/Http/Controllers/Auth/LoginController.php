@@ -17,7 +17,7 @@ class LoginController extends Controller
             return view('auth.form_login');
         } else {
             $user = auth()->user();
-            return redirect('/' . $user->role . '/dashboard');
+            return redirect('/' . $user->role );
         }
     }
 

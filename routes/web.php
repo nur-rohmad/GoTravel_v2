@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Auth'], function () {
-    Route::get('/login', 'LoginController@login');
+    Route::get('/login', 'LoginController@login')->name('login');
     Route::post('/proces-login', 'LoginController@procces_login');
     Route::get('/register', function () {
         return view('auth.form_register');
@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', 'ProfileController@index');
     Route::post('/update-password', 'ProfileController@updatePassword');
+    Route::post('/update-profile', 'ProfileController@updateProfile');
 });
 
 // Auth::routes(['verify' => true]);

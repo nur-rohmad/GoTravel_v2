@@ -14,6 +14,18 @@
 <!-- PAGE-HEADER END -->
 
 <div class="row">
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+            <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i> {{session('success')}}
+        </div>
+        @endif
+        @if (session('gagal'))
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+            <i class="fa fa-frown-o me-2" aria-hidden="true"></i> {{session('gagal')}}
+        </div>
+    @endif
     <div class="col-xl-4">
         <form action="/update-password" method="POST">
             @csrf
@@ -25,31 +37,17 @@
                 <div class="card-body">
                     <div class="text-center chat-image mb-5">
                         <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                            <a class="" href="profile.html"><img id="foto-profile-preview" alt="avatar"
-                                    src="{{ $user_data->foto_profile ? $user_data->foto_profile : 'https://www.riobeauty.co.uk/images/product_image_not_found.gif' }}"
-                                    class="brround"></a>
+                          <img id="foto-profile-preview" alt="avatar"
+                                    src="{{ $user_data->foto_profile ? asset('storage/'.$user_data->foto_profile) : 'https://www.riobeauty.co.uk/images/product_image_not_found.gif' }}"
+                                    class="brround avatar avatar-xxl">
                         </div>
                         <div class="main-chat-msg-name">
-                            <a href="profile.html">
                                 <h5 class="mb-1 text-dark fw-semibold">{{ $user_data->name }}</h5>
-                            </a>
                             <p class="text-muted mt-0 mb-0 pt-0 fs-13"><span
                                     class="badge badge-sm bg-{{ $user_data->role == 'admin' ? 'success' : 'danger' }}">{{
                                     $user_data->role }}</span></p>
                         </div>
                     </div>
-                    @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i> {{session('success')}}
-                    </div>
-                    @endif
-                    @if (session('gagal'))
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="fa fa-frown-o me-2" aria-hidden="true"></i> {{session('gagal')}}
-                    </div>
-                    @endif
                     <div class="form-group">
                         <label class="form-label">Current Password</label>
                         <div class="wrap-input100 validate-input input-group" id="Password-toggle">
@@ -98,42 +96,12 @@
                 </div>
             </div>
         </form>
-        <div class="card panel-theme">
-            <div class="card-header">
-                <div class="float-start">
-                    <h3 class="card-title">Contact</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="card-body no-padding">
-                <ul class="list-group no-margin">
-                    <li class="list-group-item d-flex ps-3">
-                        <div class="social social-profile-buttons me-2">
-                            <a class="social-icon text-primary" href="javascript:void(0)"><i class="fe fe-mail"></i></a>
-                        </div>
-                        <a href="javascript:void(0)" class="my-auto">support@demo.com</a>
-                    </li>
-                    <li class="list-group-item d-flex ps-3">
-                        <div class="social social-profile-buttons me-2">
-                            <a class="social-icon text-primary" href="javascript:void(0)"><i
-                                    class="fe fe-globe"></i></a>
-                        </div>
-                        <a href="javascript:void(0)" class="my-auto">www.abcd.com</a>
-                    </li>
-                    <li class="list-group-item d-flex ps-3">
-                        <div class="social social-profile-buttons me-2">
-                            <a class="social-icon text-primary" href="javascript:void(0)"><i
-                                    class="fe fe-phone"></i></a>
-                        </div>
-                        <a href="javascript:void(0)" class="my-auto">+125 5826 3658</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
     </div>
     <div class="col-xl-8">
-        <form action="" method="POST">
+        <form action="/update-profile" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="id" value="{{$user_data->id}}">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Edit Profile</h3>
@@ -180,12 +148,15 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label"> Foto Profile </label>
-                        <input type="file" name="foto_profile" id="foto-profile" class="form-control">
+                        <input type="file" name="foto_profile" id="foto-profile" class="form-control @error('foto_profile') is-invalid @enderror">
+                        @error('foto_profile')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-success my-1">Save</button>
                     <button type="reset" class="btn btn-danger my-1">Reset</button>
+                    <button type="submit" class="btn btn-success my-1">update</button>
                 </div>
         </form>
     </div>
