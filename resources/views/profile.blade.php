@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.'.auth()->user()->role)
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
