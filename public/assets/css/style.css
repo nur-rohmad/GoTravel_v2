@@ -17651,7 +17651,6 @@ table.table-bordered.dataTable thead tr:first-child td {
 .handle-counter {
     overflow: hidden;
     display: flex;
-    justify-content: center;
 }
 
 @media (max-width: 465px) {

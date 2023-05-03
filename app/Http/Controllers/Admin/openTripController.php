@@ -42,6 +42,7 @@ class openTripController extends Controller
         // penambahan input
         $openTrip['slug'] = str_replace(' ', '-', strtolower($request->title));
         $openTrip['lokasi_tujuan'] = json_encode($request->lokasi_tujuan);
+        $openTrip['sisa_kuota'] = $request->jumlah_peserta;
         $openTrip['poster'] = $request->file('poster')->store('open-trip/poster'); //upload poster
         $openTrip['lokasi_penjemputan'] = json_encode([
             'latitude' => $request->latitude,

@@ -83,9 +83,9 @@
                             <div class="col-xl-2 col-lg-12 col-md-12 my-auto">
                                 <div class="card-body p-0">
                                     <div class="price h3 text-center mb-5 fw-bold">{{ number_format($item->harga) }} / Orang </div>
-                                    <button class="btn btn-dark btn-block" onclick="showDetailLokasi('{{ $item->lokasi_tujuan }}')"><i class="fa fa-map mx-2"></i>Detail Lokasi Tujuan</button>
+                                    <button class="btn btn-dark btn-block" onclick="showDetailLokasi({{ $item->lokasi_tujuan }})"><i class="fa fa-map mx-2"></i>Detail Lokasi Tujuan</button>
                                     <button class="btn btn-primary btn-block" onclick="ShowLocation('{{$item->lokasi_penjemputan->latitude}}', '{{$item->lokasi_penjemputan->longitude}}')"><i class="fa fa-map-pin mx-2"></i>Lokasi Penjemputan</button>
-                                    <button class="btn btn-success btn-block"><i class="fa fa-map mx-2"></i>Booking</button>
+                                    <a href="/pelanggan/booking/{{ $item->slug }}" class="btn btn-success btn-block"><i class="fa fa-map mx-2"></i>Booking</a>
 
                                 </div>
                             </div>
@@ -205,47 +205,47 @@
     // show detail lokasi tujuan
     function showDetailLokasi(lokasi)
     {
-        console.log(lokasi)
-        // const detail_lokasi = lokasi.map((item)=>{
-        //     return `<div class="col-xl-12 col-lg-12 col-md-12">
-        //         <div class="card overflow-hidden">
-        //             <div class="card-body">
-        //                 <div class="row g-0">
-        //                     <div class="col-xl-3 col-lg-12 col-md-12">
-        //                         <div class="product-list">
-        //                             <div class="br-be-0 br-te-0">
-        //                                 <a href="shop-description.html" class="">
-        //                                     <img src="" alt="img"
-        //                                         class="cover-image br-7 w-100">
-        //                                 </a>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                     <div class="col-xl-9 col-lg-12 col-md-12 border-end my-auto">
-        //                         <div class="card-body">
-        //                             <div class="mb-3">
-        //                                 <h3 class="fw-bold fs-30 mb-3 text-info"> ${item->nama_wisata}</h3>
-        //                                 <div class="mb-2">
-        //                                     <span class="badge rounded-pill bg-success badge-sm me-2"> <i
-        //                                             class="fa fa-building me-1"></i> 
-        //                                         ${item->kota}  </span>
-        //                                 </div>
-                                         
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>`
-        // })
+        const detail_lokasi = lokasi.map((item)=>{
 
-        // $('#modal-body-detail-lokasi').append(detail_lokasi);
-        // $('#modal-detail-lokasi').modal('show')
+            return `<div class="col-xl-12 col-lg-12 col-md-12" id="detail-wisata">
+                <div class="card overflow-hidden">
+                    <div class="card-body">
+                        <div class="row g-0">
+                            <div class="col-xl-3 col-lg-12 col-md-12">
+                                <div class="product-list">
+                                    <div class="br-be-0 br-te-0">
+                                        <a href="shop-description.html" class="">
+                                            <img src="/storage/${item.image}" alt="img"
+                                                class="cover-image br-7 w-100">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-9 col-lg-12 col-md-12 border-end my-auto">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h3 class="fw-bold fs-30 mb-3 text-info"> ${item.nama_wisata}</h3>
+                                        <div class="mb-2">
+                                            <span class="badge rounded-pill bg-success badge-sm me-2"> <i
+                                                    class="fa fa-building me-1"></i> 
+                                                ${item.kota}  </span>
+                                        </div>
+                                         ${item.deskripsi}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        })
+
+        $('#modal-body-detail-lokasi').html(detail_lokasi);
+        $('#modal-detail-lokasi').modal('show')
     }
 
     $('#modal-detail-lokasi').on('hide.bs.modal', function(){
-        
+        $('#detail-wisata').remove()
     })
 
 </script>

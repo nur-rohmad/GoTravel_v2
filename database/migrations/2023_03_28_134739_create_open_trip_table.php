@@ -20,6 +20,7 @@ class CreateOpenTripTable extends Migration
             $table->text('deskripsi');
             $table->string('poster', 200);
             $table->integer('jumlah_peserta');
+            $table->integer('sisa_kuota');
             $table->dateTime('tgl_berangkat');
             $table->string('lokasi_tujuan');
             $table->float('harga');
