@@ -15,16 +15,16 @@
 
 <div class="row">
     @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i> {{session('success')}}
-        </div>
-        @endif
-        @if (session('gagal'))
-        <div class="alert alert-danger" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-frown-o me-2" aria-hidden="true"></i> {{session('gagal')}}
-        </div>
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i> {{session('success')}}
+    </div>
+    @endif
+    @if (session('gagal'))
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-frown-o me-2" aria-hidden="true"></i> {{session('gagal')}}
+    </div>
     @endif
     <div class="col-xl-4">
         <form action="/update-password" method="POST">
@@ -37,12 +37,12 @@
                 <div class="card-body">
                     <div class="text-center chat-image mb-5">
                         <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                          <img id="foto-profile-preview" alt="avatar"
-                                    src="{{ $user_data->foto_profile ? asset('storage/'.$user_data->foto_profile) : 'https://www.riobeauty.co.uk/images/product_image_not_found.gif' }}"
-                                    class="brround avatar avatar-xxl">
+                            <img id="foto-profile-preview" alt="avatar"
+                                src="{{ $user_data->foto_profile ? asset('storage/'.$user_data->foto_profile) : 'https://www.riobeauty.co.uk/images/product_image_not_found.gif' }}"
+                                class="brround avatar avatar-xxl">
                         </div>
                         <div class="main-chat-msg-name">
-                                <h5 class="mb-1 text-dark fw-semibold">{{ $user_data->name }}</h5>
+                            <h5 class="mb-1 text-dark fw-semibold">{{ $user_data->name }}</h5>
                             <p class="text-muted mt-0 mb-0 pt-0 fs-13"><span
                                     class="badge badge-sm bg-{{ $user_data->role == 'admin' ? 'success' : 'danger' }}">{{
                                     $user_data->role }}</span></p>
@@ -148,7 +148,10 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label"> Foto Profile </label>
-                        <input type="file" name="foto_profile" id="foto-profile" class="form-control @error('foto_profile') is-invalid @enderror">
+                        <input type="file" name="foto_profile" id="foto-profile"
+                            class="dropify  @error('foto_profile') is-invalid @enderror" @if ($user_data->foto_profile)
+                        data-default-file="{{ asset('storage/'. $user_data->foto_profile) }}"
+                        @endif >
                         @error('foto_profile')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -165,6 +168,10 @@
 </div>
 @endsection
 @section('addscript')
+<!-- FILE UPLOADES JS -->
+<script src="/assets/plugins/fileuploads/js/fileupload.js"></script>
+<script src="/assets/plugins/fileuploads/js/file-upload.js"></script>
+{{-- show password --}}
 <script src="/assets/js/show-password.min.js"></script>
 <script>
     $(document).ready(function() {

@@ -99,19 +99,11 @@
                             <div class="form-group">
                                 <label class="form-label">Poster</label>
                                 <div class="input-group">
-                                    <input type="file" name="poster" id="foto-poster"
-                                        class="form-control @error('poster') is-invalid @enderror" />
+                                    <input type="file" class="dropify" name="poster" data-bs-height="180">
                                 </div>
                                 @error('poster')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
-                            <div class="col-md-12">
-                                <div class="privew-image">
-                                    <img id="preview-image_add"
-                                        src="https://www.riobeauty.co.uk/images/product_image_not_found.gif"
-                                        alt="preview image" style="max-height: 200px; max-width: 250px;">
-                                </div>
                             </div>
                         </div>
 
@@ -181,8 +173,14 @@
 <!-- /Row -->
 @endsection
 @section('addscript')
+
+<!-- FILE UPLOADES JS -->
+<script src="/assets/plugins/fileuploads/js/fileupload.js"></script>
+<script src="/assets/plugins/fileuploads/js/file-upload.js"></script>
+
 {{-- select2 --}}
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
+<script src="/assets/js/select2.js"></script>
 
 <!-- INTERNAL SUMMERNOTE Editor JS -->
 <script src="/assets/plugins/summernote1/summernote1.js"></script>

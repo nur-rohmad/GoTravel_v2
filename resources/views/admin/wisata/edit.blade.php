@@ -52,18 +52,13 @@
                             <div class="form-group">
                                 <label class="form-label">Foto <span class="text-red">*</span></label>
                                 <div class="input-group">
-                                    <input type="file" name="image" id="foto_wisata"
-                                        class="form-control @error('image') is-invalid @enderror" />
+                                    <input type="file" class="dropify" name="image"
+                                        data-default-file="{{ asset('storage/'. $wisata->image) }}"
+                                        data-bs-height="180">
                                 </div>
                                 @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
-                            <div class="col-md-12">
-                                <div class="privew-image">
-                                    <img id="preview-image_edit" src="{{ asset('storage/'. $wisata->image) }}"
-                                        alt="preview image" style="max-height: 200px; max-width: 250px;">
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -149,6 +144,10 @@
 <!-- /Row -->
 @endsection
 @section('addscript')
+
+<!-- FILE UPLOADES JS -->
+<script src="/assets/plugins/fileuploads/js/fileupload.js"></script>
+<script src="/assets/plugins/fileuploads/js/file-upload.js"></script>
 
 <!-- INTERNAL SUMMERNOTE Editor JS -->
 <script src="/assets/plugins/summernote1/summernote1.js"></script>

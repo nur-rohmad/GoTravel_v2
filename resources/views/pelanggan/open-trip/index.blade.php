@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/assets/plugins/leaflet-routing-machine/dist/leaflet-routing-machine.css">
 @endsection
 @section('main')
-    <!-- PAGE-HEADER -->
+<!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">Open Trip</h1>
     <div>
@@ -24,25 +24,27 @@
                     <div class="card-body p-4">
                         <form action="/pelanggan/wisata" method="GET">
                             <div class="row">
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    <input type="text" class="form-control  my-2" name="search" placeholder="Open Trip" value="{{ Request::get('search') }}">
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control  my-2" name="search"
+                                            placeholder="Open Trip" value="{{ Request::get('search') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="date" name="tgl_berangkat" class="form-control my-2"
+                                            placeholder="Tanggal Berangkat">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-success   my-2">
+                                        <i class="fe fe-search " aria-hidden="true"></i>
+                                    </button>
+                                    <a href="/pelanggan/wisata" class="btn btn-outline-dark  my-2">
+                                        <i class="fa fa-undo " aria-hidden="true"></i>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input type="date" name="tgl_berangkat" class="form-control my-2" placeholder="Tanggal Berangkat">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-success   my-2">
-                                    <i class="fe fe-search " aria-hidden="true"></i>
-                                </button>
-                                <a href="/pelanggan/wisata" class="btn btn-outline-dark  my-2">
-                                    <i class="fa fa-undo " aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
                         </form>
                     </div>
                 </div>
@@ -69,7 +71,8 @@
                                     <div class="mb-3">
                                         <h3 class="fw-bold fs-30 mb-3 text-info">{{ $item->title }}</h3>
                                         <div class="mb-2">
-                                            <span class="badge rounded-pill bg-success badge-sm me-2"> <i class="fa fa-user me-1"></i> {{
+                                            <span class="badge rounded-pill bg-success badge-sm me-2"> <i
+                                                    class="fa fa-user me-1"></i> {{
                                                 $item->jumlah_peserta }} orang </span>
                                             <span class="badge rounded-pill bg-primary badge-sm"> <i
                                                     class="fa fa-calendar-check-o me-1"></i>
@@ -82,10 +85,16 @@
                             </div>
                             <div class="col-xl-2 col-lg-12 col-md-12 my-auto">
                                 <div class="card-body p-0">
-                                    <div class="price h3 text-center mb-5 fw-bold">{{ number_format($item->harga) }} / Orang </div>
-                                    <button class="btn btn-dark btn-block" onclick="showDetailLokasi({{ $item->lokasi_tujuan }})"><i class="fa fa-map mx-2"></i>Detail Lokasi Tujuan</button>
-                                    <button class="btn btn-primary btn-block" onclick="ShowLocation('{{$item->lokasi_penjemputan->latitude}}', '{{$item->lokasi_penjemputan->longitude}}')"><i class="fa fa-map-pin mx-2"></i>Lokasi Penjemputan</button>
-                                    <a href="/pelanggan/booking/{{ $item->slug }}" class="btn btn-success btn-block"><i class="fa fa-map mx-2"></i>Booking</a>
+                                    <div class="price h3 text-center mb-5 fw-bold">{{ number_format($item->harga) }} /
+                                        Orang </div>
+                                    <button class="btn btn-dark btn-block"
+                                        onclick="showDetailLokasi({{ $item->lokasi_tujuan }})"><i
+                                            class="fa fa-map mx-2"></i>Detail Lokasi Tujuan</button>
+                                    <button class="btn btn-primary btn-block"
+                                        onclick="ShowLocation('{{$item->lokasi_penjemputan->latitude}}', '{{$item->lokasi_penjemputan->longitude}}')"><i
+                                            class="fa fa-map-pin mx-2"></i>Lokasi Penjemputan</button>
+                                    <a href="/pelanggan/booking/{{ $item->slug }}" class="btn btn-success btn-block"><i
+                                            class="fa fa-map mx-2"></i>Booking</a>
 
                                 </div>
                             </div>
@@ -94,10 +103,11 @@
                 </div>
             </div>
             @empty
-                <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="card overflow-hidden">
                     <div class="card-body text-center">
-                        <i class="fa fa-folder-open fa-3x" ></i> <h4>Data tidak ditemukan</h4>
+                        <i class="fa fa-folder-open fa-3x"></i>
+                        <h4>Data tidak ditemukan</h4>
                     </div>
                 </div>
             </div>
@@ -135,8 +145,9 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Yang dikunjungi <span id="nama-wisata"></span></h6><button aria-label="Close"
-                    class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title">Lokasi Yang dikunjungi <span id="nama-wisata"></span></h6><button
+                    aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span
+                        aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body" id="modal-body-detail-lokasi">
 
@@ -201,7 +212,6 @@
          $('#leaflet2').remove()
          $('#getRoute').remove()
     })
-
     // show detail lokasi tujuan
     function showDetailLokasi(lokasi)
     {

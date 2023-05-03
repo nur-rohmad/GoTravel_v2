@@ -23,4 +23,10 @@ Route::group(['namespace' => 'admin', 'middleware' => ['admin_role']], function 
         Route::get('/edit/{slug}', 'OpenTripController@edit');
         Route::post('/proccess-edit', 'OpenTripController@proccess_edit');
     });
+
+    // chanel pembayaran
+    Route::group(['prefix' => 'chanel-pembayaran'], function () {
+        Route::get('/', 'ChanelPembayaranController@index');
+        Route::post('/', 'ChanelPembayaranController@create');
+    });
 });

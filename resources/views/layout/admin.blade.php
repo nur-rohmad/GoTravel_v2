@@ -81,8 +81,8 @@
                                         <div class="dropdown d-flex profile-1">
                                             <a href="javascript:void(0)" data-bs-toggle="dropdown"
                                                 class="nav-link leading-none d-flex">
-                                                <img src="{{ asset('storage/'.auth()->user()->foto_profile) }}" alt="profile-user"
-                                                    class="avatar  profile-user brround cover-image">
+                                                <img src="{{ asset('storage/'.auth()->user()->foto_profile) }}"
+                                                    alt="profile-user" class="avatar  profile-user brround cover-image">
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                 <div class="drop-heading">
@@ -154,6 +154,12 @@
                                     href="/admin/open-trip"><i class="side-menu__icon fe fe-calendar"></i><span
                                         class="side-menu__label">Open
                                         Trip</span></a>
+                            </li>
+                            <li>
+                                <a class="side-menu__item has-link {{ (request()->is('admin/chanel-pembayaran*') )? 'active' : '' }}"
+                                    href="/admin/chanel-pembayaran"><i
+                                        class="side-menu__icon fa fa-credit-card"></i><span
+                                        class="side-menu__label">Chanel Pembayaran</span></a>
                             </li>
 
                         </ul>

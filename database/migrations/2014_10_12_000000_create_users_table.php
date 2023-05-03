@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->enum('role', ['pelanggan', 'admin']);
             $table->dateTime('last_login')->nullable();
             $table->integer('status');
-            $table->string('NoHP', 15);
-            $table->string('alamat', 200);
-            $table->string('foto_profile', 225);
+            $table->string('NoHP', 15)->nullable();
+            $table->string('alamat', 200)->nullable();
+            $table->string('foto_profile', 225)->nullable();
             $table->timestamps();
         });
     }

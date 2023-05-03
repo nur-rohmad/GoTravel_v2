@@ -20,7 +20,8 @@ class OpenTrip extends Model
         'harga',
         'lama_open_trip',
         'poster',
-        'lokasi_penjemputan'
+        'lokasi_penjemputan',
+        'sisa_kuota'
     ];
 
     protected static function boot()
@@ -38,7 +39,7 @@ class OpenTrip extends Model
 
     public function getLokasiTujuanAttribute()
     {
-         $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
+        $lokasiTujuan = json_decode($this->attributes['lokasi_tujuan'], true);
 
         $lokasi = Wisata::select('id', 'nama_wisata', 'image', 'deskripsi', 'updated_at', 'kota')->whereIn('id', $lokasiTujuan)->get();
         return $lokasi;
