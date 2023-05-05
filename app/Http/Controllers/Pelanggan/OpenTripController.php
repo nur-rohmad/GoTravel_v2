@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class OpenTripController extends Controller
 {
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         $openTrip = OpenTrip::orderBy('tgl_berangkat', 'desc')->paginate(10);
         return view('pelanggan.open-trip.index', compact('openTrip'));

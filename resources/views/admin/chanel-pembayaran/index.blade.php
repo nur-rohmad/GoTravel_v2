@@ -1,4 +1,7 @@
 @extends('layout.admin')
+@section('addcss')
+<link rel="stylesheet" href="/assets/plugins/loader/ldld.min.css">
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -19,7 +22,7 @@
         <div class="card shadow">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="card-title">Daftar Chanel Pembayaran</h3>
-                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#addModalChanelPembayaran">
+                <button class="btn btn-sm btn-danger" onclick="add()">
                     <i class="fa fa-plus"></i> Tambah </button>
             </div>
             <div class="card-body">
@@ -40,16 +43,18 @@
                             @foreach ($chanelPembayaran as $item)
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
-                                <td>{{ $item->payment_type }}</td>
+                                <td>{{ ucwords(str_replace('_', " ", $item->payment_type)) }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->payment_code }}</td>
                                 <td> <img src="{{ asset('storage/'.$item->image) }}" alt="logo Chanel" width="100px">
                                 </td>
-                                <td>{{ $item->status }}</td>
-                                <td>
+                                <td><span
+                                        class="badge badge-sm bg-{{ $item->status == 'active' ? 'success' : 'danger' }}">{{
+                                        $item->status }}</span></td>
+                                <td class="text-center">
                                     <button onclick="update({{ $item }})" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                    {{-- <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -66,13 +71,14 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Chanel Pembayaran</h5>
+                <h5 class="modal-title">Kelola Chanel Pembayaran</h5>
                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <form id="form-chanel-pembayaran" enctype="multipart/form-data">
                 <div class="modal-body">
+                    <div id="my-loader" class="ldld default"></div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -107,8 +113,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="form-label">Logo Chanel Pembayaran</label>
-                                <input type="file" name="image" class="dropify">
+                                <label class="form-label" id="label-image">Logo Chanel Pembayaran</label>
                                 <div id="error-image" class="text-danger">
 
                                 </div>
@@ -120,7 +125,7 @@
                     <button class="btn btn-secondary" type="reset">
                         Reset
                     </button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -130,7 +135,7 @@
 @section('addscript')
 <!-- FILE UPLOADES JS -->
 <script src="/assets/plugins/fileuploads/js/fileupload.js"></script>
-<script src="/assets/plugins/fileuploads/js/file-upload.js"></script>
+{{-- <script src="/assets/plugins/fileuploads/js/file-upload.js"></script> --}}
 
 <script src="/assets/plugins/select2/select2.full.min.js"></script>
 
@@ -141,28 +146,29 @@
 <script src="/assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
 <script src="/assets/js/table-data.js"></script>
 
+{{-- loader --}}
+<script src="/assets/plugins/loader/ldld.min.js"></script>
 <script>
+    var ldld = new ldLoader({ root: "#my-loader" });
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $('#form-chanel-pembayaran').submit((e)=>{
+        ldld.on();
         e.preventDefault();
-        // $('#form-chanel-pembayaran').addClass('d-none')
         let form = $('#form-chanel-pembayaran')
         let data1 = new FormData(form[0])
         this.reset_error()
         $.ajax({
-            type: 'POST',
-            url: '/admin/chanel-pembayaran',
+            type:  'POST' ,
+            url:  $('#submit').val() == 'add' ?  '/admin/chanel-pembayaran' :  '/admin/chanel-pembayaran/edit',
             data: data1,
             processData: false,
             contentType: false,
             success: (result)=> {
-                // $('#loader').addClass('d-none')
-                console.log(result)
-                // $('#addModalChanelPembayaran').removeClass('d-none')
+                ldld.off();
                 $('#addModalChanelPembayaran').modal('hide')
                 Swal.fire({
                     title: "Success",
@@ -174,9 +180,7 @@
 
         },
         error: (error) => {
-            console.log(error)
-            // $('#form-submit-barang').removeClass('d-none')
-            // $('#loader').addClass('d-none')
+            ldld.off();
             let error_message = error.responseJSON.errors
             $.each(error_message, (key,value) => {
                 let error_html = $('#error-'+ key);
@@ -189,17 +193,34 @@
         })
 })
 
-function update(data){
-    console.log(data)
-    // $('#modal-title').text("Edit Data Barang")
+function add(){
+    // reset error
+    reset_error()
+    // reset form
     $('#form-chanel-pembayaran')[0].reset()
+    // add image upload
+    $('#label-image').after(`<div id="image"><input type="file" name="image" id="image-upload" class="dropify"></div>`)
+    dropify()
+    // add value button
+    $('#submit').val('add')
+    // tampilkan modal
+    $('#addModalChanelPembayaran').modal('show')
+}
+
+function update(data){
+    $('#form-chanel-pembayaran').append(`<input type="hidden" name="id" value="${data.id}">`)
+    // add uploadfile
+    $('#label-image').after(`<div id="image"><input type="file" name="image" id="image-upload" data-default-file="{{ asset('storage/${data.image}') }}" class="dropify"></div>`)
+    dropify()
+    // $('#modal-title').text("Edit Data Barang")
+    // reset form
+    $('#form-chanel-pembayaran')[0].reset()
+    // reset error
     this.reset_error()
-    $('#button_submit').val('update');
+    // add value in button
+    $('#submit').val('update');
     $.each(data, (key, value) => {
-        if (key == 'image') {
-            $('[name="image"]').attr('data-default-file', '{{ asset('storage') }}/'+data.image);
-        }
-        else if(['name','payment_type', 'payment_code' ].includes(key)){
+         if(['name','payment_type', 'payment_code' ].includes(key)){
             $(`[name="${key}"]`).val(value)
         }
     })
@@ -211,6 +232,25 @@ function reset_error(){
     $('#error-payment_type').text('')
     $('#error-payment_code').text('')
     $('#error-image').text('')
+}
+
+$('#addModalChanelPembayaran').on('hide.bs.modal', function(){
+    $('#image').remove()
+})
+
+function dropify()
+{
+    $('.dropify').dropify({
+    messages: {
+    'default': 'Drag and drop a file here or click',
+    'replace': 'Drag and drop or click to replace',
+    'remove': 'Remove',
+    'error': 'Ooops, something wrong appended.'
+    },
+    error: {
+    'fileSize': 'The file size is too big (2M max).'
+    }
+    });
 }
 </script>
 @endsection

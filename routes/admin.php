@@ -28,5 +28,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['admin_role']], function 
     Route::group(['prefix' => 'chanel-pembayaran'], function () {
         Route::get('/', 'ChanelPembayaranController@index');
         Route::post('/', 'ChanelPembayaranController@create');
+        Route::post('/edit', 'ChanelPembayaranController@update');
     });
 });

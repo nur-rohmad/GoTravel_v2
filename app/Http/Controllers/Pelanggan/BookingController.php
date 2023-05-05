@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\pelanggan;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChanelPembayaran;
 use App\Models\OpenTrip;
 use Illuminate\Http\Request;
 
@@ -12,11 +13,11 @@ class BookingController extends Controller
     public function create($slug)
     {
         $openTrip = OpenTrip::where('slug', $slug)->first();
-
+        $chanelPembayaran = ChanelPembayaran::where('status', 'active')->get();
         if (!$openTrip) {
             return back()->with('gagal', 'Open trip tidak ditemukan');
-        }else{
-            return view('pelanggan.booking.create', compact('openTrip'));
+        } else {
+            return view('pelanggan.booking.create', compact('openTrip', 'chanelPembayaran'));
         }
     }
 }
