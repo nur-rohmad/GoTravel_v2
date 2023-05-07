@@ -29,7 +29,6 @@ class CreateInvoicesTable extends Migration
             $table->foreign('id_booking')->references('id')->on('bookings');
         });
     }
-
     /**
      * Reverse the migrations.
      *
