@@ -17,7 +17,6 @@ class CreateBookingsTable extends Migration
             $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->uuid('id_openTrip');
-            $table->string('id_invoice', 30);
             $table->string('email_tujuan', 100);
             $table->integer('jumlah_booking');
             $table->enum('status', ['proses', 'gagal', 'berhasil']);
@@ -25,7 +24,6 @@ class CreateBookingsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('id_openTrip')->references('id')->on('open_trip');
-            $table->foreign('id_invoice')->references('id')->on('invoices');
         });
     }
 
