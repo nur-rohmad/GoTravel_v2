@@ -94,7 +94,7 @@
                                 <label class="form-label">Group Chanel Pembayaran</label>
                                 <select name="payment_type" class="form-control form-select">
                                     <option value="bank_transfer">Bank Transfer</option>
-                                    <option value="qris">Qris</option>
+                                    <option value="gopay">Qris</option>
                                     <option value="cstore">Conter Payment</option>
                                 </select>
                                 <div id="error-payment_type" class="text-danger">

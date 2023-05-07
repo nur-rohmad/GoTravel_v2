@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $user = auth()->user();
+        $booking = Booking::with('invoice')->where('user_id', $user->id)->paginate(10);
+        info('booking', [$booking]);
+        // dd($booking);
+        return view('pelanggan.booking.index', compact('booking'));
+    }
+
     // create booking
     public function create($slug)
     {
@@ -56,6 +66,10 @@ class BookingController extends Controller
                 'email_tujuan' => $user->email,
                 'jumlah_booking' => $request->jumlah,
                 'status' => 'menunggu_pembayaran'
+            ]);
+
+            $openTrip->update([
+                'sisa_kuota' => (int)$openTrip->sisa_kuota - (int)$request->jumlah
             ]);
 
             // conect to midtrans
@@ -109,6 +123,7 @@ class BookingController extends Controller
             // create invoice
             $dataInvoice = [
                 'id' => $responseJson['order_id'],
+                'id_cahnel_pembayaran' => $request->metode_pembayaran,
                 "amount" => $responseJson['gross_amount'],
                 "metode_pembayaran" => $responseJson['payment_type'],
                 // "waktu_expired" => $responseJson['expiry_time']
@@ -126,10 +141,7 @@ class BookingController extends Controller
 
             $invoice = Invoice::create($dataInvoice);
             DB::commit();
-            dd($invoice);
-            $booking->update([
-                'id_invoice' => $invoice->id
-            ]);
+            $invoice['id_booking'] = $booking->id;
 
             return Redirect('pelanggan/open-trip');
         } catch (\Throwable $th) {
@@ -138,5 +150,14 @@ class BookingController extends Controller
             info('errpor', [$th]);
             return redirect('pelanggan/wisata');
         }
+    }
+
+    public function detail($id)
+    {
+        $invoice = Invoice::find($id);
+        if (!$invoice) {
+            return back();
+        }
+        return view('pelanggan.booking.show', compact('invoice'));
     }
 }

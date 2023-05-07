@@ -12,7 +12,8 @@
     <h1 class="page-title">Booking</h1>
     <div>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Booking</li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/pelanggan/booking">Booking</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
         </ol>
     </div>
 </div>
@@ -83,7 +84,7 @@
                             <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
                                 onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
-                                    <img class="avatar avatar-xl me-3" alt="avatra-img"
+                                    <img class="me-3" width="150px" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
                                     <div class="my-2">
                                         <a href="javascript:void(0)" class="text-default fw-semibold">{{ $item->name
@@ -98,11 +99,11 @@
                         </div>
                         <div class="tab-pane" id="tab21">
                             @foreach ($chanelPembayaran as $item)
-                            @if ($item->payment_type == 'gopay')
+                            @if ($item->payment_type == 'cstore')
                             <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
                                 onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
-                                    <img class="avatar avatar-xl me-3" alt="avatra-img"
+                                    <img class="me-3" width="200px" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
                                     <div class="my-2">
                                         <a href="javascript:void(0)" class="text-default fw-semibold">{{ $item->name
@@ -116,7 +117,7 @@
                         </div>
                         <div class="tab-pane" id="tab22">
                             @foreach ($chanelPembayaran as $item)
-                            @if ($item->payment_type == 'cstore')
+                            @if ($item->payment_type == 'gopay')
                             <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
                                 onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">

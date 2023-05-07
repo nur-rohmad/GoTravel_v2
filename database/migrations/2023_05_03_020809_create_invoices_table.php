@@ -16,6 +16,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->string('id', 30)->primary();
             $table->string('id_booking', 30);
+            $table->bigInteger('id_chanel_pembayaran');
             $table->bigInteger('amount');
             $table->enum('metode_pembayaran', ['va_account', 'qris']);
             $table->string('bank', 50);

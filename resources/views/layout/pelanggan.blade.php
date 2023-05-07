@@ -155,6 +155,12 @@
                                         class="side-menu__label">Open
                                         Trip</span></a>
                             </li>
+                            <li>
+                                <a class="side-menu__item has-link {{ (request()->is('pelanggan/booking*') )? 'active' : '' }}"
+                                    href="/pelanggan/booking"><i
+                                        class="side-menu__icon icon icon-calendar "></i></i><span
+                                        class="side-menu__label">Booking</span></a>
+                            </li>
 
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

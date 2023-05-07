@@ -16,7 +16,11 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'pelanggan'], fun
     });
     // booking
     Route::group(['prefix' => 'booking'], function () {
+        Route::get('/', 'BookingController@index');
+        Route::get('/detail/{id}', 'BookingController@detail');
         Route::get('/{slug}', 'BookingController@create');
         Route::post('/checkout', 'BookingController@checkout');
     });
+    // invoice
+    Route::get('/invoice/{id}', 'InvoiceController@show');
 });
