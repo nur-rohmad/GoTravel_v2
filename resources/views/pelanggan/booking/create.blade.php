@@ -1,4 +1,11 @@
 @extends('layout.pelanggan')
+@section('addcss')
+<style>
+    .total tr {
+        height: 50px;
+    }
+</style>
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -37,13 +44,14 @@
                             <button type="button" class="counter-minus btn btn-white lh-2 shadow-none">
                                 <i class="fa fa-minus text-muted"></i>
                             </button>
-                            <input type="text" value="1" class="qty" name="jumlah_booking">
+                            <input type="number" value="1" class="qty" id="jumlah_booking" min="1" max="5" readonly>
                             <button type="button" class="counter-plus btn btn-white lh-2 shadow-none">
                                 <i class="fa fa-plus text-muted"></i>
                             </button>
                         </div>
                     </div>
                     <div class="ms-auto">
+                        <input type="hidden" id="harga-awal" value="{{ $openTrip->harga }}">
                         <span class="fs-16 fw-semibold">{{ number_format($openTrip->harga) }}</span>
                     </div>
                 </div>
@@ -72,8 +80,8 @@
                         <div class="tab-pane active show" id="tab20">
                             @foreach ($chanelPembayaran as $item)
                             @if ($item->payment_type == 'bank_transfer')
-                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}" onclick="select(id)"
-                                style="cursor: pointer">
+                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
+                                onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
                                     <img class="avatar avatar-xl me-3" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
@@ -91,8 +99,8 @@
                         <div class="tab-pane" id="tab21">
                             @foreach ($chanelPembayaran as $item)
                             @if ($item->payment_type == 'gopay')
-                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}" onclick="select(id)"
-                                style="cursor: pointer">
+                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
+                                onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
                                     <img class="avatar avatar-xl me-3" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
@@ -109,8 +117,8 @@
                         <div class="tab-pane" id="tab22">
                             @foreach ($chanelPembayaran as $item)
                             @if ($item->payment_type == 'cstore')
-                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}" onclick="select(id)"
-                                style="cursor: pointer">
+                            <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
+                                onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
                                     <img class="avatar avatar-xl me-3" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
@@ -130,18 +138,74 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5"></div>
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-header">
+                <h3 class="card-title">Total Bayar</h3>
+            </div>
+            <div class="card-body">
+                <table width="100%" class="total">
+                    <tr>
+                        <th width="50%">Sub Total</th>
+                        <td align="right">{{ number_format($openTrip->harga) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Jumlah Booking</th>
+                        <td align="right" id="jumlah-booking-preview">1</td>
+                    </tr>
+                    <tr>
+                        <th>Biaya Admin</th>
+                        <td align="right">Gratis</td>
+                    </tr>
+                    <tr>
+                        <th>Metode Pembayaran</th>
+                        <td align="right" id="pay-metode">-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <form action="/pelanggan/booking/checkout" id="bayar" method="POST">
+                    @csrf
+                    <input type="hidden" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="metode_pembayaran" id="payMetode">
+                    <input type="hidden" name="open_trip" value="{{ $openTrip->id }}">
+                    <input type="hidden" name="jumlah" id="jumlah" value="1">
+                </form>
+                <div class="d-flex justify-content-between">
+                    <h3 class="fw-bold  text-primary" id="pay-total">{{ number_format($openTrip->harga) }}</h3>
+                    <button id="buttonCheckout" class="btn btn-success"> Bayar <i
+                            class="fa fa-arrow-right ms-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('addscript')
 <!-- Handle Counter js -->
 <script src="/assets/js/handlecounter.js"></script>
 <script>
-    function select(id)
+    function select(id, name)
     {
+        $('#pay-metode').text(name)
+        $('#payMetode').val(id.replace('chanel-', ''))
         let select  = $('#select').remove()
         $('#'+id).append(`<div class="power-ribbone power-ribbone-top-left text-success" id="select"><span class="bg-success"><i
                     class="fa fa-check text-light"></i></span></div>`)
     }
+
+    $('#buttonCheckout').click(() => {
+        let metodePembayaran = $('#payMetode').val()
+        if (!metodePembayaran) {
+            $.growl.error({
+            title: '<i class="fa fa-check"></i> Gagal',
+            message: "Pilih Metode Pembayaran",
+            duration: 2000,
+            });
+        }else{
+            $('#bayar').submit()
+        }
+    })
+
 </script>
 @endsection

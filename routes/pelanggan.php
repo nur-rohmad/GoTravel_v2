@@ -11,11 +11,12 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'pelanggan'], fun
         Route::get('/', 'WisataController@index');
     });
     // open-trip 
-    Route::group(['prefix' => 'open-trip'], function(){
-        Route::get('/','OpenTripController@index');
+    Route::group(['prefix' => 'open-trip'], function () {
+        Route::get('/', 'OpenTripController@index');
     });
     // booking
-    Route::group(['prefix' => 'booking'], function(){
+    Route::group(['prefix' => 'booking'], function () {
         Route::get('/{slug}', 'BookingController@create');
+        Route::post('/checkout', 'BookingController@checkout');
     });
 });
