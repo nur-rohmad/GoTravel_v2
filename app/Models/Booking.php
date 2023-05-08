@@ -11,6 +11,8 @@ class Booking extends Model
     use HasFactory;
     protected $appends = ['badge_color'];
     protected $guarded  = [];
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function user()
     {
@@ -25,11 +27,6 @@ class Booking extends Model
     public function invoice()
     {
         return $this->hasOne(Invoice::class, 'id_booking');
-    }
-
-    public function getKeyType()
-    {
-        return 'string';
     }
 
     public function getBadgeColorAttribute()

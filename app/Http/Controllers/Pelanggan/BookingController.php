@@ -123,7 +123,8 @@ class BookingController extends Controller
             // create invoice
             $dataInvoice = [
                 'id' => $responseJson['order_id'],
-                'id_cahnel_pembayaran' => $request->metode_pembayaran,
+                'id_booking' => $booking->id,
+                'id_chanel_pembayaran' => $request->metode_pembayaran,
                 "amount" => $responseJson['gross_amount'],
                 "metode_pembayaran" => $responseJson['payment_type'],
                 // "waktu_expired" => $responseJson['expiry_time']
@@ -140,9 +141,7 @@ class BookingController extends Controller
             }
 
             $invoice = Invoice::create($dataInvoice);
-            DB::commit();
-            $invoice['id_booking'] = $booking->id;
-
+            DB::commit(); 
             return Redirect('pelanggan/open-trip');
         } catch (\Throwable $th) {
             DB::rollBack();

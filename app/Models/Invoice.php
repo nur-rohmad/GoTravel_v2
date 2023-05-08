@@ -9,11 +9,9 @@ class Invoice extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $keyType = 'string';
+    public $incrementing = false;
 
-    public function getKeyType()
-    {
-        return 'string';
-    }
 
     public function booking()
     {
