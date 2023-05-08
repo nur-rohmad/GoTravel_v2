@@ -161,6 +161,11 @@
                                         class="side-menu__icon fa fa-credit-card"></i><span
                                         class="side-menu__label">Chanel Pembayaran</span></a>
                             </li>
+                            <li>
+                                <a class="side-menu__item has-link {{ (request()->is('admin/booking*') )? 'active' : '' }}"
+                                    href="/admin/booking"><i class="side-menu__icon icon icon-calendar"></i><span
+                                        class="side-menu__label">Booking</span></a>
+                            </li>
 
                         </ul>
                         <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
