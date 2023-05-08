@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBookingsTable extends Migration
 {
-    
+
     /**
      * Run the migrations.
      *
@@ -20,7 +20,7 @@ class CreateBookingsTable extends Migration
             $table->uuid('id_openTrip');
             $table->string('email_tujuan', 100);
             $table->integer('jumlah_booking');
-            $table->enum('status', ['proses', 'gagal', 'berhasil']);
+            $table->enum('status', ['menunggu_pembayaran', 'proses', 'gagal', 'berhasil']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

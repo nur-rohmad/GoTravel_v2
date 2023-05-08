@@ -15,8 +15,10 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <h3 class="card-title">Detail Booking</h3>
+                <span class="badge bg-{{ $invoice->booking->badge_color }} py-2">{{ ucwords(str_replace("_", " ",
+                    $invoice->booking->status)) }}</span>
             </div>
             <div class="card-body">
                 <div class="form-group">

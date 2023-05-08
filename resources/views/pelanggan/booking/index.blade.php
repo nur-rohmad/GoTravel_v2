@@ -26,6 +26,7 @@
                                 <th>Open Trip</th>
                                 <th>Tanggal Berangkat</th>
                                 <th>Jumlah Booking</th>
+                                <th>Metode Pembayaran</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -37,6 +38,10 @@
                                 <td>{{ $item->open_trip->title }}</td>
                                 <td>{{ date("d M Y H:i:s", strtotime($item->open_trip->tgl_berangkat)) }}</td>
                                 <td>{{ $item->jumlah_booking }}</td>
+                                <td class="text-center">
+                                    <img src="{{ asset('storage/'.$item->invoice->chanel_pembayaran->image) }}"
+                                        width="100px" alt="">
+                                </td>
                                 <td><span class="badge badge-sm bg-{{ $item->badge_color }}"> {{
                                         ucwords(str_replace("_", " ", $item->status)) }} </span></td>
                                 <td>
