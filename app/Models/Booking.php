@@ -39,7 +39,8 @@ class Booking extends Model
             case 'proses':
                 $color = 'dark';
                 break;
-            case 'berhasil':
+            case 'berhasil' :
+            case 'dibayar' :
                 $color = 'success';
                 break;
             case 'gagal':

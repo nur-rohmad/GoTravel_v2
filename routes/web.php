@@ -42,4 +42,9 @@ Route::get('/midtrans', function () {
     dd($invoice);
 });
 
+// cllback
+Route::group(['namespace' => 'Callback'], function(){
+    Route::post('/calback/midtrans-NX9PxSSmeQ', 'MidtransController@index');
+});
+
 // Auth::routes(['verify' => true]);

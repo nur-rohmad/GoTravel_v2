@@ -112,7 +112,7 @@ class BookingController extends Controller
             }
 
             $responseMidtrans = Http::accept('application/json')->withHeaders([
-                'Authorization' => 'U0ItTWlkLXNlcnZlci0wUmwyd0xGeG9fNkRZZVozZjl2bFRBT1Q='
+                'Authorization' => base64_encode(env('MIDTRANS_SERVERKEY'))
             ])->post('https://api.sandbox.midtrans.com/v2/charge', $payload);
 
             $responseJson = $responseMidtrans->json();
