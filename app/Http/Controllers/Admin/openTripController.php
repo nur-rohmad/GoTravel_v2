@@ -8,7 +8,7 @@ use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class openTripController extends Controller
+class OpenTripController extends Controller
 {
     public function index(Request $request)
     {
