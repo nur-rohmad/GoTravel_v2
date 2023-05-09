@@ -62,7 +62,7 @@
         {{-- metodew pembayaran --}}
         <div class="card shadow">
             <div class="card-header">
-                <h3 class="card-title">Metode Pembayran</h3>
+                <h3 class="card-title">Metode Pembayaran</h3>
             </div>
             <div class="card-body">
                 <div class="card-pay">

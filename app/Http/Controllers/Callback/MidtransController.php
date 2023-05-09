@@ -32,6 +32,13 @@ class MidtransController extends Controller
 
         // get data invoice
         $invoice = Invoice::where('id', $transaction->order_id)->first();
+
+        if (!$invoice) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invoice Tidak ditemukan'
+            ], 200);
+        }
         // get data booking
         $booking = Booking::where('id', $invoice->id_booking)->first();
 
