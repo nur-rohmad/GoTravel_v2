@@ -1,4 +1,10 @@
 @extends('layout.admin')
+@section('addcss')
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+/>
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -151,6 +157,9 @@
 <!-- INTERNAL leaflet js -->
 <script src="/assets/plugins/leaflet/leaflet.js"></script>
 
+{{-- geosearch --}}
+<script src="https://unpkg.com/leaflet-geosearch@3.5.0/dist/geosearch.umd.js"></script>
+
 <script>
     // preview image
     $(document).ready(function (e) {
@@ -173,6 +182,16 @@
        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
        }).addTo(peta);
+   
+        const search = new GeoSearch.GeoSearchControl({
+            provider: new GeoSearch.OpenStreetMapProvider(),
+            style: 'bar',
+        });
+
+  
+        peta.addControl(search);
+
+
         // create event  saat peta diclick
         var theMarker = {}
         peta.on('click', function(ev){
