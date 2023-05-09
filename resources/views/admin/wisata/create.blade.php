@@ -171,6 +171,11 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
         reader.readAsDataURL(this.files[0]);
         });
     });
+
+    
+    function searchEventHandler(result) {
+            console.log(result.location);
+         }
     // load location
    function showMap()
    {
@@ -188,7 +193,8 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
             style: 'bar',
         });
 
-  
+
+        peta.on('geosearch/showlocation', searchEventHandler);
         peta.addControl(search);
 
 
