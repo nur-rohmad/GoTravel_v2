@@ -64,7 +64,7 @@
                             @foreach ($openTrip->lokasi_tujuan as $lokasi)
                             <div class="row g-0 py-3">
                                 <div class="col-md-2">
-                                    <img src="{{ asset('storage/'.$lokasi->image) }}" class="card-img-left h-100"
+                                    <img src="{{ asset('storage/'.$lokasi->image) }}" class="card-img-left"
                                         alt="img" width="200px">
                                 </div>
                                 <div class="col-md-8">
