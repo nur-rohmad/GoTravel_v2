@@ -121,7 +121,7 @@
                             <div class="card ribbone-card border" id="chanel-{{ $item->id }}"
                                 onclick="select(id, '{{ $item->name }}')" style="cursor: pointer">
                                 <div class="d-flex px-5 py-5">
-                                    <img class="avatar avatar-xl me-3" alt="avatra-img"
+                                    <img class="me-3" width="150px" alt="avatra-img"
                                         src="{{ asset('storage/'.$item->image) }}">
                                     <div class="my-2">
                                         <a href="javascript:void(0)" class="text-default fw-semibold">{{ $item->name

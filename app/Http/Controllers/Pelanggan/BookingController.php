@@ -100,7 +100,7 @@ class BookingController extends Controller
                     "bank" => $chanelPembayaran->payment_code
                 ];
             } elseif ($chanelPembayaran->payment_type == 'cstore') {
-                $payload['bank_transfer'] = [
+                $payload['cstore'] = [
                     "store" => $chanelPembayaran->payment_code,
                     "message" => "Pembayaran Go Travel",
                 ];
@@ -134,6 +134,7 @@ class BookingController extends Controller
                 $dataInvoice['va_number'] = $responseJson['va_numbers'][0]['va_number'];
                 $dataInvoice['bank'] = $responseJson['va_numbers'][0]['bank'];
             } elseif ($responseJson['payment_type'] == 'gopay') {
+                $dataInvoice['bank'] = 'GOPAY';
                 $dataInvoice['pay_url'] = $responseJson['actions'][0]['url'];
             } elseif ($responseJson['payment_type'] == 'cstore') {
                 $dataInvoice['va_number'] = $responseJson['payment_code'];
@@ -141,8 +142,8 @@ class BookingController extends Controller
             }
 
             $invoice = Invoice::create($dataInvoice);
-            DB::commit(); 
-            return Redirect('pelanggan/open-trip');
+            DB::commit();
+            return Redirect('pelanggan/booking');
         } catch (\Throwable $th) {
             DB::rollBack();
             dd($th);

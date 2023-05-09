@@ -1,4 +1,4 @@
-@extends('layout.pelanggan')
+@extends('layout.admin')
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -23,6 +23,8 @@
                         <thead>
                             <tr>
                                 <th>ID Booking</th>
+                                <th>Tanggal Booking</th>
+                                <th>Pelanggan</th>
                                 <th>Open Trip</th>
                                 <th>Tanggal Berangkat</th>
                                 <th>Jumlah Booking</th>
@@ -35,9 +37,11 @@
                             @forelse ($booking as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
+                                <td>{{ date("d M Y H:i:s", strtotime($item->created_at)) }}</td>
+                                <td>{{ $item->user->name }}</td>
                                 <td>{{ $item->open_trip->title }}</td>
                                 <td>{{ date("d M Y H:i:s", strtotime($item->open_trip->tgl_berangkat)) }}</td>
-                                <td>{{ $item->jumlah_booking }}</td>
+                                <td class="text-center">{{ $item->jumlah_booking }}</td>
                                 <td class="text-center">
                                     <img src="{{ asset('storage/'.$item->invoice->chanel_pembayaran->image) }}"
                                         width="100px" alt="">
@@ -45,8 +49,7 @@
                                 <td><span class="badge badge-sm bg-{{ $item->badge_color }}"> {{
                                         ucwords(str_replace("_", " ", $item->status)) }} </span></td>
                                 <td>
-                                    <a class="btn btn-sm btn-info"
-                                        href="/pelanggan/booking/detail/{{ $item->invoice->id}}">
+                                    <a class="btn btn-sm btn-info" href="/admin/booking/detail/{{ $item->invoice->id}}">
                                         detail</a>
                                 </td>
                             </tr>

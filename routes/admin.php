@@ -30,4 +30,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
         Route::post('/', 'ChanelPembayaranController@create');
         Route::post('/edit', 'ChanelPembayaranController@update');
     });
+
+    // booking
+    Route::group(['prefix' => 'booking'], function () {
+        Route::get('/', 'BookingController@index');
+        Route::get('/detail/{id}', 'BookingController@detail');
+    });
 });

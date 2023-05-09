@@ -5,7 +5,7 @@
     <h1 class="page-title">Detail Booking</h1>
     <div>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item " aria-current="page"><a href="/pelanggan/booking">Booking</a></li>
+            <li class="breadcrumb-item " aria-current="page"><a href="/admin/booking">Booking</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ $invoice->booking->id }}</li>
         </ol>
     </div>
@@ -85,7 +85,32 @@
                     </div>
                 </div>
                 @endif
-
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Informasi Pemesan</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label"> Nama </label>
+                    <input type="text" class="form-control" value="{{ $invoice->booking->user->name }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Email </label>
+                    <input type="text" class="form-control" value="{{ $invoice->booking->user->email }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> No Handpone </label>
+                    <input type="text" class="form-control" value="{{ $invoice->booking->user->NoHP }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Alamat </label>
+                    <textarea class="form-control" cols="30" rows="8"
+                        disabled>{{ $invoice->booking->user->alamat }}</textarea>
+                </div>
             </div>
         </div>
     </div>
