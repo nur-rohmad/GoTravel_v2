@@ -61,9 +61,9 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo"
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img desktop-logo"
                                 alt="logo">
-                            <img src="/assets/images/brand/logo-dark.png" class="header-brand-img light-logo1"
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
                         <!-- LOGO -->
@@ -116,13 +116,13 @@
                 <div class="app-sidebar">
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
-                            <img src="/assets/images/brand/logo-white.png" class="header-brand-img desktop-logo"
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img desktop-logo"
                                 alt="logo">
-                            <img src="/assets/images/brand/icon-white.png" class="header-brand-img toggle-logo"
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img toggle-logo"
                                 alt="logo">
-                            <img src="/assets/images/brand/icon-dark.png" class="header-brand-img light-logo"
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img light-logo"
                                 alt="logo">
-                            <img src="/assets/images/brand/logo-dark.png" class="header-brand-img light-logo1"
+                            <img src="/assets/images/logo_GoTravel.png"  style="width: 80px!important" class="header-brand-img light-logo1"
                                 alt="logo">
                         </a>
                         <!-- LOGO -->

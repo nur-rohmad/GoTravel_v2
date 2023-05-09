@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'admin', 'middleware' => ['admin_role']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function () {
     Route::get('/', 'DashboardController@index');
     // route untuk wisata
     Route::group(['prefix' => 'wisata'], function () {

@@ -54,7 +54,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7 mb-2">
                     <div class="text-center">
-                        <a href="index.html"><img src="/assets/images/brand/logo-white.png" class="header-brand-img" alt=""></a>
+                        <a href="index.html"><img src="/assets/images/logo_GoTravel.png" style="width: 200px!important" class="header-brand-img" alt=""></a>
                     </div>
                 </div>
 

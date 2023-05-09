@@ -3,7 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'pelanggan'], function () {
+Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], function () {
     Route::get('/', 'DashboardController@index');
 
     // wisata controller
