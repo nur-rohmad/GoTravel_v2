@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="container">
-                    <div class="wrap-login100 p-6 col-6 mx-auto">
+                    <div class="wrap-login100 p-6 col-md-6 mx-auto">
                         <form class="login100-form validate-form" method="POST" action="/proces-login">
                             @csrf
                             <span class="login100-form-title pb-5">

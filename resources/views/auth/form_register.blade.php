@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="container">
-                    <div class="wrap-login100 p-6 col-6 mx-auto">
+                    <div class="wrap-login100 p-6 col-md-6 mx-auto">
                         <form class="login100-form validate-form" method="POST" action="/register">
                             @csrf
                             <span class="login100-form-title pb-5">
@@ -110,12 +110,11 @@
                             </div>
                             <div class="container-login100-form-btn">
                                 <button type="submit" class="login100-form-btn btn-primary">
-                                    Login
+                                    Register
                                 </button>
                             </div>
                             <div class="text-center pt-3">
-                                <p class="text-dark mb-0">Not a member?<a href="/login" class="text-primary ms-1">Sign
-                                        UP</a></p>
+                                <p class="text-dark mb-0">have a acount <a href="/login" class="text-primary ms-1">Signin</a></p>
                             </div>
                             <label class="login-social-icon"><span>Login with Social</span></label>
                             <div class="d-flex justify-content-center">
