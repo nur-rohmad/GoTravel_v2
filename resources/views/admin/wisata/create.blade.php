@@ -26,6 +26,8 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="card-title">Tambah wisata</h3>
+                <a href="javascript:void(0)" class="btn btn-success" onclick="showMap()">Cari Lokasi <i
+                    class="fa fa-map-o ms-2"></i></a>
                 <a href="/admin/wisata" class="btn btn-sm btn-dark"><i class="fa fa-arrow-left me-2"></i>Kembali</a>
             </div>
             <div class="card-body">
@@ -37,7 +39,7 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
                                 <label class="form-label">Nama Wisata <span class="text-red">*</span></label>
                                 <input type="text" name="nama_wisata"
                                     class="form-control @error('nama_wisata') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('nama_wisata') }}">
+                                    placeholder="Bromo.." id="nama_wisata" value="{{ old('nama_wisata') }}">
                                 @error('nama_wisata')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -47,7 +49,7 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
                                 <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('kota') }}">
+                                    placeholder="Bromo.." id="nama_kota" value="{{ old('kota') }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -88,12 +90,8 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror"
-                                        name="latitude" id="latitude" value="{{ old('latitude') }}" readonly>
-                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i
-                                            class="fa fa-map-o ms-2"></i></a>
-                                </div>
+                                <input type="text" class="form-control @error('latitude') is-invalid @enderror"
+                                    name="latitude" id="latitude" value="{{ old('latitude') }}" readonly>
                                 @error('latitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -174,7 +172,21 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
 
     
     function searchEventHandler(result) {
-            console.log(result.location);
+            // insert latitude and longitude
+            $('#latitude').val(result.location.y)
+            $('#longitude').val(result.location.x)
+
+            // ambil nama lokasi 
+           let label = result.location.label.split(",")
+            // insert nama dan kota wisata
+            $('#nama_wisata').val(label[0])
+            $('#nama_kota').val(label[2])
+
+             $.growl.notice({
+                title: '<i class="fa fa-check"></i> Sukses',
+                message: `berhasil menambahkan <br/> latitude : ${result.location.y} <br/> longitude : ${result.location.x}`,
+                duration: 2000
+            });
          }
     // load location
    function showMap()
@@ -198,29 +210,7 @@ href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
         peta.addControl(search);
 
 
-        // create event  saat peta diclick
-        var theMarker = {}
-        peta.on('click', function(ev){
-        var latlng = peta.mouseEventToLatLng(ev.originalEvent);
-        // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
-        if (theMarker != undefined) {
-              peta.removeLayer(theMarker); 
-        };
-        // add marker to map
-         theMarker = L.marker([latlng.lat , latlng.lng]).addTo(peta)
-        // add latlng to form
-        $('#latitude').val(latlng.lat)
-        $('#longitude').val(latlng.lng)
-
-        // notif
-        $.growl.notice({
-                title: '<i class="fa fa-check"></i> Sukses',
-                message: `berhasil menambahkan <br/> latitude : ${latlng.lat} <br/> longitude : ${latlng.lng}`,
-                duration: 2000
-        });
-
-       
-});
+     
        $('#modal-location').modal('show');
    }
 

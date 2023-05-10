@@ -1,4 +1,10 @@
 @extends('layout.admin')
+@section('addcss')
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+/>
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -188,6 +194,10 @@
 
 <!-- INTERNAL leaflet js -->
 <script src="/assets/plugins/leaflet/leaflet.js"></script>
+
+{{-- geosearch --}}
+<script src="https://unpkg.com/leaflet-geosearch@3.5.0/dist/geosearch.umd.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#select2-multiple').select2({
@@ -205,6 +215,17 @@
         });
     })
 
+    function searchEventHandler(result) {
+            $('#latitude').val(result.location.y)
+            $('#longitude').val(result.location.x)
+
+             $.growl.notice({
+                title: '<i class="fa fa-check"></i> Sukses',
+                message: `berhasil menambahkan <br/> latitude : ${result.location.y} <br/> longitude : ${result.location.x}`,
+                duration: 2000
+            });
+         }
+
     function showMap()
     {
         // add canva map
@@ -215,28 +236,19 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(peta);
+
+        const search = new GeoSearch.GeoSearchControl({
+            notFoundMessage: 'Lokasi tidak ditemukan',
+            provider: new GeoSearch.OpenStreetMapProvider(),
+            style: 'bar',
+        });
+
+
+        peta.on('geosearch/showlocation', searchEventHandler);
+        peta.addControl(search);
+
         // create event saat peta diclick
-        var theMarker = {}
-        peta.on('click', function(ev){
-        var latlng = peta.mouseEventToLatLng(ev.originalEvent);
-        // check apakah marker sudah ada jika sudah ada maka akan diremove dahulu
-        if (theMarker != undefined) {
-        peta.removeLayer(theMarker);
-        };
-        // add marker to map
-        theMarker = L.marker([latlng.lat , latlng.lng]).addTo(peta)
-        // add latlng to form
-        $('#latitude').val(latlng.lat)
-        $('#longitude').val(latlng.lng)
-        
-        // notif
-        $.growl.notice({
-        title: '<i class="fa fa-check"></i> Sukses',
-        message: `berhasil menambahkan <br /> latitude : ${latlng.lat} <br /> longitude : ${latlng.lng}`,
-        duration: 2000
-        });
-        
-        });
+       
         $('#modal-location').modal('show');
     }
 

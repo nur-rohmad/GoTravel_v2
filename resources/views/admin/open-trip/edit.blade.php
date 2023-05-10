@@ -1,4 +1,10 @@
 @extends('layout.admin')
+@section('addcss')
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+/>
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -167,7 +173,7 @@
     <div class="modal-dialog  modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Lokasi Wisata <span id="nama-wisata"></span></h6><button aria-label="Close"
+                <h6 class="modal-title">Lokasi Penjemputan <span id="nama-wisata"></span></h6><button aria-label="Close"
                     class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body" id="modal-body">
@@ -196,6 +202,10 @@
 
 <!-- INTERNAL leaflet js -->
 <script src="/assets/plugins/leaflet/leaflet.js"></script>
+
+{{-- geosearch --}}
+<script src="https://unpkg.com/leaflet-geosearch@3.5.0/dist/geosearch.umd.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#select2-multiple').select2({
@@ -212,6 +222,18 @@
         reader.readAsDataURL(this.files[0]);
         });
     })
+
+    function searchEventHandler(result) {
+            // insert latitude and longitude
+            $('#latitude').val(result.location.y)
+            $('#longitude').val(result.location.x)
+
+             $.growl.notice({
+                title: '<i class="fa fa-check"></i> Sukses',
+                message: `berhasil menambahkan <br/> latitude : ${result.location.y} <br/> longitude : ${result.location.x}`,
+                duration: 2000
+            });
+         }
 
     function showMap()
     {
@@ -237,6 +259,16 @@
 
         L.marker([{{ $openTrip->lokasi_penjemputan->latitude}} , {{$openTrip->lokasi_penjemputan->longitude}}], {icon: iconLama}).addTo(peta)
             .bindPopup('titik lama')
+
+        const search = new GeoSearch.GeoSearchControl({
+            provider: new GeoSearch.OpenStreetMapProvider(),
+            style: 'bar',
+        });
+
+
+        peta.on('geosearch/showlocation', searchEventHandler);
+        peta.addControl(search);
+        
 
         // create event saat peta diclick
         var theMarker = {}

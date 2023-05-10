@@ -1,4 +1,10 @@
 @extends('layout.admin')
+@section('addcss')
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
+/>s
+@endsection
 @section('main')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -20,6 +26,8 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="card-title">Edit wisata</h3>
+                <a href="javascript:void(0)" class="btn btn-success" onclick="showMap()">cari Lokasi <i
+                    class="fa fa-map-o ms-2"></i></a>
                 <a href="/admin/wisata" class="btn btn-sm btn-dark"><i class="fa fa-arrow-left me-2"></i>Kembali</a>
             </div>
             <div class="card-body">
@@ -32,7 +40,7 @@
                                 <label class="form-label">Nama Wisata <span class="text-red">*</span></label>
                                 <input type="text" name="nama_wisata"
                                     class="form-control @error('nama_wisata') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('nama_wisata', $wisata->nama_wisata) }}">
+                                    placeholder="Bromo.." id="nama_wisata" value="{{ old('nama_wisata', $wisata->nama_wisata) }}">
                                 @error('nama_wisata')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -42,7 +50,7 @@
                             <div class="form-group">
                                 <label class="form-label">Kota Wisata <span class="text-red">*</span></label>
                                 <input type="text" name="kota" class="form-control @error('kota') is-invalid @enderror"
-                                    placeholder="Bromo.." value="{{ old('kota', $wisata->kota) }}">
+                                    placeholder="Bromo.." id="nama_kota" value="{{ old('kota', $wisata->kota) }}">
                                 @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -89,13 +97,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label"> Laitude <span class="text-red">*</span></label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control @error('latitude') is-invalid @enderror"
-                                        name="latitude" id="latitude"
-                                        value="{{ old('latitude' , $wisata->location->latitude) }}" readonly>
-                                    <a href="javascript:void(0)" class="btn btn-dark" onclick="showMap()">Buka Peta <i
-                                            class="fa fa-map-o ms-2"></i></a>
-                                </div>
+                                <input type="text" class="form-control @error('latitude') is-invalid @enderror"
+                                    name="latitude" id="latitude"
+                                    value="{{ old('latitude' , $wisata->location->latitude) }}" readonly>
                                 @error('latitude')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -164,7 +168,9 @@
 
 <!-- INTERNAL leaflet js -->
 <script src="/assets/plugins/leaflet/leaflet.js"></script>
-{{-- <script src="/assets/js/map-leafleft.js"></script> --}}
+
+{{-- geosearch --}}
+<script src="https://unpkg.com/leaflet-geosearch@3.5.0/dist/geosearch.umd.js"></script>
 
 
 <script>
@@ -178,6 +184,23 @@
     });
     
     });
+
+    function searchEventHandler(result) {
+            // insert latitude and longitude
+            $('#latitude').val(result.location.y)
+            $('#longitude').val(result.location.x)
+
+            // ambil nama lokasi 
+           let label = result.location.label.split(",")
+            // insert nama dan kota wisata
+            $('#nama_wisata').val(label[0])
+            $('#nama_kota').val(label[2])
+             $.growl.notice({
+                title: '<i class="fa fa-check"></i> Sukses',
+                message: `berhasil menambahkan <br/> latitude : ${result.location.y} <br/> longitude : ${result.location.x}`,
+                duration: 2000
+            });
+         }
 
     // load location
    function showMap()
@@ -196,7 +219,7 @@
         })
 
        // inisialisasi map
-       var peta = L.map('leaflet2').setView([{{$wisata->location->latitude}} , {{$wisata->location->longitude}}], 12);
+       var peta = L.map('leaflet2').setView([{{$wisata->location->latitude}} , {{$wisata->location->longitude}}], 20);
        setTimeout(function(){ peta.invalidateSize()}, 400);
        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -205,6 +228,15 @@
        //add maker 
        L.marker([{{$wisata->location->latitude}} , {{$wisata->location->longitude}}], {icon: iconLama}).addTo(peta)
             .bindPopup('titik lama')
+
+        const search = new GeoSearch.GeoSearchControl({
+            provider: new GeoSearch.OpenStreetMapProvider(),
+            style: 'bar',
+        });
+
+
+        peta.on('geosearch/showlocation', searchEventHandler);
+        peta.addControl(search);
        
         var theMarker = {}
        

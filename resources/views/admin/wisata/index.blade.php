@@ -181,7 +181,7 @@
         $('#modal-body').append( `<div class="ht-300" id="leaflet2" style="height: 400px;"></div>`)
         
         // inisialisasi map
-        var peta = L.map('leaflet2').setView([latitude, longitude], 13);
+        var peta = L.map('leaflet2').setView([latitude, longitude], 20);
         setTimeout(function(){ peta.invalidateSize()}, 400);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -219,7 +219,6 @@
                 },
                 body: JSON.stringify({id_wisata: id})
             }).then((result) => {
-                console.log('result',result)
                 if (!result.ok) {
                     swal.fire('Gagal','Gagal Menghapus data', 'error')
                 }else{

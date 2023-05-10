@@ -108,7 +108,7 @@
                     $('#titikKumpul').append('<div class="ht-300" id="leaflet2" style="height: 400px;"></div>')
                 }
                 // inisialisasi map
-                var peta = L.map('leaflet2').setView([latitude, longitude], 13);
+                var peta = L.map('leaflet2').setView([latitude, longitude], 20);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(peta);
@@ -122,7 +122,6 @@
                         navigator.geolocation.getCurrentPosition((location) => {
                             user_latitude = location.coords.latitude
                             user_longitude = location.coords.longitude
-                            console.log(user_latitude, user_longitude)
                            L.Routing.control({
                             waypoints: [
                                 L.latLng(user_latitude ,user_longitude),
