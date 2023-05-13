@@ -9,6 +9,7 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], fun
     // wisata controller
     Route::group(['prefix' => 'wisata'], function () {
         Route::get('/', 'WisataController@index');
+        Route::get('/{id}', 'WisataController@show');
     });
     // open-trip 
     Route::group(['prefix' => 'open-trip'], function () {

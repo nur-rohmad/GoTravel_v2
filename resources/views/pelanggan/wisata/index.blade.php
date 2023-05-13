@@ -28,9 +28,11 @@
                     <div class="card-body">
                         <ul class="list-group">
                             @foreach ($kota_wisata as $item)
-                            <li class="list-group-item border-0 p-0 {{ Request::get('kota') == $item->kota ? 'active' : '' }}"> <a href="/pelanggan/wisata?kota={{ $item->kota }}"><i
-                                        class="fe fe-chevron-right"></i>
-                                    {{ $item->kota }} </a> </li>
+                            <li
+                                class="list-group-item border-0 p-0 {{ Request::get('kota') == $item->kota ? 'active' : '' }}">
+                                <a href="/pelanggan/wisata?kota={{ $item->kota }}"><i class="fe fe-chevron-right"></i>
+                                    {{ $item->kota }} </a>
+                            </li>
                             @endforeach
                         </ul>
                     </div>
@@ -46,18 +48,19 @@
                     <div class="card-body p-4">
                         <div class="row">
                             <form action="/pelanggan/wisata" method="GET">
-                            <div class="col-md-5">
-                                <div class="input-group d-flex w-100 float-start">
-                                    <input type="text" class="form-control border-end-0 my-2" name="search" placeholder="Nama Wisata" value="{{ Request::get('search') }}">
-                                    <button class="btn input-group-text bg-success  my-2">
-                                        <i class="fe fe-search " aria-hidden="true"></i>
-                                    </button>
-                                    <a href="/pelanggan/wisata" class="btn input-group-text bg-danger  my-2">
-                                        <i class="fa fa-undo " aria-hidden="true"></i>
-                                    </a>
+                                <div class="col-md-5">
+                                    <div class="input-group d-flex w-100 float-start">
+                                        <input type="text" class="form-control border-end-0 my-2" name="search"
+                                            placeholder="Nama Wisata" value="{{ Request::get('search') }}">
+                                        <button class="btn input-group-text bg-success  my-2">
+                                            <i class="fe fe-search " aria-hidden="true"></i>
+                                        </button>
+                                        <a href="/pelanggan/wisata" class="btn input-group-text bg-danger  my-2">
+                                            <i class="fa fa-undo " aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -65,49 +68,28 @@
         </div>
         <div class="row">
             @forelse ($wisata as $item)
-            <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="card overflow-hidden">
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="card ribbone-card overflow-hidden">
+                    <img src="{{ asset('storage/'. $item->image) }}" class="card-img-top" height="200px" alt="img">
                     <div class="card-body">
-                        <div class="row g-0">
-                            <div class="col-xl-3 col-lg-12 col-md-12">
-                                <div class="product-list">
-                                    <div class="br-be-0 br-te-0">
-                                        <a href="shop-description.html" class="">
-                                            <img src="{{ asset('storage/'. $item->image) }}" alt="img"
-                                                class="cover-image br-7 w-100">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 border-end my-auto">
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <h3 class="fw-bold fs-30 mb-3 text-info">{{ $item->nama_wisata }}</h3>
-                                        <div class="mb-2">
-                                            <span class="badge rounded-pill bg-success badge-sm me-2"> <i
-                                                    class="fa fa-building me-1"></i> {{
-                                                $item->kota }} </span>
-                                        </div>
-                                        {!! $item->deskripsi !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-12 col-md-12 my-auto">
-                                <div class="card-body p-0">
-                                    <button
-                                        onclick="ShowDirection('{{ $item->location->latitude }}', '{{ $item->location->longitude }}')"
-                                        class="btn btn-primary btn-block"><i class="fa fa-map mx-2"></i>Lihat Lokasi</button>
-                                </div>
-                            </div>
+                        <div class="arrow-ribbone-left bg-teal">
+                            <i class="fa fa-building ml-2"></i> {{ $item->kota }}
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="card-title"><a href="/pelanggan/wisata/{{ $item->id }}">{{ $item->nama_wisata
+                                    }}</a></h5>
+                            <p class="card-text ">{{ substr(strip_tags($item->deskripsi),0, 150) }}...</p>
+                            <a href="/pelanggan/wisata/{{ $item->id }}" class="">Lihat lainnya</a>
                         </div>
                     </div>
                 </div>
             </div>
             @empty
-                <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="card overflow-hidden">
                     <div class="card-body text-center">
-                        <i class="fa fa-folder-open fa-3x" ></i> <h4>Data tidak ditemukan</h4>
+                        <i class="fa fa-folder-open fa-3x"></i>
+                        <h4>Data tidak ditemukan</h4>
                     </div>
                 </div>
             </div>
