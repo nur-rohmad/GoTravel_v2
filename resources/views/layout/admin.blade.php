@@ -7,10 +7,6 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/logo_GoTravel.png">
@@ -61,10 +57,10 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img desktop-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -116,14 +112,14 @@
                 <div class="app-sidebar">
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img desktop-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img toggle-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img light-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img toggle-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img light-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                     </div>
@@ -198,8 +194,7 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                            class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All
+                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Go-Travel</a>. All
                         rights reserved.
                     </div>
                 </div>
