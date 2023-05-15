@@ -29,7 +29,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="body mx-4 my-4">
-                <img src="{{ asset('storage/'. $wisata->image) }}" class="" alt="{{ $wisata->nama_wisata }}">
+                <img src="{{ asset('storage/'. $wisata->image) }}" width="100%" alt="{{ $wisata->nama_wisata }}">
                 <h1 class="title text-center">{{ $wisata->nama_wisata }}</h1>
                 <div class="panel panel-primary">
                     <div class="tab-menu-heading">

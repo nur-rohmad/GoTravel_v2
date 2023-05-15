@@ -34,9 +34,9 @@
                             date("d M Y H:i", strtotime($openTrip->tgl_berangkat)) }} </span>
                     </div>
                     <h4 class="mt-4"><b> Deshripsi</b></h4>
-                    <div class="">
+                    <!--<div class="">-->
                         {!! $openTrip->deskripsi !!}
-                    </div>
+                    <!--</div>-->
                     <h4 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{
                             number_format($openTrip->harga)
                             }} </h4>
