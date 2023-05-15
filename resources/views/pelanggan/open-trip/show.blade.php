@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.pelanggan')
 @section('addcss')
 <link rel="stylesheet" href="/assets/plugins/leaflet-routing-machine/dist/leaflet-routing-machine.css">
 @endsection
@@ -41,7 +41,9 @@
                                 class="me-1 p-3  bg-danger-transparent text-danger bradius">Rp</i> {{
                             number_format($openTrip->harga)
                             }} </h4>
-                    <a class="btn btn-danger float-end me-2" href="/admin/open-trip"><i
+                    <a class="btn btn-outline-success float-end" href="/pelanggan/booking/{{ $openTrip->slug }}">Booking
+                        <i class="fa fa-arrow-right ms-2"></i></a>
+                    <a class="btn btn-danger float-end me-2" href="/pelanggan/open-trip"><i
                             class="fa fa-arrow-left me-2"></i>Kembali</a>
                 </div>
             </div>

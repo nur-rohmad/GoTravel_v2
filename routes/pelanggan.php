@@ -14,6 +14,7 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], fun
     // open-trip 
     Route::group(['prefix' => 'open-trip'], function () {
         Route::get('/', 'OpenTripController@index');
+        Route::get('/{slug}', 'OpenTripController@show');
     });
     // booking
     Route::group(['prefix' => 'booking'], function () {

@@ -61,10 +61,10 @@
                             href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img desktop-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 50px!important"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -116,14 +116,14 @@
                 <div class="app-sidebar">
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img desktop-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img toggle-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important" class="header-brand-img light-logo"
-                                alt="logo">
-                            <img src="/assets/images/logo_GoTravel.png"  style="width: 80px!important" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img toggle-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img light-logo" alt="logo">
+                            <img src="/assets/images/logo_GoTravel.png" style="width: 80px!important"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                     </div>
@@ -193,8 +193,7 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                            class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All
+                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Go-Travel</a>. All
                         rights reserved.
                     </div>
                 </div>

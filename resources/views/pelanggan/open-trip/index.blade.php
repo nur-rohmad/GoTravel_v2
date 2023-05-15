@@ -22,7 +22,7 @@
             <div class="col-xl-12">
                 <div class="card p-0">
                     <div class="card-body p-4">
-                        <form action="/pelanggan/wisata" method="GET">
+                        <form action="/pelanggan/open-trip" method="GET">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="input-group">
@@ -33,14 +33,14 @@
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <input type="date" name="tgl_berangkat" class="form-control my-2"
-                                            placeholder="Tanggal Berangkat">
+                                            placeholder="Tanggal Berangkat" value="{{ Request::get('tgl_berangkat') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class=" col-md-2">
                                     <button class="btn btn-success   my-2">
                                         <i class="fe fe-search " aria-hidden="true"></i>
                                     </button>
-                                    <a href="/pelanggan/wisata" class="btn btn-outline-dark  my-2">
+                                    <a href="/pelanggan/open-trip" class="btn btn-outline-dark  my-2">
                                         <i class="fa fa-undo " aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -52,53 +52,26 @@
         </div>
         <div class="row">
             @forelse ($openTrip as $item)
-            <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="card overflow-hidden">
+            <div class="col-xl-3 col-md-6 col-sm-12">
+                <div class="card ribbone-card overflow-hidden">
+                    <img src="{{ asset('storage/'. $item->poster) }}" class="card-img-top border" height="200px"
+                        alt="img">
                     <div class="card-body">
-                        <div class="row g-0">
-                            <div class="col-xl-3 col-lg-12 col-md-12">
-                                <div class="product-list">
-                                    <div class="br-be-0 br-te-0">
-                                        <a href="shop-description.html" class="">
-                                            <img src="{{ asset('storage/'. $item->poster) }}" alt="img"
-                                                class="cover-image br-7 w-100">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-7 col-lg-12 col-md-12 border-end my-auto">
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <h3 class="fw-bold fs-30 mb-3 text-info">{{ $item->title }}</h3>
-                                        <div class="mb-2">
-                                            <span class="badge rounded-pill bg-success badge-sm me-2"> <i
-                                                    class="fa fa-user me-1"></i> {{
-                                                $item->jumlah_peserta }} orang </span>
-                                            <span class="badge rounded-pill bg-primary badge-sm"> <i
-                                                    class="fa fa-calendar-check-o me-1"></i>
-                                                {{
-                                                date("d M Y H:i", strtotime($item->tgl_berangkat)) }} </span>
-                                        </div>
-                                        {!! $item->deskripsi !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-12 col-md-12 my-auto">
-                                <div class="card-body p-0">
-                                    <div class="price h3 text-center mb-5 fw-bold">{{ number_format($item->harga) }} /
-                                        Orang </div>
-                                    <button class="btn btn-dark btn-block"
-                                        onclick="showDetailLokasi({{ $item->lokasi_tujuan }})"><i
-                                            class="fa fa-map mx-2"></i>Detail Lokasi Tujuan</button>
-                                    <button class="btn btn-primary btn-block"
-                                        onclick="ShowLocation('{{$item->lokasi_penjemputan->latitude}}', '{{$item->lokasi_penjemputan->longitude}}')"><i
-                                            class="fa fa-map-pin mx-2"></i>Lokasi Penjemputan</button>
-                                    <a href="/pelanggan/booking/{{ $item->slug }}" class="btn btn-success btn-block"><i
-                                            class="fa fa-map mx-2"></i>Booking</a>
-
-                                </div>
-                            </div>
-                        </div>
+                        <h5 class="card-title"><a href="/pelanggan/open-trip/{{ $item->slug }}">{{ $item->title
+                                }}</a></h5>
+                        <span class="text-muted"> <i class="ion-calendar me-3"></i> {{ date("d M Y",
+                            strtotime($item->tgl_berangkat)) }} </span>
+                        <span class="text-muted float-end"> <i class="ion-clock me-3"></i> {{ date("H:i",
+                            strtotime($item->tgl_berangkat)) }} </span>
+                        <p class="text-muted mt-2"> <i class="ion-person me-3"></i> {{ $item->sisa_kuota }}
+                        </p>
+                        <p class="card-text ">{{ substr(strip_tags($item->deskripsi),0, 150) }}...</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-primary w-100 my-2" href="/pelanggan/booking/{{ $item->slug }}">Booking <i
+                                class="fa fa-arrow-right ms-2"></i></a>
+                        <a class="btn btn-light w-100 my-2" href="/pelanggan/open-trip/{{ $item->slug }}">
+                            Detail <i class="fe fe-search ms-2"></i></a>
                     </div>
                 </div>
             </div>

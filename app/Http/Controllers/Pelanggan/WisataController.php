@@ -21,7 +21,7 @@ class WisataController extends Controller
             $wisata->where('kota', $request->kota);
         }
 
-        $wisata = $wisata->paginate(10);
+        $wisata = $wisata->paginate(6);
 
         return view('pelanggan.wisata.index', compact('wisata', 'kota_wisata'));
     }

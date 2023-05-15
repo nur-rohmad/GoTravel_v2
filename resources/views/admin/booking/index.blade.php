@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
+                    <table class="table table-bordered text-nowrap border-bottom" id="booking">
                         <thead>
                             <tr>
                                 <th>ID Booking</th>
