@@ -181,6 +181,6 @@ class BookingController extends Controller
             }
             $ticket = Ticket::where('id_booking', $idBooking)->get();
         }
-        return view('ticket', compact('ticket'));
+        return view('ticket', compact('ticket', 'booking'));
     }
 }
