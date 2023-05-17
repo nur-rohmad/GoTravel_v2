@@ -48,6 +48,11 @@
                                     <a class="btn btn-sm btn-info"
                                         href="/pelanggan/booking/detail/{{ $item->invoice->id}}">
                                         detail</a>
+                                    @if ($item->status == 'dibayar')
+                                    <a class="btn btn-sm btn-success" target="_blank"
+                                        href="/pelanggan/booking/cetak-tiket/{{ $item->id}}">
+                                        Cetak tiket</a>
+                                    @endif
                                 </td>
                             </tr>
                             @empty

@@ -7,9 +7,11 @@ use App\Models\Booking;
 use App\Models\ChanelPembayaran;
 use App\Models\Invoice;
 use App\Models\OpenTrip;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
@@ -159,5 +161,26 @@ class BookingController extends Controller
             return back();
         }
         return view('pelanggan.booking.show', compact('invoice'));
+    }
+
+    public function cetakTiket($idBooking)
+    {
+        $booking = Booking::find($idBooking);
+        if (!$idBooking) {
+            abort(404);
+        }
+        $ticket = Ticket::where('id_booking', $idBooking)->get();
+        // dd($ticket);
+        if (count($ticket) < 1) {
+            // buat tilet baru
+            for ($i = 0; $i < $booking->jumlah_booking; $i++) {
+                Ticket::create([
+                    'id_booking' => $idBooking,
+                    'no_ticket' => 'GT-' . Str::random(10)
+                ]);
+            }
+            $ticket = Ticket::where('id_booking', $idBooking)->get();
+        }
+        return view('ticket', compact('ticket'));
     }
 }

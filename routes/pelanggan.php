@@ -22,6 +22,7 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], fun
         Route::get('/detail/{id}', 'BookingController@detail');
         Route::get('/{slug}', 'BookingController@create');
         Route::post('/checkout', 'BookingController@checkout');
+        Route::get('/cetak-tiket/{id_booking}', 'BookingController@cetakTiket');
     });
     // invoice
     Route::get('/invoice/{id}', 'InvoiceController@show');
