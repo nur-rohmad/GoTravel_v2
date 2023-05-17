@@ -14,7 +14,7 @@
         width: 800px;
         height: 264px;
         border: 1px solid white;
-        background-image: url('{{ asset(' storage/'. $booking->open_trip->poster) }}');
+        background-image: url('{{ asset('storage/'. $booking->open_trip->poster) }}');
         background-size: cover;
         opacity: 0.8;
     }
