@@ -23,6 +23,8 @@
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {{-- fontawesome --}}
+    <link id="style" href="/assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
 
     <!-- STYLE CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
@@ -144,7 +146,7 @@
                                 <h3>Main</h3>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="pelanggan/dashboard"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="/pelanggan"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Dashboard</span></a>
                             </li>
@@ -200,7 +202,7 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Go-Travel</a>. All
+                        Copyright © <span id="year"></span> . All
                         rights reserved.
                     </div>
                 </div>

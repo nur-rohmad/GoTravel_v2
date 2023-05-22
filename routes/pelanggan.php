@@ -1,7 +1,8 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], function () {
     Route::get('/', 'DashboardController@index');
@@ -26,4 +27,5 @@ Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], fun
     });
     // invoice
     Route::get('/invoice/{id}', 'InvoiceController@show');
+    Route::get('/get-secadule', 'DashboardController@getSecadue');
 });

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookingController extends Controller
 {
@@ -165,6 +167,7 @@ class BookingController extends Controller
 
     public function cetakTiket($idBooking)
     {
+        // dd(url('assets/images/logo_GoTravel.png'));
         $booking = Booking::find($idBooking);
         if (!$idBooking) {
             abort(404);
@@ -174,13 +177,25 @@ class BookingController extends Controller
         if (count($ticket) < 1) {
             // buat tilet baru
             for ($i = 0; $i < $booking->jumlah_booking; $i++) {
+                $no_ticket = 'GT-' . Str::random(10);
                 Ticket::create([
                     'id_booking' => $idBooking,
-                    'no_ticket' => 'GT-' . Str::random(10)
+                    'no_ticket' => $no_ticket,
+                    'qrcode' => $this->generateQrcode($no_ticket)
                 ]);
             }
             $ticket = Ticket::where('id_booking', $idBooking)->get();
         }
         return view('ticket', compact('ticket', 'booking'));
+    }
+
+    // function create qrcode
+    private function generateQrcode($content)
+    {
+        $image =  QrCode::format('png')->generate($content);
+        Storage::disk('local')->put('/ticket/qrcode/' . $content, $image);
+        // $filename =  $image->store('ticket/qrcode');
+
+        return true;
     }
 }
