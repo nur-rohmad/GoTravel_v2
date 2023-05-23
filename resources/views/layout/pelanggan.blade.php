@@ -202,7 +202,7 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> . All
+                       <span id="year"></span> . All
                         rights reserved.
                     </div>
                 </div>
