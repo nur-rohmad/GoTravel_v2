@@ -58,7 +58,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Postingan Wisata terbatu</h3>
+                <h3 class="card-title">Postingan Wisata terbaru</h3>
             </div>
             <div class="card-body">
                 <div class="row">
