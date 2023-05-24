@@ -1,8 +1,9 @@
+<link rel="shortcut icon" type="image/x-icon" href="{{ public_path("assets/images/logo_GoTravel.png") }}">
 <style>
     @page { margin: 0; }
     .box-ticket {
         width: 800px;
-        height: 264px;
+        height: 300px;
         border: 1px solid white;
         background-image: url('{{ public_path("storage/" . $booking->open_trip->poster) }}') !important;
         background-size: cover;
@@ -25,6 +26,7 @@
         font-style: italic;
         text-decoration: underline;
         color: blanchedalmond;
+        font-weight: bold;
     }
 
     .content h2 {
@@ -34,8 +36,13 @@
     }
 
     p {
+        position: absolute;
         color: blanchedalmond;
-        bottom: 0px;
+        font-weight: bold;
+        text-decoration: none;
+        bottom: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
     table {
         margin: 0px 20px
@@ -59,10 +66,9 @@
         <div class="content text-center">
             <h2>Promo Akhir Tahun</h2>
             <h4 style="color: blanchedalmond; margin-top: -10px">{{ $item->no_ticket }}</h4>
-            <img class="mb-2" src="{{ public_path("assets/images/qrcod.png") }}" alt="tes" width="70px">
         </div>
 
-        <p class="text-center">Tiket dicetak melalui <a href="/">go-travel.site</a> pada tanggal
+        <p class="text-center ">Tiket dicetak melalui <a href="/">go-travel.site</a> pada tanggal
             {{ date('d M Y', strtotime($item->created_at)) }}</p>
     </div>
 @endforeach
