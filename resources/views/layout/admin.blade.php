@@ -20,6 +20,9 @@
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    {{-- fontawesome --}}
+    <link id="style" href="/assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+
     <!-- STYLE CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
 

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function () {
     Route::get('/', 'DashboardController@index');
+    Route::get('/get-grafik', 'DashboardController@getDataGrafik');
+    Route::get('/open-trip-besSelling', 'DashboardController@openTripBesSelling');
     // route untuk wisata
     Route::group(['prefix' => 'wisata'], function () {
         Route::get('/', 'WisataController@index');
