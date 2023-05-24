@@ -8,6 +8,7 @@ use App\Models\ChanelPembayaran;
 use App\Models\Invoice;
 use App\Models\OpenTrip;
 use App\Models\Ticket;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -23,7 +24,6 @@ class BookingController extends Controller
     {
         $user = auth()->user();
         $booking = Booking::with('invoice')->where('user_id', $user->id)->paginate(10);
-        info('booking', [$booking]);
         // dd($booking);
         return view('pelanggan.booking.index', compact('booking'));
     }
@@ -181,21 +181,24 @@ class BookingController extends Controller
                 Ticket::create([
                     'id_booking' => $idBooking,
                     'no_ticket' => $no_ticket,
-                    'qrcode' => $this->generateQrcode($no_ticket)
+                    // 'qrcode' => $this->generateQrcode($no_ticket)
                 ]);
             }
             $ticket = Ticket::where('id_booking', $idBooking)->get();
         }
-        return view('ticket', compact('ticket', 'booking'));
+
+            $pdf = pdf::loadView('ticket', compact('ticket', 'booking'))->setPaper(array(0, 0, 595.276, 226.772));
+            return $pdf->stream();
+        // return view('ticket', compact('ticket', 'booking'));
     }
 
     // function create qrcode
-    private function generateQrcode($content)
-    {
-        $image =  QrCode::format('png')->generate($content);
-        Storage::disk('local')->put('/ticket/qrcode/' . $content, $image);
-        // $filename =  $image->store('ticket/qrcode');
+    // private function generateQrcode($content)
+    // {
+    //     $image =  QrCode::format('png')->generate($content);
+    //     Storage::disk('local')->put('/ticket/qrcode/' . $content, $image);
+    //     // $filename =  $image->store('ticket/qrcode');
 
-        return true;
-    }
+    //     return true;
+    // }
 }
