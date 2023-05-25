@@ -167,13 +167,11 @@ class BookingController extends Controller
 
     public function cetakTiket($idBooking)
     {
-        // dd(url('assets/images/logo_GoTravel.png'));
         $booking = Booking::find($idBooking);
         if (!$idBooking) {
             abort(404);
         }
         $ticket = Ticket::where('id_booking', $idBooking)->get();
-        // dd($ticket);
         if (count($ticket) < 1) {
             // buat tilet baru
             for ($i = 0; $i < $booking->jumlah_booking; $i++) {
