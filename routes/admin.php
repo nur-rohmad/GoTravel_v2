@@ -39,6 +39,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
         Route::get('/detail/{id}', 'BookingController@detail');
     });
 
+    Route::get('/pelanggan', 'PelangganController@index');
+
     Route::get('/ticket', function () {
         return view('ticket');
     });

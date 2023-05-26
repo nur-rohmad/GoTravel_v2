@@ -38,6 +38,13 @@ $(function (e) {
             sSearch: "",
         },
     });
+    $("#pelanggan").DataTable({
+        language: {
+            searchPlaceholder: "Cari Nama/email Chanel pelanggan",
+            scrollX: "100%",
+            sSearch: "",
+        },
+    });
 
     //______File-Export Data Table
     var table = $("#file-datatable").DataTable({

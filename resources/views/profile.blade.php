@@ -48,6 +48,7 @@
                                     $user_data->role }}</span></p>
                         </div>
                     </div>
+                    @if ($user_data->password != null)    
                     <div class="form-group">
                         <label class="form-label">Current Password</label>
                         <div class="wrap-input100 validate-input input-group" id="Password-toggle">
@@ -62,6 +63,7 @@
                             @enderror
                         </div>
                     </div>
+                    @endif
                     <div class="form-group">
                         <label class="form-label">New Password</label>
                         <div class="wrap-input100 validate-input input-group" id="Password-toggle1">

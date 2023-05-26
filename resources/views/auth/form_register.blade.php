@@ -116,9 +116,9 @@
                             <div class="text-center pt-3">
                                 <p class="text-dark mb-0">have a acount <a href="/login" class="text-primary ms-1">Signin</a></p>
                             </div>
-                            <label class="login-social-icon"><span>Login with Social</span></label>
+                            <label class="login-social-icon"><span>Register with Social</span></label>
                             <div class="d-flex justify-content-center">
-                                <a href="javascript:void(0)">
+                                <a href="/login-google">
                                     <div class="social-login me-4 text-center">
                                         <i class="fa fa-google"></i>
                                     </div>

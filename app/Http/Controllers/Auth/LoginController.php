@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -87,5 +88,32 @@ class LoginController extends Controller
         } else {
             return back()->with('error', 'Pendaftaran akun gagal');
         }
+    }
+
+    // redirect google login
+    public function googleLogin(Request $request) {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackOauth(Request $request)
+    {
+        $user_google = Socialite::driver('google')->user();
+
+        $user = User::where('email', $user_google->getEmail())->first();
+        if ($user === null) {
+           $user =  User::create([
+                'email' => $user_google->getEmail(),
+                'name' => $user_google->getName(),
+                'role' => 'pelanggan',
+                'status' => 1,
+                'password' => null
+            ]);
+            Auth::login($user);
+            return redirect('pelanggan/');
+        }else {
+            Auth::login($user);
+            return redirect('pelanggan/');
+        }
+        
     }
 }

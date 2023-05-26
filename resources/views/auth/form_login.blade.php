@@ -114,7 +114,7 @@
                                 </div>
                                 <label class="login-social-icon"><span>Login with Social</span></label>
                                 <div class="d-flex justify-content-center">
-                                    <a href="javascript:void(0)">
+                                    <a href="/login-google">
                                         <div class="social-login me-4 text-center">
                                             <i class="fa fa-google"></i>
                                         </div>
