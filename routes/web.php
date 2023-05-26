@@ -28,6 +28,8 @@ Route::group(['namespace' => 'Auth'], function () {
         return view('auth.form_register');
     });
     Route::post('/register', 'LoginController@register');
+    Route::get('/login-google', 'LoginController@googleLogin');
+    Route::get('/oauth/calback', 'LoginController@callbackOauth');
     Route::get('/logouth', 'LoginController@logouth')->middleware('auth');
 });
 
@@ -37,14 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-profile', 'ProfileController@updateProfile');
 });
 
-Route::get('/midtrans', function () {
-    $invoice = Invoice::all();
-    dd($invoice);
-});
 
 // cllback
 Route::group(['namespace' => 'Callback'], function(){
     Route::post('/calback/midtrans-NX9PxSSmeQ', 'MidtransController@index');
 });
+
+
 
 // Auth::routes(['verify' => true]);

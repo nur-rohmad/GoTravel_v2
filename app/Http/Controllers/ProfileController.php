@@ -26,13 +26,21 @@ class ProfileController extends Controller
     {
         // get data user
         $user = User::find($request->id);
-        $request->validate([
-            'old_password' => 'required',
+        
+       $rule = [
             'password' => 'required|confirmed|min:6'
-        ]);
+        ];
+
+        if ($user->password != null) {
+           $rule['old_password'] = 'required';
+        }
+        $request->validate($rule);
+
         // check current password
-        if (!Hash::check($request->old_password, $user->password)) {
-            return redirect('/profile')->with('gagal', 'Password lama salah');
+        if ($user->password != null) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                return redirect('/profile')->with('gagal', 'Password lama salah');
+            }
         }
 
         // hash password
