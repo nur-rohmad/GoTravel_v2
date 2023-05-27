@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('/login-google', 'LoginController@googleLogin');
     Route::get('/oauth/calback', 'LoginController@callbackOauth');
     Route::get('/logouth', 'LoginController@logouth')->middleware('auth');
+    Route::get('/reset-password', function(){
+        return view('auth.passwords.email');
+    });
 });
 
 Route::group(['middleware' => 'auth'], function () {
