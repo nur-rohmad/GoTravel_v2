@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return redirect('/login');
 });
-
+Auth::routes();
+Auth::routes(['verify' => true]);
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('/login', 'LoginController@login')->name('login');
     Route::post('/proces-login', 'LoginController@procces_login');
@@ -47,4 +47,8 @@ Route::group(['namespace' => 'Callback'], function(){
 
 
 
-// Auth::routes(['verify' => true]);
+
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

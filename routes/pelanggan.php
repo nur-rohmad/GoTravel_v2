@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-Route::group(['middleware' => 'pelanggan_role', 'namespace' => 'Pelanggan'], function () {
+Route::group(['middleware' => ['pelanggan_role', 'verified'], 'namespace' => 'Pelanggan'], function () {
     Route::get('/', 'DashboardController@index');
 
     // wisata controller

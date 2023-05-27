@@ -4,14 +4,44 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('guest')->except('logout');
+    }
+
     public function login()
     {
         if (!Auth::user()) {
@@ -51,47 +81,8 @@ class LoginController extends Controller
         }
     }
 
-    public function logouth()
-    {
-        Auth::logout();
-
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
-
-        return redirect('/login')->with('success', 'Anda Berhasil Logouth');
-    }
-
-    public function register(Request $request)
-    {
-        $user = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:6'
-        ], [
-            'name.required' => 'nama harus diisi',
-            'email.required' => 'email harus diisi',
-            'email.email' => 'email tidak valid',
-            'email.unique' => 'email telah terdaftar',
-            'password.required' => 'password harus diisi',
-            'password.min' => 'password harus lebih dari atau sama dengan  6 karakter'
-        ]);
-
-        $user['status'] = 1;
-        $user['role'] = 'pelanggan';
-        $user['password'] = Hash::make($request->password);
-
-        $new_user = User::create($user);
-        if ($new_user) {
-            event(new Registered($user));
-            return redirect('/login')->with('success', 'Pendaftaran akun berhasil silahkan login');
-        } else {
-            return back()->with('error', 'Pendaftaran akun gagal');
-        }
-    }
-
-    // redirect google login
-    public function googleLogin(Request $request) {
+     // redirect google login
+     public function googleLogin(Request $request) {
         return Socialite::driver('google')->redirect();
     }
 
@@ -106,7 +97,8 @@ class LoginController extends Controller
                 'name' => $user_google->getName(),
                 'role' => 'pelanggan',
                 'status' => 1,
-                'password' => null
+                'password' => null,
+                'email_verified_at' => now()
             ]);
             Auth::login($user);
             return redirect('pelanggan/');
@@ -116,4 +108,16 @@ class LoginController extends Controller
         }
         
     }
+
+    public function logouth()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'Anda Berhasil Logouth');
+    }
+
 }

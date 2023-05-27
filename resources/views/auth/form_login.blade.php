@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="Go Travel merupakan website penyedia informasi tempat-tempat wisata yang indah yang ada di Indonesia">
+    <meta name="author" content="PT Go-Travel Indonesia">
+    <meta name="keywords" content="wisata, travel, liburan">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/logo_GoTravel.png">
@@ -51,12 +51,12 @@
             <div class="">
                 <!-- Theme-Layout -->
 
-                <!-- CONTAINER OPEN -->
+                {{-- <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7 mb-2">
                     <div class="text-center">
                         <a href="index.html"><img src="/assets/images/logo_GoTravel.png" style="width: 200px!important" class="header-brand-img" alt=""></a>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="container">
                     <div class="wrap-login100 p-6 col-md-6 mx-auto">
