@@ -23447,7 +23447,7 @@ ul.timeline>li:before {
 .header-brand-img {
     line-height: 2rem;
     vertical-align: middle;
-    width: auto;
+    width: 70px;
 }
 
 .header-avatar {
