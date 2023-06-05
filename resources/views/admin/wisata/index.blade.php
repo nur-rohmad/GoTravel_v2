@@ -222,7 +222,7 @@
                 if (!result.ok) {
                     swal.fire('Gagal','Gagal Menghapus data', 'error')
                 }else{
-                    swal.fire('Gagal','Data wisata berhasil dihapus', 'success').then(() => {
+                    swal.fire('Sukses','Data wisata berhasil dihapus', 'success').then(() => {
                     location.reload()
                 })
                 }

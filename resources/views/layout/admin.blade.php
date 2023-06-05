@@ -172,9 +172,9 @@
                                         class="side-menu__label">Booking</span></a>
                             </li>
                             <li>
-                                <a class="side-menu__item has-link {{ (request()->is('admin/pelanggan*') )? 'active' : '' }}"
-                                    href="/admin/pelanggan"><i class="side-menu__icon fas fa-users"></i><span
-                                        class="side-menu__label">Pelanggan</span></a>
+                                <a class="side-menu__item has-link {{ (request()->is('admin/user*') )? 'active' : '' }}"
+                                    href="/admin/user"><i class="side-menu__icon fas fa-users"></i><span
+                                        class="side-menu__label">User</span></a>
                             </li>
 
                         </ul>

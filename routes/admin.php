@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
         Route::get('/show/{slug}', 'OpenTripController@show');
         Route::get('/edit/{slug}', 'OpenTripController@edit');
         Route::post('/proccess-edit', 'OpenTripController@proccess_edit');
+        Route::post('/delete', 'OpenTripController@delete');
     });
 
     // chanel pembayaran
@@ -39,7 +40,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
         Route::get('/detail/{id}', 'BookingController@detail');
     });
 
-    Route::get('/pelanggan', 'PelangganController@index');
+    Route::get('/user', 'UserController@index');
+    Route::post('/user/edit', 'UserController@update');
 
     Route::get('/ticket', function () {
         return view('ticket');
