@@ -40,7 +40,7 @@ $(function (e) {
     });
     $("#pelanggan").DataTable({
         language: {
-            searchPlaceholder: "Cari Nama/email Chanel pelanggan",
+            searchPlaceholder: "Cari Nama/email user",
             scrollX: "100%",
             sSearch: "",
         },
