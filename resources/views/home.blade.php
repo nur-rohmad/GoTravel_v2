@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Go Travel</title>
 
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/logo_GoTravel.png">
+
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -92,10 +95,7 @@
                                         <img src="../assets/images/logo_GoTravel.png" class="logo-3" alt="logo" width="30px">
                                     </a>
                                     <ul class="side-menu">
-                                        <li class="slide">
-                                            <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
-                                                    class="side-menu__label">Home</span></a>
-                                        </li>
+                                       
                                         <li class="slide">
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
                                                     class="side-menu__label">Features</span></a>
@@ -120,37 +120,14 @@
                                             <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
                                                     class="side-menu__label">Contact</span></a>
                                         </li>
-                                        <li class="slide">
-                                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                                <span class="side-menu__label">Submenu items</span><i class="angle fe fe-chevron-right"></i></a>
-                                            <ul class="slide-menu">
-                                                <li class="side-menu-label1"><a href="javascript:void(0)">Submenu
-                                                        items</a></li>
-                                                <li><a href="javascript:void(0)" class="slide-item">Submenu-1</a></li>
-                                                <li class="sub-slide"> <a class="sub-side-menu__item" data-bs-toggle="sub-slide" href="javascript:void(0)"><span class="sub-side-menu__label">Submenu-2</span><i class="sub-angle fe fe-chevron-right"></i></a>
-                                                    <ul class="sub-slide-menu">
-                                                        <li><a class="sub-slide-item" href="javascript:void(0)">Submenu-2.1</a></li>
-                                                        <li><a class="sub-slide-item" href="javascript:void(0)">Submenu-2.2</a></li>
-                                                        <li class="sub-slide2"> <a class="sub-side-menu__item2" href="javascript:void(0)" data-bs-toggle="sub-slide2"><span class="sub-side-menu__label2">Submenu-2.3</span><i class="sub-angle2 fe fe-chevron-right"></i></a>
-                                                            <ul class="sub-slide-menu2">
-                                                                <li><a href="javascript:void(0)" class="sub-slide-item2">Submenu-2.3.1</a></li>
-                                                                <li><a href="javascript:void(0)" class="sub-slide-item2">Submenu-2.3.2</a></li>
-                                                                <li><a href="javascript:void(0)" class="sub-slide-item2">Submenu-2.3.3</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a class="sub-slide-item" href="javascript:void(0)">Submenu-2.4</a></li>
-                                                        <li><a class="sub-slide-item" href="javascript:void(0)">Submenu-2.5</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                       
                                     </ul>
                                     <div class="header-nav-right d-none d-lg-flex">
-                                        <a href="register.html"
+                                        <a href="/register"
                                             class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                             target="_blank">New User
                                         </a>
-                                        <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                        <a href="/login" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                             target="_blank">Login
                                         </a>
                                     </div>
@@ -160,37 +137,34 @@
                     </div>
                     <!--/APP-SIDEBAR-->
                 </div>
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
-                    <div class="container px-sm-0">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-7">Manage Your Business</h4>
-                                <h1 class="text-start fw-bold">We Help to Build Your Dream Project with <span
-                                        class="text-primary animate-heading">Sash</span></h1>
-                                <h6 class="pb-3">
-                                    Sash - Now you can use this admin template to design stunning dashboards
-                                    that will wow your target viewers or users to no end. To create a good and
-                                    well-structured dashboard,
-                                    you need to start from scratch with HTML, SCSS, CSS, and JS and with lots of coding,
-                                    but by using this Sash-Admin template.</h6>
-
-                                <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
-                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Get Started
-                                </a>
-                                <a href="https://themeforest.net/user/spruko/portfolio"
-                                    class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2 d-inline-flex"></i>Discover More
-                                </a>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="../assets/images/landing/3.png" alt="">
-                            </div>
-                        </div>
+               
+            </div>
+            <div id="carousel-indicators4" class="carousel slide" data-bs-ride="carousel">
+                <ol class="carousel-indicators carousel-indicators4">
+                    <li data-bs-target="#carousel-indicators4" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carousel-indicators4" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#carousel-indicators4" data-bs-slide-to="2"></li>
+                    <li data-bs-target="#carousel-indicators4" data-bs-slide-to="3"></li>
+                    <li data-bs-target="#carousel-indicators4" data-bs-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 br-5" alt="tes" src="{{ asset('storage/cover-wisata/TZy72Cs8ZFbmJknW27Zq9Ilng971PrtW2krnlkZQ.png') }}" data-bs-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 br-5" alt="coba" src="/assets/images/storage/cover-wisata/5.jpg" data-bs-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 br-5" alt="tes" src="/assets/images/storage/cover-wisata/6.jpg" data-bs-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 br-5" alt="sasa" src="/assets/images/storage/cover-wisata/7.jpg" data-bs-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100 br-5" alt="sdasd" src="../assets/images/media/8.jpg" data-bs-holder-rendered="true">
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

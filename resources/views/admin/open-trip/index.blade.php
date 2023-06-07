@@ -59,7 +59,7 @@
                                             class="fa fa-eye"></i></a>
                                     <a href="/admin/open-trip/edit/{{ $item->slug }}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></a>
-                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteOpenTrip('{{ $item->id }}','{{ $item->title }}')"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                             @endforeach
@@ -87,6 +87,48 @@
 <script src="/assets/plugins/datatable/dataTables.responsive.min.js"></script>
 <script src="/assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
 <script src="/assets/js/table-data.js"></script>
+
+<script>
+    // delete wisata
+    function deleteOpenTrip(id, name_wisata){
+        Swal.fire({
+            title: 'apakah anda yakin ?',
+            icon: 'warning',
+            html: `Menghapus Open Trip dengan nama open Trip <span class="text-danger fw-bold">${name_wisata}</span>`,
+            confirmButtonColor: "#dc3545",
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+            return fetch(`/admin/open-trip/delete`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify({id_openTrip: id})
+            }).then((result) => {
+                if (!result.ok) {
+                    if (result.status == 503) {
+                        swal.fire('Gagal','Data Open Trip yang telah dibooking tidak dapat dihapus', 'error')
+                    }else {
+                        swal.fire('Gagal','Gagal Menghapus data', 'error')
+                    }
+                }else{
+                    swal.fire('Sukses','Data wisata berhasil dihapus', 'success').then(() => {
+                    location.reload()
+                })
+                }
+            })
+            .catch(error => {
+                swal.fire('Gagal','Terjadi kesalahan pada sistem', 'error')
+            })
+            },
+                allowOutsideClick: () => !Swal.isLoading()
+            })
+    }
+</script>
 
 @if (session('gagal'))
 <script>

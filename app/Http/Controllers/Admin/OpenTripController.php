@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\OpenTrip;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
@@ -123,5 +124,46 @@ class OpenTripController extends Controller
 
         OpenTrip::where('id', $request->id)->update($openTrip);
         return redirect('admin/open-trip')->with('success', 'data berhasil diupdate');
+    }
+
+    // delete open trip
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id_openTrip' => 'required'
+        ]);
+
+        // cari data openTrip
+        $openTrip = OpenTrip::where('id', $request->id_openTrip)->first();
+
+        // check apakah data opentrip terdapat pada booking
+        $booking = Booking::where('id_openTrip', $request->id_openTrip)->first();
+
+        // jika data openTrip tidak ditemukan kembalikan error
+        if (!$openTrip) {
+            return response()->json([
+                'success' => false,
+                'message' => 'data Open Trip tidak ditemukan'
+            ], 404);
+        }
+
+        // jika ditemukan data opentrip pada booking maka tolak penghapusan data
+        if ($booking) {
+            return response()->json([
+                "success" => false,
+                "message" => "Data Open Trip yang telah dibooking tidak dapat dihapus"
+            ], 503);
+        }
+
+        // hapus data dari database 
+        $openTrip->delete();
+        if ($openTrip->poster != null) {
+            Storage::delete($openTrip->poster);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'data Open Trip berhasil dihapus'
+        ], 200);
     }
 }
