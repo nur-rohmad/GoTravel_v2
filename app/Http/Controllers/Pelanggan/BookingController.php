@@ -23,7 +23,7 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $booking = Booking::with('invoice')->where('user_id', $user->id)->paginate(10);
+        $booking = Booking::with('invoice')->where('user_id', $user->id)->get();
         // dd($booking);
         return view('pelanggan.booking.index', compact('booking'));
     }
