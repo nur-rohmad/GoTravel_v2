@@ -113,6 +113,18 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label class="form-label"> Status Chanel Pembayaran </label>
+                                <select name="status" class="form-control">
+                                    <option value="active">Aktif</option>
+                                    <option value="nonaktif">Tidak Aktif</option>
+                                </select>
+                                <div id="error-status" class="text-danger">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label class="form-label" id="label-image">Logo Chanel Pembayaran</label>
                                 <div id="error-image" class="text-danger">
 
@@ -220,7 +232,7 @@ function update(data){
     // add value in button
     $('#submit').val('update');
     $.each(data, (key, value) => {
-         if(['name','payment_type', 'payment_code' ].includes(key)){
+         if(['name','payment_type', 'payment_code', 'status' ].includes(key)){
             $(`[name="${key}"]`).val(value)
         }
     })

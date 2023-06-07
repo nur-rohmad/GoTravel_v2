@@ -23,6 +23,7 @@ class ChanelPembayaranController extends Controller
             'name' => 'required',
             'payment_type' => 'required',
             'payment_code' => 'required',
+            'status' => 'required',
             'image' => 'required|image|max:5120'
         ]);
 
@@ -51,10 +52,10 @@ class ChanelPembayaranController extends Controller
             'name' => 'required',
             'payment_type' => 'required',
             'payment_code' => 'required',
+            'status' => 'required',
             'image' => 'image|max:5120'
         ]);
 
-        
 
         // get data old
         $chanelPembayaran = ChanelPembayaran::find($request->id);
