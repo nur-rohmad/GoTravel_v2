@@ -64,7 +64,7 @@
             </table>
         </div>
         <div class="content text-center">
-            <h2>Promo Akhir Tahun</h2>
+            <h2>{{ $booking->open_trip->title }}</h2>
             <h4 style="color: blanchedalmond; margin-top: -10px">{{ $item->no_ticket }}</h4>
         </div>
 
