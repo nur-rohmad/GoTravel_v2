@@ -90,6 +90,7 @@ class BookingController extends Controller
                 ],
                 "customer_details" => [
                     "first_name" => $user->name,
+                    "last_name"=> "",
                     "email" => $user->email,
                 ],
                 "expiry" => [
