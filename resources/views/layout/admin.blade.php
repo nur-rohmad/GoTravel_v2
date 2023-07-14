@@ -172,6 +172,11 @@
                                         class="side-menu__label">Booking</span></a>
                             </li>
                             <li>
+                                <a class="side-menu__item has-link {{ (request()->is('admin/laporan*') )? 'active' : '' }}"
+                                    href="/admin/laporan"><i class="side-menu__icon fas fa-file"></i><span
+                                        class="side-menu__label">Laporan</span></a>
+                            </li>
+                            <li>
                                 <a class="side-menu__item has-link {{ (request()->is('admin/user*') )? 'active' : '' }}"
                                     href="/admin/user"><i class="side-menu__icon fas fa-users"></i><span
                                         class="side-menu__label">User</span></a>

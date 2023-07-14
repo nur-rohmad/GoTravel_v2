@@ -4,6 +4,7 @@ namespace App\Http\Controllers\pelanggan;
 
 use App\Http\Controllers\Controller;
 use App\Models\OpenTrip;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OpenTripController extends Controller
@@ -16,7 +17,10 @@ class OpenTripController extends Controller
             $openTrip->where('title', 'LIKE', '%' . $request->search . '%');
         }
         if ($request->has('tgl_berangkat') && $request->tgl_berangkat != null) {
-            $openTrip->where('tgl_berangkat', $request->tgl_berangkat);
+            $openTrip->whereBetween('tgl_berangkat', [
+                Carbon::parse($request->tgl_berangkat, 'UTC')->setTime(0, 0)->timezone('UTC')->toDateTimeString(),
+                Carbon::parse($request->tgl_berangkat, 'UTC')->setTime(23, 59, 59)->timezone('UTC')->toDateTimeString(),
+            ]);
         }
 
         $openTrip = $openTrip->paginate(6);

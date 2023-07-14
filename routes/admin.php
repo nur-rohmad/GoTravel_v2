@@ -40,6 +40,11 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
         Route::get('/detail/{id}', 'BookingController@detail');
     });
 
+    // laporan
+    Route::group(['prefix' => 'laporan'], function () {
+        Route::get('/', 'LaporanController@index');
+    });
+
     Route::get('/user', 'UserController@index');
     Route::post('/user/edit', 'UserController@update');
 

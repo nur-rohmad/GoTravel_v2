@@ -18,7 +18,7 @@ class LoginController extends Controller
             return view('auth.form_login');
         } else {
             $user = auth()->user();
-            return redirect('/' . $user->role );
+            return redirect('/' . $user->role);
         }
     }
 
@@ -26,7 +26,7 @@ class LoginController extends Controller
     {
 
         $data_login = $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
 
@@ -91,7 +91,8 @@ class LoginController extends Controller
     }
 
     // redirect google login
-    public function googleLogin(Request $request) {
+    public function googleLogin(Request $request)
+    {
         return Socialite::driver('google')->redirect();
     }
 
@@ -101,7 +102,7 @@ class LoginController extends Controller
 
         $user = User::where('email', $user_google->getEmail())->first();
         if ($user === null) {
-           $user =  User::create([
+            $user =  User::create([
                 'email' => $user_google->getEmail(),
                 'name' => $user_google->getName(),
                 'role' => 'pelanggan',
@@ -110,10 +111,9 @@ class LoginController extends Controller
             ]);
             Auth::login($user);
             return redirect('pelanggan/');
-        }else {
+        } else {
             Auth::login($user);
             return redirect('pelanggan/');
         }
-        
     }
 }
