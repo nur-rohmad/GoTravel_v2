@@ -12,6 +12,21 @@
 <!-- PAGE-HEADER END -->
 
 <div class="card shadow">
+    <form action="/admin/wisata" method="GET">
+        <div class="row p-4">
+            <div class="col-md-3">
+                <input type="text" value="{{ Request::get('nama_wisata') }}" class="form-control" name="nama_wisata"
+                    placeholder="nama wisata">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">Cari</button>
+                <a href="/admin/wisata" class="btn btn-dark">Reset</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card shadow">
     <div class="card-header">
         <h3 class="card-title">Laporan Pendapatan</h3>
     </div>
