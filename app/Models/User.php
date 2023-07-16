@@ -25,8 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
         'NoHP',
         'alamat',
-        'foto_profile'
-
+        'foto_profile',
+        'deleted_at'
     ];
 
     public function booking()

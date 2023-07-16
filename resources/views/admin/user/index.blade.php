@@ -43,15 +43,18 @@
                                 <td>{{ ucwords($item->name) }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td><span
-                                    class="badge badge-sm bg-{{ $item->role == 'admin' ? 'primary' : 'warning' }}">{{ $item->role == 'admin' ? 'Admin' : 'Pelanggan' }}</span></td>
+                                        class="badge badge-sm bg-{{ $item->role == 'admin' ? 'primary' : 'warning' }}">{{
+                                        $item->role == 'admin' ? 'Admin' : 'Pelanggan' }}</span></td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->NoHP }}</td>
-                                <td><span
-                                        class="badge badge-sm bg-{{ $item->status == 1 ? 'success' : 'danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span></td>
+                                <td><span class="badge badge-sm bg-{{ $item->status == 1 ? 'success' : 'danger' }}">{{
+                                        $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span></td>
                                 <td>{{ date("d M Y H:s", strtotime($item->last_login)) }}</td>
                                 <td class="text-center">
                                     <button onclick="update({{ $item }})" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></button>
+                                    <button onclick="delete_user({{ $item }})" class="btn btn-sm btn-danger"><i
+                                            class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                             @endforeach
@@ -116,7 +119,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label">Alamat</label>
-                               <textarea name="alamat" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea name="alamat" class="form-control" cols="30" rows="5"></textarea>
                             </div>
                             <div id="error-alamat" class="text-danger">
 
@@ -254,5 +257,42 @@ function reset_error(){
     $('#error-role').text('')
     $('#error-password').text('')
 }
+
+function delete_user(item)
+{
+    Swal.fire({
+    title: 'apakah anda yakin ?',
+    icon: 'warning',
+    html: `Menghapus user  <span class="text-danger fw-bold">${item.name}</span>`,
+    confirmButtonColor: "#dc3545",
+    showCancelButton: true,
+    confirmButtonText: 'Delete',
+    showLoaderOnConfirm: true,
+    preConfirm: (login) => {
+    return fetch(`/admin/user/delete`, {
+    method: 'POST',
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({user_id: item.id})
+    }).then((result) => {
+    if (!result.ok) {
+    swal.fire('Gagal','Gagal Menghapus data', 'error')
+    }else{
+    swal.fire('Sukses','Data wisata berhasil dihapus', 'success').then(() => {
+    location.reload()
+    })
+    }
+    })
+    .catch(error => {
+    swal.fire('Gagal','Terjadi kesalahan pada sistem', 'error')
+    })
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+    })
+}
+
 </script>
 @endsection

@@ -90,7 +90,7 @@ class BookingController extends Controller
                 ],
                 "customer_details" => [
                     "first_name" => $user->name,
-                    "last_name"=> "",
+                    "last_name" => "",
                     "email" => $user->email,
                 ],
                 "expiry" => [
@@ -185,8 +185,8 @@ class BookingController extends Controller
             }
             $ticket = Ticket::where('id_booking', $idBooking)->get();
         }
-            $pdf = pdf::loadView('ticket', compact('ticket', 'booking'))->setPaper(array(0, 0, 595.276, 226.772));
-            return $pdf->stream();
+        $pdf = pdf::loadView('ticket', compact('ticket', 'booking'))->setPaper(array(0, 0, 400.400, 400.400));
+        return $pdf->stream();
         // return view('ticket', compact('ticket', 'booking'));
     }
 

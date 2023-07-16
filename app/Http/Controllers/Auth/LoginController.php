@@ -29,9 +29,15 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-
+        $user_login = User::where('email', $request->email)->whereNull('deleted_at')->first();
+        if (!$user_login) {
+            return back()->with('error', 'user tidak ditemukan');
+        }
         if (Auth::Attempt($data_login)) {
-            $user = User::where('id', auth()->user()->id)->first();
+            $user = User::where('id', auth()->user()->id)->whereNull('deleted_at')->first();
+            if (!$user) {
+                return back()->with('error', 'user tidak ditemukan');
+            }
             $user->last_login = now();
             $user->save();
             $request->session()->regenerate();

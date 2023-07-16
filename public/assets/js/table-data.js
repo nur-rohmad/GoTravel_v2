@@ -46,19 +46,51 @@ $(function (e) {
         },
     });
 
-    //______File-Export Data Table
-    var table = $("#file-datatable").DataTable({
-        buttons: ["copy", "excel", "pdf", "colvis"],
-        language: {
-            searchPlaceholder: "Search...",
-            scrollX: "100%",
-            sSearch: "",
-        },
-    });
-    table
-        .buttons()
-        .container()
-        .appendTo("#file-datatable_wrapper .col-md-6:eq(0)");
+    // //______File-Export Data Table
+    // var table = $("#laporan").DataTable({
+    //     dom: "Bfrtip",
+    //     lenghtMenu: [
+    //         [10, 25, 50, -1],
+    //         ["q", "q", "e", "e"],
+    //     ],
+    //     lengthChange: true,
+    //     buttons: [
+    //         {
+    //             extend: "print",
+    //             text: '<i class="fas fa-print mr-1"></i>Print',
+    //             className: "btn btn-success mr-2",
+    //             title: "<h1 >Data Booking Go-Travel</h1> ",
+    //             exportOptions: {
+    //                 columns: ":visible:not(:contains(Action),:contains(No))",
+    //             },
+    //         },
+    //         {
+    //             extend: "excel",
+    //             text: '<i class="fas fa-file-excel mr-1"></i> Donwload Excel',
+    //             className: "btn btn-primary mr-2",
+    //             filename: "data_transaksi",
+    //             title: "Data Booking Go-Travel ",
+    //             exportOptions: {
+    //                 columns: ":visible:not(:contains(Action),:contains(No))",
+    //             },
+    //         },
+    //         {
+    //             extend: "pdf",
+    //             text: '<i class="fas fa-file-pdf mr-1"></i> Donwload PDF',
+    //             className: "btn btn-warning mr-2",
+    //             filename: "data_transaksi",
+    //             title: "Data Booking Go-Travel ",
+    //             exportOptions: {
+    //                 columns: ":visible:not(:contains(Action),:contains(No))",
+    //             },
+    //         },
+    //     ],
+    //     searching: true,
+    // });
+    // table
+    //     .buttons()
+    //     .container()
+    //     .appendTo("#file-datatable_wrapper .col-md-6:eq(0)");
 
     //______Delete Data Table
     var table = $("#delete-datatable").DataTable({

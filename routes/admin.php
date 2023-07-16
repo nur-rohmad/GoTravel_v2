@@ -47,6 +47,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['admin_role']], function 
 
     Route::get('/user', 'UserController@index');
     Route::post('/user/edit', 'UserController@update');
+    Route::post('/user/delete', 'UserController@delete');
 
     Route::get('/ticket', function () {
         return view('ticket');

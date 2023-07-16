@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::orderBy('last_login', 'DESC')->get();
+        $user = User::whereNull('deleted_at')->orderBy('last_login', 'DESC')->get();
 
         return view('admin.user.index', compact('user'));
     }
@@ -67,11 +67,33 @@ class UserController extends Controller
                 "success" => true,
                 "message" => "Berhasil update data user"
             ]);
-        }else{
+        } else {
             return response()->json([
                 "success" => false,
                 "message" => "Gagal Update Data User"
             ], 503);
         }
     }
+
+    public function delete(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'data user tidak ditemukan'
+            ], 404);
+        }
+        // dd($user);
+
+    $user->update([
+            'deleted_at' => now()
+    ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'data user berhasil dihapus'
+        ], 200);
+        }
+
 }
